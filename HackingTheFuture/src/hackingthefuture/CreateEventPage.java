@@ -58,6 +58,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Event Title");
 
+        eventTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventTitleActionPerformed(evt);
@@ -67,6 +68,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Event Description");
 
+        eventDescription.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventDescriptionActionPerformed(evt);
@@ -82,18 +84,21 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Event Time");
 
+        eventVenue.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventVenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventVenueActionPerformed(evt);
             }
         });
 
+        eventDate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventDateActionPerformed(evt);
             }
         });
 
+        eventTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventTimeActionPerformed(evt);
@@ -152,7 +157,7 @@ public class CreateEventPage extends javax.swing.JFrame {
                 .addComponent(eventTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(createEventButton)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -164,7 +169,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
