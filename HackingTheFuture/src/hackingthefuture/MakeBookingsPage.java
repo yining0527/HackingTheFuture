@@ -177,7 +177,11 @@ public class MakeBookingsPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
+                BookingsPage BookingsPageFrame = new BookingsPage();
+                BookingsPageFrame.setVisible(true);
+                BookingsPageFrame.pack();
+                BookingsPageFrame.setLocationRelativeTo(null);
+                this.dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
     /**

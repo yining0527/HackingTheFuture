@@ -217,7 +217,11 @@ public class ViewQuizPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ScienceButtonActionPerformed
 
     private void AttemptQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttemptQuizButtonActionPerformed
-        // TODO add your handling code here:
+                AttemptQuizPage AttemptQuizPageFrame = new AttemptQuizPage();
+                AttemptQuizPageFrame.setVisible(true);
+                AttemptQuizPageFrame.pack();
+                AttemptQuizPageFrame.setLocationRelativeTo(null);
+                this.dispose();
     }//GEN-LAST:event_AttemptQuizButtonActionPerformed
 
     /**
