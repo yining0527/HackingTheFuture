@@ -263,7 +263,7 @@ private void saveEventData() {
         String quizData = title + "," + description + "," + venue + "," + theme+ "," + content;
 
         // Specify the file path
-        String filePath = "C:\\FOP\\Netbeans Project\\quizData.txt";
+        String filePath = "C:\\FOP\\Netbeans Project\\quizdata.txt";
 
         // Write data to file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
