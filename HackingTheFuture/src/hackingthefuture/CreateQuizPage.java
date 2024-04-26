@@ -3,13 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hackingthefuture;
-
+    import java.io.BufferedWriter;
+    import java.io.FileWriter;
+    import java.io.IOException;
+    import javax.swing.JOptionPane;
 /**
  *
  * @author Asus
  */
 public class CreateQuizPage extends javax.swing.JFrame {
-
+    private String title;
+    private String description;
+    private String theme;
+    private String content;
     /**
      * Creates new form EventPage
      */
@@ -104,14 +110,13 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(quizTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                     .addComponent(createQuizButton)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5)
-                        .addComponent(quizDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-                        .addComponent(quizTheme)
-                        .addComponent(quizContent)))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(quizDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                    .addComponent(quizTheme)
+                    .addComponent(quizContent))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -200,7 +205,78 @@ public class CreateQuizPage extends javax.swing.JFrame {
     }//GEN-LAST:event_quizContentActionPerformed
 
     private void createQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createQuizButtonActionPerformed
-                
+     title = quizTitle.getText();
+    description = quizDescription.getText();
+    theme = quizTheme.getText();
+    content = quizContent.getText();
+
+    // Optionally, you can print the data to verify it's captured correctly
+    System.out.println("Quiz Title: " + title);
+    System.out.println("Quiz Description: " + description);
+    System.out.println("Quiz Theme: " + theme);
+    System.out.println("Quiz content: " + content);
+    
+    saveEventData();
+    }                                                 
+private boolean validateEventData() {
+    // Check if required fields are empty
+    if (quizTitle.getText().isEmpty() ||
+        quizDescription.getText().isEmpty() ||
+        quizTheme.getText().isEmpty() ||
+        quizContent.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    // Check if the quiz theme is valid (Science/Technology/Engineering/Mathematics)
+    String enteredTheme = quizTheme.getText().trim();  // Trim whitespace
+    if (!isValidQuizTheme(enteredTheme)) {
+        JOptionPane.showMessageDialog(this, "Invalid quiz theme. Please enter Science, Technology, Engineering, or Mathematics.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    return true; // All validation checks passed
+}
+
+private boolean isValidQuizTheme(String theme) {
+    // Define valid quiz themes
+    String[] validThemes = {"Science", "Technology", "Engineering", "Mathematics"};
+    
+    // Check if the entered theme matches any valid theme
+    for (String validTheme : validThemes) {
+        if (validTheme.equalsIgnoreCase(theme)) {
+            return true;
+        }
+    }
+    
+    return false;  // Theme is not valid
+}
+
+private void saveEventData() {
+    if (validateEventData()) {
+        // Retrieve data from text fields
+        String title = quizTitle.getText();
+        String description = quizDescription.getText();
+        String venue = quizTheme.getText();
+        String date = quizContent.getText();
+        // Prepare data string to write to file
+        String quizData = title + "," + description + "," + venue + "," + theme+ "," + content;
+
+        // Specify the file path
+        String filePath = "C:\\FOP\\Netbeans Project\\quizData.txt";
+
+        // Write data to file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(quizData);
+            writer.newLine();
+            System.out.println("Quiz data saved successfully.");
+            JOptionPane.showMessageDialog(this, "Quiz data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            System.err.println("Error saving event data: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error saving event data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     }//GEN-LAST:event_createQuizButtonActionPerformed
 
     /**

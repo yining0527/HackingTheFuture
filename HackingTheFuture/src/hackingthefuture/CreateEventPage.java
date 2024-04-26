@@ -4,12 +4,21 @@
  */
 package hackingthefuture;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Asus
  */
 public class CreateEventPage extends javax.swing.JFrame {
-
+    private String title;
+    private String description;
+    private String venue;
+    private String date;
+    private String time;
     /**
      * Creates new form EventPage
      */
@@ -80,7 +89,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel6.setText("Event Date (DD/MM/YYYY)");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("Event Time");
+        jLabel7.setText("Event Time(HH:MM)");
 
         eventVenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,9 +230,78 @@ public class CreateEventPage extends javax.swing.JFrame {
     }//GEN-LAST:event_eventTimeActionPerformed
 
     private void createEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventButtonActionPerformed
-                
-    }//GEN-LAST:event_createEventButtonActionPerformed
+    title = eventTitle.getText();
+    description = eventDescription.getText();
+    venue = eventVenue.getText();
+    date = eventDate.getText();
+    time = eventTime.getText();
 
+    // Optionally, you can print the data to verify it's captured correctly
+    System.out.println("Event Title: " + title);
+    System.out.println("Event Description: " + description);
+    System.out.println("Event Venue: " + venue);
+    System.out.println("Event Date: " + date);
+    System.out.println("Event Time: " + time);
+    
+    saveEventData();
+    }//GEN-LAST:event_createEventButtonActionPerformed
+private boolean validateEventData() {
+    // Check if required fields are empty
+    if (eventTitle.getText().isEmpty() ||
+        eventDescription.getText().isEmpty() ||
+        eventVenue.getText().isEmpty() ||
+        eventDate.getText().isEmpty() ||
+        eventTime.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Validate date format (DD/MM/YYYY)
+    String datePattern = "\\d{2}/\\d{2}/\\d{4}";
+    if (!eventDate.getText().matches(datePattern)) {
+        JOptionPane.showMessageDialog(this, "Invalid date format. Please use DD/MM/YYYY.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Validate time format (HH:MM)
+    String timePattern = "\\d{2}:\\d{2}";
+    if (!eventTime.getText().matches(timePattern)) {
+        JOptionPane.showMessageDialog(this, "Invalid time format. Please use HH:MM.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    return true; // All validation checks passed
+}
+
+private void saveEventData() {
+    if (validateEventData()) {
+        // Retrieve data from text fields
+        String title = eventTitle.getText();
+        String description = eventDescription.getText();
+        String venue = eventVenue.getText();
+        String date = eventDate.getText();
+        String time = eventTime.getText();
+
+        // Prepare data string to write to file
+        String eventData = title + "," + description + "," + venue + "," + date + "," + time;
+
+        // Specify the file path
+        String filePath = "C:\\FOP\\Netbeans Project\\eventData.txt";
+
+        // Write data to file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(eventData);
+            writer.newLine();
+            System.out.println("Event data saved successfully.");
+            JOptionPane.showMessageDialog(this, "Event data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            System.err.println("Error saving event data: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error saving event data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
+    
     /**
      * @param args the command line arguments
      */
