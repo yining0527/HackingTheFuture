@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 
 
@@ -32,6 +33,8 @@ public class Role extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButtonEducator); // Add your radio buttons to the ButtonGroup
         buttonGroup1.add(jRadioButtonParent);
         buttonGroup1.add(jRadioButtonChildren);
+       
+        
        
     }
     public void setUsername(String transferUsername,String email, String pass){
@@ -202,47 +205,67 @@ public class Role extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
-        
-        
-        double x = generateRandomCoordinate();
-        double y = generateRandomCoordinate();
-        String locationC =  "(" + x + ", " + y + ")";
-        
-        try {
-           // Establish connection to the database
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        JFrame frame = new JFrame("Radio Button Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (!jRadioButtonEducator.isSelected() && !jRadioButtonParent.isSelected() && !jRadioButtonChildren.isSelected()) {
+                JOptionPane.showMessageDialog(frame, "Please select an option", "Selection Required", JOptionPane.WARNING_MESSAGE);
 
-           // Prepare the SQL query to update the role
-           String query = "UPDATE `user` SET `role` = ?,`LocationCoordinate` = ? WHERE `email` = ? AND `username` = ? AND `password` = ?";
+            } 
+        else{
+            double x = generateRandomCoordinate();
+            double y = generateRandomCoordinate();
+            String locationC =  "(" + x + ", " + y + ")";
 
-           // Create a PreparedStatement object
-           pst = con.prepareStatement(query);
+            try {
+               // Establish connection to the database
+               con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
-           // Set the parameters for the PreparedStatement
-           pst.setString(1, role); // newRole is the new value for the role field
-           pst.setString(2, locationC);
-           pst.setString(3, email); // Assuming email.getText() retrieves the current email value
-           pst.setString(4, username); // Assuming username.getText() retrieves the current username value
-           pst.setString(5, pass); // Assuming pass.getText() retrieves the current password value
+               // Prepare the SQL query to update the role
+               String query = "UPDATE `user` SET `role` = ?,`LocationCoordinate` = ? WHERE `email` = ? AND `username` = ? AND `password` = ?";
 
-           // Execute the update operation
-           pst.executeUpdate();
+               // Create a PreparedStatement object
+               pst = con.prepareStatement(query);
 
-           // Optionally, you can add a success message here if needed
-       } catch (SQLException ex) {
-           // Handle any SQL errors here
-           ex.printStackTrace();
-       } 
+               // Set the parameters for the PreparedStatement
+               pst.setString(1, role); // newRole is the new value for the role field
+               pst.setString(2, locationC);
+               pst.setString(3, email); // Assuming email.getText() retrieves the current email value
+               pst.setString(4, username); // Assuming username.getText() retrieves the current username value
+               pst.setString(5, pass); // Assuming pass.getText() retrieves the current password value
 
-        //Hide the SignUp frame
-        this.setVisible(false);
-        
-        Login LoginFrame = new Login();
-        LoginFrame.setVisible(true);
-        LoginFrame.pack();
-        LoginFrame.setLocationRelativeTo(null);
-    
+               // Execute the update operation
+               pst.executeUpdate();
 
+               // Optionally, you can add a success message here if needed
+           } catch (SQLException ex) {
+               // Handle any SQL errors here
+               ex.printStackTrace();
+           } 
+
+            //Hide the SignUp frame
+            this.setVisible(false);
+
+            if (role.equalsIgnoreCase("parent")){
+                numberofChildren NoChildFrame = new numberofChildren();
+                NoChildFrame.setUsername(username);
+                NoChildFrame .setVisible(true);
+                NoChildFrame .pack();
+                NoChildFrame .setLocationRelativeTo(null);
+
+            }else if(role.equalsIgnoreCase("children") ){
+                children children = new children();
+                children.setUsername(username);
+                children.setVisible(true);
+                children.pack();
+                children.setLocationRelativeTo(null);
+            }else {
+               
+                Login LoginFrame = new Login();
+                LoginFrame.setVisible(true);
+                LoginFrame.pack();
+                LoginFrame.setLocationRelativeTo(null);
+            }
+        }
     
    
     }//GEN-LAST:event_signUpActionPerformed
@@ -307,6 +330,7 @@ public class Role extends javax.swing.JFrame {
                 signUpFrame.setLocationRelativeTo(null);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -33,6 +33,7 @@ public class Login extends JFrame{
         initComponents();
         setPreferredSize(new Dimension(850,550));
         setResizable(true); 
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
