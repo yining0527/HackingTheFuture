@@ -202,6 +202,7 @@ public class numberofChildren extends javax.swing.JFrame {
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         //        try{
             //Get the values from the text fields
+            this.setVisible(false);
             
             parents  parentsFrame = new  parents();
             parentsFrame.setUsername(username,value );
