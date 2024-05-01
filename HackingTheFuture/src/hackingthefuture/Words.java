@@ -475,7 +475,7 @@ public class Words extends javax.swing.JFrame {
     private void MENUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MENUActionPerformed
         // TODO add your handling code here:
        String transferUsername = username;
-        MainPage MainPageFrame = new MainPage();
+        MainPageEducator MainPageFrame = new MainPageEducator();
         MainPageFrame.setUsername(transferUsername);
         MainPageFrame.pack();
         MainPageFrame.setVisible(true);

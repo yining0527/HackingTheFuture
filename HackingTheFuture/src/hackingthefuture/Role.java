@@ -28,7 +28,7 @@ public class Role extends javax.swing.JFrame {
      
     public Role() {
         initComponents();
-        setPreferredSize(new Dimension(850,550));
+        setPreferredSize(new Dimension(900,600));
         setResizable(true);
         buttonGroup1.add(jRadioButtonEducator); // Add your radio buttons to the ButtonGroup
         buttonGroup1.add(jRadioButtonParent);
@@ -69,10 +69,10 @@ public class Role extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 51));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("<html>Hacking The Future </html>");
         jLabel1.setToolTipText("");
         jLabel1.setAutoscrolls(true);
@@ -96,22 +96,22 @@ public class Role extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addGap(187, 187, 187))
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 400, 520);
+        jPanel2.setBounds(0, 0, 400, 650);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setBackground(new java.awt.Color(0, 102, 102));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("Role");
 
-        signUp.setBackground(new java.awt.Color(0, 102, 102));
-        signUp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        signUp.setBackground(new java.awt.Color(204, 204, 255));
+        signUp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         signUp.setForeground(new java.awt.Color(255, 255, 255));
         signUp.setText("Next");
         signUp.addActionListener(new java.awt.event.ActionListener() {
@@ -121,11 +121,11 @@ public class Role extends javax.swing.JFrame {
         });
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 255));
         jLabel5.setText("Select your Role");
 
         jRadioButtonEducator.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jRadioButtonEducator.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonEducator.setText("Educator");
         jRadioButtonEducator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +134,6 @@ public class Role extends javax.swing.JFrame {
         });
 
         jRadioButtonParent.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jRadioButtonParent.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonParent.setText("Parent");
         jRadioButtonParent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +142,6 @@ public class Role extends javax.swing.JFrame {
         });
 
         jRadioButtonChildren.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jRadioButtonChildren.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonChildren.setText("Children");
         jRadioButtonChildren.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,15 +154,17 @@ public class Role extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jRadioButtonChildren)
-                        .addComponent(jRadioButtonParent)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButtonEducator)))
+                .addGap(82, 82, 82)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonEducator)
+                    .addComponent(jRadioButtonParent)
+                    .addComponent(jRadioButtonChildren)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -174,15 +174,15 @@ public class Role extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(43, 43, 43)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jRadioButtonParent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jRadioButtonChildren)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addComponent(jRadioButtonEducator)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addComponent(signUp)
-                .addGap(152, 152, 152))
+                .addGap(52, 52, 52))
         );
 
         jPanel1.add(jPanel3);
@@ -197,7 +197,7 @@ public class Role extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

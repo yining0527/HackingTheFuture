@@ -4,9 +4,11 @@
  */
 package hackingthefuture;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,16 +16,26 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class CreateEventPage extends javax.swing.JFrame {
+
+    Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement psCheckUserExists = null;
+    ResultSet resultSet = null;
+
     private String title;
     private String description;
     private String venue;
     private String date;
-    private String time;
+    private String startTime;
+    private String endTime;
+
     /**
      * Creates new form EventPage
      */
     public CreateEventPage() {
         initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
     }
 
     /**
@@ -47,8 +59,10 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         eventVenue = new javax.swing.JTextField();
         eventDate = new javax.swing.JTextField();
-        eventTime = new javax.swing.JTextField();
+        eventStartTime = new javax.swing.JTextField();
         createEventButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        eventEndTime = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,10 +102,10 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel5.setText("Event Venue");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setText("Event Date (DD/MM/YYYY)");
+        jLabel6.setText("Event Date (YYYY/MM/DD)");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("Event Time(HH:MM)");
+        jLabel7.setText("Event Start Time(HH:MM:SS)");
 
         eventVenue.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventVenue.addActionListener(new java.awt.event.ActionListener() {
@@ -107,10 +121,10 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
 
-        eventTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        eventTime.addActionListener(new java.awt.event.ActionListener() {
+        eventStartTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eventStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eventTimeActionPerformed(evt);
+                eventStartTimeActionPerformed(evt);
             }
         });
 
@@ -121,52 +135,68 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("Event End Time(HH:MM:SS)");
+
+        eventEndTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eventEndTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventEndTimeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(createEventButton)
-                    .addComponent(jLabel3)
-                    .addComponent(eventTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(eventDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(eventVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(eventDate, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(eventTime, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(eventTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(eventDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(eventVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(eventDate, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(eventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(eventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventVenue, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(eventTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(eventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(createEventButton)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -178,22 +208,23 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(40, 40, 40)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,7 +238,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -230,83 +261,104 @@ public class CreateEventPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_eventDateActionPerformed
 
-    private void eventTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventTimeActionPerformed
+    private void eventStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventStartTimeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_eventTimeActionPerformed
+    }//GEN-LAST:event_eventStartTimeActionPerformed
 
     private void createEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventButtonActionPerformed
-    title = eventTitle.getText();
-    description = eventDescription.getText();
-    venue = eventVenue.getText();
-    date = eventDate.getText();
-    time = eventTime.getText();
-
-    // Optionally, you can print the data to verify it's captured correctly
-    System.out.println("Event Title: " + title);
-    System.out.println("Event Description: " + description);
-    System.out.println("Event Venue: " + venue);
-    System.out.println("Event Date: " + date);
-    System.out.println("Event Time: " + time);
-    
-    saveEventData();
-    }//GEN-LAST:event_createEventButtonActionPerformed
-private boolean validateEventData() {
-    // Check if required fields are empty
-    if (eventTitle.getText().isEmpty() ||
-        eventDescription.getText().isEmpty() ||
-        eventVenue.getText().isEmpty() ||
-        eventDate.getText().isEmpty() ||
-        eventTime.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-
-    // Validate date format (DD/MM/YYYY)
-    String datePattern = "\\d{2}/\\d{2}/\\d{4}";
-    if (!eventDate.getText().matches(datePattern)) {
-        JOptionPane.showMessageDialog(this, "Invalid date format. Please use DD/MM/YYYY.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-
-    // Validate time format (HH:MM)
-    String timePattern = "\\d{2}:\\d{2}";
-    if (!eventTime.getText().matches(timePattern)) {
-        JOptionPane.showMessageDialog(this, "Invalid time format. Please use HH:MM.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-
-    return true; // All validation checks passed
-}
-
-private void saveEventData() {
-    if (validateEventData()) {
-        // Retrieve data from text fields
-        String title = eventTitle.getText();
-        String description = eventDescription.getText();
-        String venue = eventVenue.getText();
-        String date = eventDate.getText();
-        String time = eventTime.getText();
-
-        // Prepare data string to write to file
-        String eventData = title + "," + description + "," + venue + "," + date + "," + time;
-
-        // Specify the file path
-        String filePath = "C:\\FOP\\Netbeans Project\\eventData.txt";
-
-        // Write data to file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(eventData);
-            writer.newLine();
-            System.out.println("Event data saved successfully.");
-            JOptionPane.showMessageDialog(this, "Event data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
-            System.err.println("Error saving event data: " + e.getMessage());
-            JOptionPane.showMessageDialog(this, "Error saving event data.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!validateEventData()) {
+            return; // Stop event creation if data validation fails
         }
-    }
-}
 
-    
+        title = eventTitle.getText();
+        description = eventDescription.getText();
+        venue = eventVenue.getText();
+        date = eventDate.getText();
+        startTime = eventStartTime.getText();
+        endTime = eventEndTime.getText();
+
+        // Optionally, you can print the data to verify it's captured correctly
+        System.out.println("Event Title: " + title);
+        System.out.println("Event Description: " + description);
+        System.out.println("Event Venue: " + venue);
+        System.out.println("Event Date: " + date);
+        System.out.println("Event Start Time: " + startTime);
+
+        if (title.isEmpty() || description.isEmpty() || venue.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all the blanks.");
+            return;
+        }
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Check if the event already exists based on title, description, venue, date, and time
+            String query = "SELECT * FROM `event` WHERE `event title` = ? AND `event description` = ? AND `event venue` = ? AND `event date` = ? AND `event start time` = ? AND `event end time` = ?";
+            pst = con.prepareStatement(query);
+            pst.setString(1, title);
+            pst.setString(2, description);
+            pst.setString(3, venue);
+            pst.setString(4, date);
+            pst.setString(5, startTime);
+            pst.setString(6, endTime);
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                // Event already exists
+                JOptionPane.showMessageDialog(null, "EVENT ALREADY EXISTS");
+            } else {
+                // Event does not exist, insert it into the database
+                String insertQuery = "INSERT INTO `event`(`event title`, `event description`, `event venue`, `event date`, `event start time`, `event end time`) VALUES (?,?,?,?,?,?)";
+                pst = con.prepareStatement(insertQuery);
+                pst.setString(1, title);
+                pst.setString(2, description);
+                pst.setString(3, venue);
+                pst.setString(4, date);
+                pst.setString(5, startTime);
+                pst.setString(6, endTime);
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "EVENT SAVED SUCCESSFULLY");
+
+                // Optionally, you can hide the current frame here if needed
+                // this.setVisible(false);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_createEventButtonActionPerformed
+
+    private void eventEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventEndTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eventEndTimeActionPerformed
+    private boolean validateEventData() {
+        // Check if required fields are empty
+        if (eventTitle.getText().isEmpty()
+                || eventDescription.getText().isEmpty()
+                || eventVenue.getText().isEmpty()
+                || eventDate.getText().isEmpty()
+                || eventStartTime.getText().isEmpty() || eventEndTime.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validate date format (DD/MM/YYYY)
+        String datePattern = "\\d{4}/\\d{2}/\\d{2}";
+        if (!eventDate.getText().matches(datePattern)) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use YYYY/MM/DD.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validate time format (HH:MM)
+        String timePattern = "\\d{2}:\\d{2}:\\d{2}";
+        if (!eventStartTime.getText().matches(timePattern) || !eventEndTime.getText().matches(timePattern)) {
+            JOptionPane.showMessageDialog(this, "Invalid time format. Please use HH:MM:SS.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true; // All validation checks passed
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -321,16 +373,24 @@ private void saveEventData() {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateEventPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEventPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateEventPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEventPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateEventPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEventPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateEventPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateEventPage.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -338,8 +398,9 @@ private void saveEventData() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateEventPage().setVisible(true);
+
                 CreateEventPage CreateEventPageFrame = new CreateEventPage();
+                CreateEventPageFrame.setVisible(true);
                 CreateEventPageFrame.pack();
                 CreateEventPageFrame.setLocationRelativeTo(null);
             }
@@ -350,7 +411,8 @@ private void saveEventData() {
     private javax.swing.JButton createEventButton;
     private javax.swing.JTextField eventDate;
     private javax.swing.JTextField eventDescription;
-    private javax.swing.JTextField eventTime;
+    private javax.swing.JTextField eventEndTime;
+    private javax.swing.JTextField eventStartTime;
     private javax.swing.JTextField eventTitle;
     private javax.swing.JTextField eventVenue;
     private javax.swing.JLabel jLabel1;
@@ -360,6 +422,7 @@ private void saveEventData() {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

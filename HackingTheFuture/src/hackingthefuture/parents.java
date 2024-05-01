@@ -23,7 +23,7 @@ public class parents extends javax.swing.JFrame {
 
     public parents() {
         initComponents();
-        setPreferredSize(new Dimension(850, 550));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
        
 
@@ -62,10 +62,10 @@ public class parents extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 51));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("<html>Hacking The Future </html>");
         jLabel1.setToolTipText("");
         jLabel1.setAutoscrolls(true);
@@ -89,23 +89,23 @@ public class parents extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addGap(187, 187, 187))
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 400, 520);
+        jPanel2.setBounds(0, 0, 400, 600);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setBackground(new java.awt.Color(0, 102, 102));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("Information");
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(153, 153, 255));
         jLabel5.setText("Child username:");
 
         childID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -115,8 +115,8 @@ public class parents extends javax.swing.JFrame {
             }
         });
 
-        signUp1.setBackground(new java.awt.Color(0, 102, 102));
-        signUp1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        signUp1.setBackground(new java.awt.Color(204, 204, 255));
+        signUp1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         signUp1.setForeground(new java.awt.Color(255, 255, 255));
         signUp1.setText("Next");
         signUp1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ public class parents extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(102, 102, 102));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(153, 153, 255));
         jLabel6.setText("Siblings order:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -161,8 +161,8 @@ public class parents extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(signUp1)
                 .addGap(88, 88, 88))
         );
@@ -178,9 +178,7 @@ public class parents extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
         );
 
         pack();

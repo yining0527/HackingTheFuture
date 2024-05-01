@@ -4,8 +4,6 @@
  */
 package hackingthefuture;
 
-
-
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,23 +16,32 @@ import javax.swing.JOptionPane;
  *
  * @author Asus
  */
-public class Login extends JFrame{
+public class Login extends JFrame {
+
     Connection con = null;
     PreparedStatement pst = null;
     private String loggedInUsername;
-    
-    private String getUsername(){
+    private String email, pass, role;
+
+    private String getUsername() {
         return loggedInUsername;
     }
-    
-   
-    
-    public Login(){
-        initComponents();
-        setPreferredSize(new Dimension(850,550));
-        setResizable(true); 
-        
+
+    public void setUsername(String role, String transferUsername, String email, String pass) {
+        this.role = role;
+        loggedInUsername = transferUsername;
+        this.email = email;
+        this.pass = pass;
+
     }
+
+    public Login() {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,11 +75,11 @@ public class Login extends JFrame{
         Left.setMinimumSize(new java.awt.Dimension(850, 550));
         Left.setPreferredSize(new java.awt.Dimension(800, 500));
 
-        Right.setBackground(new java.awt.Color(0, 102, 102));
+        Right.setBackground(new java.awt.Color(204, 204, 255));
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel5.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setLabelFor(Left);
         jLabel5.setText("<html>Hacking the future</html>");
@@ -95,9 +102,9 @@ public class Login extends JFrame{
             .addGroup(RightLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+                .addGap(22, 22, 22))
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,10 +113,8 @@ public class Login extends JFrame{
                 .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jLabel5.getAccessibleContext().setAccessibleParent(null);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
@@ -125,11 +130,12 @@ public class Login extends JFrame{
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("LOGIN");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("Username / Gmail");
 
         username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -140,7 +146,8 @@ public class Login extends JFrame{
         });
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(153, 153, 255));
         jLabel3.setText("Password");
 
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -150,8 +157,8 @@ public class Login extends JFrame{
             }
         });
 
-        login.setBackground(new java.awt.Color(0, 102, 102));
-        login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        login.setBackground(new java.awt.Color(153, 153, 255));
+        login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -176,10 +183,10 @@ public class Login extends JFrame{
         LeftLayout.setHorizontalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LeftLayout.createSequentialGroup()
-                .addComponent(Right, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Right, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LeftLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(35, 35, 35)
                         .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,12 +195,12 @@ public class Login extends JFrame{
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                            .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                             .addComponent(password)))
                     .addGroup(LeftLayout.createSequentialGroup()
-                        .addGap(173, 173, 173)
+                        .addGap(169, 169, 169)
                         .addComponent(jLabel1)))
-                .addGap(779, 779, 779)
+                .addGap(3158, 3158, 3158)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -206,26 +213,25 @@ public class Login extends JFrame{
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(51, 51, 51)
                 .addComponent(login)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(signUp))
                 .addGap(92, 92, 92))
             .addGroup(LeftLayout.createSequentialGroup()
-                .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Right, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Right, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
 
         getContentPane().add(Left);
-        Left.setBounds(0, 0, 840, 520);
+        Left.setBounds(0, 0, 1110, 630);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -236,88 +242,103 @@ public class Login extends JFrame{
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
         boolean found = false;  //Declare found variable
 
-            String user = username.getText().trim();
-            String pass = new String(password.getPassword()).trim();
-            
-            if(user.isEmpty() || pass.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Username and password cannot be empty!");
-                return;
+        String user = username.getText().trim();
+        String pass = new String(password.getPassword()).trim();
+        if (user.isEmpty() || pass.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty!");
+            return;
+        }
+
+        try {
+
+            String enteredCredential = user;
+            String enteredPassword = pass;
+
+            // SQL query to check if the entered credentials exist in the database
+            String query = "SELECT * FROM `user` WHERE (`username` = ? OR `email` = ? )AND `password` = ?";
+
+            // Establishing a connection to the database
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Creating a prepared statement for the login query
+            pst = con.prepareStatement(query);
+
+            pst.setString(1, enteredCredential);
+            pst.setString(2, enteredCredential);
+            pst.setString(3, enteredPassword);
+
+            // Executing the query and obtaining the result set
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                // Login successful
+                found = true;
+                loggedInUsername = resultSet.getString("username");
+                System.out.println(loggedInUsername);
+
+                // Retrieve the role from the result set
+                role = resultSet.getString("role"); // Assuming "role" is the column name in the database table
+
+                // Here, you can navigate the user to another window or perform necessary actions
+            } else {
+                // Login failed, display an error message
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
             }
- 
-            try{
-                String enteredCredential = user;
-                String enteredPassword = pass;
+        } catch (Exception ex) {
+            // Catch and display any exceptions that occur during the login process
+            JOptionPane.showMessageDialog(null, ex);
+        }
 
-                // SQL query to check if the entered credentials exist in the database
-                String query = "SELECT * FROM `user` WHERE (`username` = ? OR `email` = ? )AND `password` = ?";
+        if (found) {
+//            String transferUsername = getUsername();
 
-                // Establishing a connection to the database
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            JOptionPane.showMessageDialog(this, "Successful Login!");
+            this.setVisible(false);
 
-                // Creating a prepared statement for the login query
-                pst = con.prepareStatement(query);
+            switch (role) {
+                case "parent":
+                    MainPageParent MainPageParentsFrame = new MainPageParent();
+                    MainPageParentsFrame.setVisible(true);
+                    MainPageParentsFrame.pack();
+                    MainPageParentsFrame.setLocationRelativeTo(null);
+                    break;
+                case "educator":
+                    MainPageEducator MainPageEducatorsFrame = new MainPageEducator();
+                    MainPageEducatorsFrame.setVisible(true);
+                    MainPageEducatorsFrame.pack();
+                    MainPageEducatorsFrame.setLocationRelativeTo(null);
+                    break;
 
-                pst.setString(1, enteredCredential);
-                pst.setString(2, enteredCredential);
-                pst.setString(3, enteredPassword);
-
-                // Executing the query and obtaining the result set
-                ResultSet resultSet = pst.executeQuery();
-
-                // Checking if the result set has any rows
-                if (resultSet.next()) {
-                    // Login successful, display a success message
-                    
-                    found = true;
-                    loggedInUsername = resultSet.getString("username");
-                    System.out.println(loggedInUsername);
-                    
-                   
-                    // Here, you can navigate the user to another window or perform necessary actions
-                } else {
-                    // Login failed, display an error message
-                    JOptionPane.showMessageDialog(null, "Invalid username or password");
-                }
-            } catch (Exception ex) {
-                // Catch and display any exceptions that occur during the login process
-                JOptionPane.showMessageDialog(null, ex);
+                case "children":
+                    MainPageChildren MainPageStudentsFrame = new MainPageChildren();
+                    MainPageStudentsFrame.setVisible(true);
+                    MainPageStudentsFrame.pack();
+                    MainPageStudentsFrame.setLocationRelativeTo(null);
+                    break;
+                default:
+                    throw new AssertionError();
             }
-            
-//            if(found)
-//           {   
-//               String transferUsername = getUsername();
-//               
-//               JOptionPane.showMessageDialog(this, "Successful Login!");
-//               this.setVisible(false);
-//               GameModes GameModesFrame = new GameModes();
-//               GameModesFrame.setUsername(transferUsername);
-//               GameModesFrame.setVisible(true);
-//               GameModesFrame.pack();
-//               GameModesFrame.setLocationRelativeTo(null);
-//           }
-           
-
+        }
     }//GEN-LAST:event_loginActionPerformed
-    
+
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
         // TODO add your handling code here:
         SignUp SignUpFrame = new SignUp();
         SignUpFrame.setVisible(true);
-        
+
         SignUpFrame.pack();
-        SignUpFrame.setLocationRelativeTo(null); 
-        
+        SignUpFrame.setLocationRelativeTo(null);
+
 
     }//GEN-LAST:event_signUpActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-        
+
     }//GEN-LAST:event_usernameActionPerformed
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -352,12 +373,12 @@ public class Login extends JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 Login LoginFrame = new Login();
                 LoginFrame.setVisible(true);
                 LoginFrame.pack();
                 LoginFrame.setLocationRelativeTo(null);
-                
+
             }
         });
     }
