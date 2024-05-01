@@ -20,5 +20,5 @@ public class HackingTheFuture {
         System.out.println("abcd");
         System.out.println("1234");
     }
-    
+
 }

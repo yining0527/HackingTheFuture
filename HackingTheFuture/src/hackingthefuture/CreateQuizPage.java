@@ -3,24 +3,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hackingthefuture;
-    import java.io.BufferedWriter;
-    import java.io.FileWriter;
-    import java.io.IOException;
-    import javax.swing.JOptionPane;
+
+import java.awt.Dimension;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
+
 /**
  *
  * @author Asus
  */
 public class CreateQuizPage extends javax.swing.JFrame {
+
+    Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement psCheckUserExists = null;
+    ResultSet resultSet = null;
+
     private String title;
     private String description;
     private String theme;
     private String content;
+
     /**
      * Creates new form EventPage
      */
     public CreateQuizPage() {
         initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
     }
 
     /**
@@ -64,6 +82,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Quiz Description");
 
+        quizDescription.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quizDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizDescriptionActionPerformed(evt);
@@ -76,12 +95,14 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Quiz content(Quizizz Link)");
 
+        quizTheme.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quizTheme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizThemeActionPerformed(evt);
             }
         });
 
+        quizContent.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quizContent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizContentActionPerformed(evt);
@@ -95,6 +116,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
             }
         });
 
+        quizTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quizTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizTitleActionPerformed(evt);
@@ -106,18 +128,18 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(quizTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                     .addComponent(createQuizButton)
                     .addComponent(jLabel6)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(quizDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                    .addComponent(quizContent)
+                    .addComponent(quizDescription)
                     .addComponent(quizTheme)
-                    .addComponent(quizContent))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(quizTitle))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +162,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addComponent(quizContent, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(createQuizButton)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -156,8 +178,8 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +189,9 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,13 +199,13 @@ public class CreateQuizPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -205,79 +229,78 @@ public class CreateQuizPage extends javax.swing.JFrame {
     }//GEN-LAST:event_quizContentActionPerformed
 
     private void createQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createQuizButtonActionPerformed
-     title = quizTitle.getText();
-    description = quizDescription.getText();
-    theme = quizTheme.getText();
-    content = quizContent.getText();
 
-    // Optionally, you can print the data to verify it's captured correctly
-    System.out.println("Quiz Title: " + title);
-    System.out.println("Quiz Description: " + description);
-    System.out.println("Quiz Theme: " + theme);
-    System.out.println("Quiz content: " + content);
-    
-    saveEventData();
-    }                                                 
-private boolean validateEventData() {
-    // Check if required fields are empty
-    if (quizTitle.getText().isEmpty() ||
-        quizDescription.getText().isEmpty() ||
-        quizTheme.getText().isEmpty() ||
-        quizContent.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Check if the quiz theme is valid (Science/Technology/Engineering/Mathematics)
-    String enteredTheme = quizTheme.getText().trim();  // Trim whitespace
-    if (!isValidQuizTheme(enteredTheme)) {
-        JOptionPane.showMessageDialog(this, "Invalid quiz theme. Please enter Science, Technology, Engineering, or Mathematics.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
+        System.out.println("happy");
+        
+        title = quizTitle.getText();
+        description = quizDescription.getText();
+        theme = quizTheme.getText();
+        content = quizContent.getText();
 
-    return true; // All validation checks passed
-}
+        // Optionally, you can print the data to verify it's captured correctly
+        System.out.println("Quiz Title: " + title);
+        System.out.println("Quiz Description: " + description);
+        System.out.println("Quiz Theme: " + theme);
+        System.out.println("Quiz content: " + content);
 
-private boolean isValidQuizTheme(String theme) {
-    // Define valid quiz themes
-    String[] validThemes = {"Science", "Technology", "Engineering", "Mathematics"};
-    
-    // Check if the entered theme matches any valid theme
-    for (String validTheme : validThemes) {
-        if (validTheme.equalsIgnoreCase(theme)) {
-            return true;
+        if (title.isEmpty() || description.isEmpty() || theme.isEmpty() || content.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all the blanks.");
+            return;
         }
-    }
-    
-    return false;  // Theme is not valid
-}
-
-private void saveEventData() {
-    if (validateEventData()) {
-        // Retrieve data from text fields
-        String title = quizTitle.getText();
-        String description = quizDescription.getText();
-        String venue = quizTheme.getText();
-        String date = quizContent.getText();
-        // Prepare data string to write to file
-        String quizData = title + "," + description + "," + venue + "," + theme+ "," + content;
-
-        // Specify the file path
-        String filePath = "C:\\FOP\\Netbeans Project\\quizdata.txt";
-
-        // Write data to file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(quizData);
-            writer.newLine();
-            System.out.println("Quiz data saved successfully.");
-            JOptionPane.showMessageDialog(this, "Quiz data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException e) {
-            System.err.println("Error saving event data: " + e.getMessage());
-            JOptionPane.showMessageDialog(this, "Error saving event data.", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        if (!isValidQuizTheme(theme)) {
+            return;
         }
-    }
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Check if the event already exists based on title, description, venue, date, and time
+            String query = "SELECT * FROM `quiz` WHERE `quiz title` = ? AND `quiz description` = ? AND `quiz theme` = ? AND `quiz content` = ?";
+            pst = con.prepareStatement(query);
+            pst.setString(1, title);
+            pst.setString(2, description);
+            pst.setString(3, theme);
+            pst.setString(4, content);
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                // Event already exists
+                JOptionPane.showMessageDialog(null, "QUIZ ALREADY EXISTS");
+            } else {
+                // Event does not exist, insert it into the database
+                String insertQuery = "INSERT INTO `quiz`(`quiz title`, `quiz description`, `quiz theme`, `quiz content`) VALUES (?,?,?,?)";
+                pst = con.prepareStatement(insertQuery);
+                pst.setString(1, title);
+                pst.setString(2, description);
+                pst.setString(3, theme);
+                pst.setString(4, content);
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "QUIZ SAVED SUCCESSFULLY");
+
+                // Optionally, you can hide the current frame here if needed
+                // this.setVisible(false);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+
 
     }//GEN-LAST:event_createQuizButtonActionPerformed
+    private boolean isValidQuizTheme(String theme) {
+        // Define valid quiz themes
+        String[] validThemes = {"Science", "Technology", "Engineering", "Mathematics"};
+
+        // Check if the entered theme matches any valid theme
+        for (String validTheme : validThemes) {
+            if (validTheme.equalsIgnoreCase(theme)) {
+                return true;
+            }
+        }
+
+        return false;  // Theme is not valid
+    }
 
     /**
      * @param args the command line arguments
@@ -306,14 +329,13 @@ private void saveEventData() {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateQuizPage().setVisible(true);
+
                 CreateQuizPage CreateQuizPageFrame = new CreateQuizPage();
+                CreateQuizPageFrame.setVisible(true);
                 CreateQuizPageFrame.pack();
                 CreateQuizPageFrame.setLocationRelativeTo(null);
             }

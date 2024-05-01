@@ -4,6 +4,8 @@
  */
 package hackingthefuture;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author Asus
@@ -15,6 +17,8 @@ public class BookingsPage extends javax.swing.JFrame {
      */
     public BookingsPage() {
         initComponents();
+        setPreferredSize(new Dimension(900,600));
+        setResizable(true);
     }
 
     /**
@@ -50,6 +54,7 @@ public class BookingsPage extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Enter destination ID for booking:");
 
+        destinationTextPane.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         destinationTextPane.setPreferredSize(new java.awt.Dimension(353, 185));
         jScrollPane1.setViewportView(destinationTextPane);
 
@@ -82,6 +87,7 @@ public class BookingsPage extends javax.swing.JFrame {
             }
         });
 
+        timeSlot.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         timeSlot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timeSlotActionPerformed(evt);
@@ -110,7 +116,7 @@ public class BookingsPage extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(destinationID, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -135,7 +141,7 @@ public class BookingsPage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 407, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +161,7 @@ public class BookingsPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(202, Short.MAX_VALUE)
+                        .addContainerGap(213, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -172,14 +178,12 @@ public class BookingsPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -199,11 +203,11 @@ public class BookingsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_timeSlotActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-                MakeBookingsPage makeBookingsPageFrame = new MakeBookingsPage();
-                makeBookingsPageFrame.setVisible(true);
-                makeBookingsPageFrame.pack();
-                makeBookingsPageFrame.setLocationRelativeTo(null);
-                this.dispose();
+        MakeBookingsPage makeBookingsPageFrame = new MakeBookingsPage();
+        makeBookingsPageFrame.setVisible(true);
+        makeBookingsPageFrame.pack();
+        makeBookingsPageFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -233,76 +237,15 @@ public class BookingsPage extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookingsPage().setVisible(true);
+
                 BookingsPage MakeBookingsPageFrame = new BookingsPage();
-                MakeBookingsPageFrame .pack();
-                MakeBookingsPageFrame .setLocationRelativeTo(null);
+                MakeBookingsPageFrame.setVisible(true);
+                MakeBookingsPageFrame.pack();
+                MakeBookingsPageFrame.setLocationRelativeTo(null);
             }
         });
     }

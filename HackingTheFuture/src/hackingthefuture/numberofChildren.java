@@ -84,10 +84,11 @@ public class numberofChildren extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 51));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("<html>Hacking The Future </html>");
         jLabel1.setToolTipText("");
         jLabel1.setAutoscrolls(true);
@@ -122,11 +123,11 @@ public class numberofChildren extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(0, 102, 102));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("Information");
 
-        Next.setBackground(new java.awt.Color(0, 102, 102));
-        Next.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Next.setBackground(new java.awt.Color(204, 204, 255));
+        Next.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Next.setForeground(new java.awt.Color(255, 255, 255));
         Next.setText("Next");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +138,7 @@ public class numberofChildren extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(102, 102, 102));
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(153, 153, 255));
         jLabel6.setText("Number of Children:");
 
         jTextPane1.setEditable(false);
