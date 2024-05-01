@@ -4,7 +4,7 @@ package hackingthefuture;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-
+import java.util.Random;
 import java.sql.DriverManager;
 
 import java.sql.PreparedStatement;
@@ -29,6 +29,9 @@ public class Role extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(850,550));
         setResizable(true);
+        buttonGroup1.add(jRadioButtonEducator); // Add your radio buttons to the ButtonGroup
+        buttonGroup1.add(jRadioButtonParent);
+        buttonGroup1.add(jRadioButtonChildren);
        
     }
     public void setUsername(String transferUsername,String email, String pass){
@@ -43,13 +46,12 @@ public class Role extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        login = new javax.swing.JButton();
         signUp = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jRadioButtonEducator = new javax.swing.JRadioButton();
@@ -105,17 +107,6 @@ public class Role extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Role");
 
-        jLabel6.setText("I've an account");
-
-        login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        login.setForeground(new java.awt.Color(255, 51, 51));
-        login.setText("Login");
-        login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
-            }
-        });
-
         signUp.setBackground(new java.awt.Color(0, 102, 102));
         signUp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         signUp.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,22 +153,15 @@ public class Role extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jRadioButtonEducator)
-                                .addComponent(jRadioButtonChildren)
-                                .addComponent(jRadioButtonParent)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(87, 87, 87)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jRadioButtonChildren)
+                        .addComponent(jRadioButtonParent)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(signUp, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioButtonEducator)))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -191,15 +175,11 @@ public class Role extends javax.swing.JFrame {
                 .addComponent(jRadioButtonParent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonChildren)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonEducator)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(signUp)
-                .addGap(86, 86, 86)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(login))
-                .addGap(42, 42, 42))
+                .addGap(152, 152, 152))
         );
 
         jPanel1.add(jPanel3);
@@ -221,32 +201,29 @@ public class Role extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
-        Login LoginFrame = new Login();
-        
-        LoginFrame.setVisible(true); 
-        LoginFrame.pack();
-        LoginFrame.setLocationRelativeTo(null); 
-        this.dispose();
-    }//GEN-LAST:event_loginActionPerformed
-
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
+        
+        
+        double x = generateRandomCoordinate();
+        double y = generateRandomCoordinate();
+        String locationC =  "(" + x + ", " + y + ")";
+        
         try {
            // Establish connection to the database
            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
            // Prepare the SQL query to update the role
-           String query = "UPDATE `user` SET `role` = ? WHERE `email` = ? AND `username` = ? AND `password` = ?";
+           String query = "UPDATE `user` SET `role` = ?,`LocationCoordinate` = ? WHERE `email` = ? AND `username` = ? AND `password` = ?";
 
            // Create a PreparedStatement object
            pst = con.prepareStatement(query);
 
            // Set the parameters for the PreparedStatement
            pst.setString(1, role); // newRole is the new value for the role field
-           pst.setString(2, email); // Assuming email.getText() retrieves the current email value
-           pst.setString(3, username); // Assuming username.getText() retrieves the current username value
-           pst.setString(4, pass); // Assuming pass.getText() retrieves the current password value
+           pst.setString(2, locationC);
+           pst.setString(3, email); // Assuming email.getText() retrieves the current email value
+           pst.setString(4, username); // Assuming username.getText() retrieves the current username value
+           pst.setString(5, pass); // Assuming pass.getText() retrieves the current password value
 
            // Execute the update operation
            pst.executeUpdate();
@@ -255,21 +232,7 @@ public class Role extends javax.swing.JFrame {
        } catch (SQLException ex) {
            // Handle any SQL errors here
            ex.printStackTrace();
-       } finally {
-           // Close the resources in the finally block
-           try {
-               if (pst != null) {
-                   pst.close();
-               }
-               if (con != null) {
-                   con.close();
-               }
-           } catch (SQLException ex) {
-               // Handle any errors that occur while closing resources
-               ex.printStackTrace();
-           }
-       }
-
+       } 
 
         //Hide the SignUp frame
         this.setVisible(false);
@@ -283,21 +246,30 @@ public class Role extends javax.swing.JFrame {
     
    
     }//GEN-LAST:event_signUpActionPerformed
-
+    
+    public static double generateRandomCoordinate() {
+        Random rand = new Random();
+        double min = -500.0;
+        double max = 500.0;
+        double randomCoordinate = min + (max - min) * rand.nextDouble();
+        return Math.round(randomCoordinate * 10.0) / 10.0; // Round to one decimal place
+    }
+    
+    
     private void jRadioButtonEducatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEducatorActionPerformed
         // TODO add your handling code here:
-        role="Educator";
+        role="educator";
     }//GEN-LAST:event_jRadioButtonEducatorActionPerformed
-
-    private void jRadioButtonParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonParentActionPerformed
-        // TODO add your handling code here:
-        role="Parent";
-    }//GEN-LAST:event_jRadioButtonParentActionPerformed
 
     private void jRadioButtonChildrenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonChildrenActionPerformed
         // TODO add your handling code here:
-        role="Children";
+        role="children";
     }//GEN-LAST:event_jRadioButtonChildrenActionPerformed
+
+    private void jRadioButtonParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonParentActionPerformed
+        // TODO add your handling code here:
+        role="parent";
+    }//GEN-LAST:event_jRadioButtonParentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,17 +310,16 @@ public class Role extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButtonChildren;
     private javax.swing.JRadioButton jRadioButtonEducator;
     private javax.swing.JRadioButton jRadioButtonParent;
-    private javax.swing.JButton login;
     private javax.swing.JButton signUp;
     // End of variables declaration//GEN-END:variables
 }

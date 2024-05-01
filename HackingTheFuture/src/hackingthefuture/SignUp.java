@@ -277,31 +277,33 @@ public class SignUp extends javax.swing.JFrame {
 
             } else {
 
-                String query = "INSERT INTO `user`(`email`, `username`, `password`,`role`) VALUES (?,?,?,?)";
+                String query = "INSERT INTO `user`(`email`, `username`, `password`,`role`,`LocationCoordinate`) VALUES (?,?,?,?,?)";
 
                 pst = con.prepareStatement(query);
                 pst.setString(1, email.getText());
                 pst.setString(2, username.getText());
                 pst.setString(3, pass);
                 pst.setString(4, null);
+                pst.setString(5, null);
                 pst.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "REGISTER SUCCESSFULLY");
+                 //Hide the SignUp frame
+                this.setVisible(false);
+
+                Role roleFrame = new Role();
+                roleFrame.setUsername(user,email1,pass);
+                roleFrame.setVisible(true);
+                roleFrame.pack();
+                roleFrame.setLocationRelativeTo(null);
+           
             }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-        //Hide the SignUp frame
-        this.setVisible(false);
-        
-        Role roleFrame = new Role();
-        roleFrame.setUsername(user,email1,pass);
-        roleFrame.setVisible(true);
-        roleFrame.pack();
-        roleFrame.setLocationRelativeTo(null);
-           
+      
     }//GEN-LAST:event_signUpActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
