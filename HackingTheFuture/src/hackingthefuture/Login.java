@@ -281,6 +281,7 @@ public class Login extends JFrame {
 
                 // Retrieve the role from the result set
                 role = resultSet.getString("role"); // Assuming "role" is the column name in the database table
+                System.out.println(role);
 
                 // Here, you can navigate the user to another window or perform necessary actions
             } else {
@@ -293,7 +294,6 @@ public class Login extends JFrame {
         }
 
         if (found) {
-//            String transferUsername = getUsername();
 
             JOptionPane.showMessageDialog(this, "Successful Login!");
             this.setVisible(false);
@@ -301,12 +301,14 @@ public class Login extends JFrame {
             switch (role) {
                 case "parent":
                     MainPageParent MainPageParentsFrame = new MainPageParent();
+                    MainPageParentsFrame.setUsername(loggedInUsername);
                     MainPageParentsFrame.setVisible(true);
                     MainPageParentsFrame.pack();
                     MainPageParentsFrame.setLocationRelativeTo(null);
                     break;
                 case "educator":
                     MainPageEducator MainPageEducatorsFrame = new MainPageEducator();
+//                    MainPageEducatorsFrame.setUsername(loggedInUsername);
                     MainPageEducatorsFrame.setVisible(true);
                     MainPageEducatorsFrame.pack();
                     MainPageEducatorsFrame.setLocationRelativeTo(null);
@@ -314,6 +316,7 @@ public class Login extends JFrame {
 
                 case "children":
                     MainPageChildren MainPageStudentsFrame = new MainPageChildren();
+                    MainPageStudentsFrame.setUsername(loggedInUsername);
                     MainPageStudentsFrame.setVisible(true);
                     MainPageStudentsFrame.pack();
                     MainPageStudentsFrame.setLocationRelativeTo(null);

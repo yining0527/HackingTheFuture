@@ -11,6 +11,7 @@ import java.awt.Dimension;
  * @author Asus
  */
 public class MainPageChildren extends javax.swing.JFrame {
+    private String username;
 
     /**
      * Creates new form EventPage
@@ -19,6 +20,10 @@ public class MainPageChildren extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(900,600));
         setResizable(true);
+    }
+    
+    public void setUsername(String transferUsername) {
+        this.username = transferUsername;
     }
 
     /**
@@ -198,6 +203,11 @@ public class MainPageChildren extends javax.swing.JFrame {
 
     private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
         // TODO add your handling code here:
+        ProfileStudent ProfileStudentFrame = new ProfileStudent();
+        ProfileStudentFrame.setUsername(username);
+        ProfileStudentFrame.setVisible(true);
+        ProfileStudentFrame.pack();
+        ProfileStudentFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_profileActionPerformed
 
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed

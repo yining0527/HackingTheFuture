@@ -11,6 +11,7 @@ import java.awt.Dimension;
  * @author Asus
  */
 public class MainPageParent extends javax.swing.JFrame {
+    private String username;
 
     /**
      * Creates new form EventPage
@@ -20,6 +21,10 @@ public class MainPageParent extends javax.swing.JFrame {
         setPreferredSize(new Dimension(900,600));
         setResizable(true);
     }
+    
+     public void setUsername(String transferUsername) {
+        this.username = transferUsername;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,8 +42,8 @@ public class MainPageParent extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         Booking = new javax.swing.JButton();
         viewEvent = new javax.swing.JButton();
-        profile = new javax.swing.JToggleButton();
         discussion = new javax.swing.JButton();
+        jButtonPROFILE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,9 +79,6 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
 
-        profile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profile.setText("Profile");
-
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         discussion.setText("Discussion");
@@ -86,26 +88,21 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
 
+        jButtonPROFILE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonPROFILE.setText("Profile");
+        jButtonPROFILE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPROFILEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(profile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(278, 278, 278)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(76, 76, 76))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(38, 38, 38))))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)))
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(321, 321, 321)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,19 +110,29 @@ public class MainPageParent extends javax.swing.JFrame {
                     .addComponent(Booking, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButtonPROFILE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(278, 278, 278)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(76, 76, 76))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(38, 38, 38))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(profile)
-                        .addGap(7, 7, 7))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jButtonPROFILE))
                 .addComponent(jLabel6)
                 .addGap(52, 52, 52)
                 .addComponent(Booking, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,6 +183,15 @@ public class MainPageParent extends javax.swing.JFrame {
         ViewQuizPageFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_discussionActionPerformed
 
+    private void jButtonPROFILEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPROFILEActionPerformed
+        // TODO add your handling code here:
+        ProfileParent ProfileParentFrame = new ProfileParent();
+        ProfileParentFrame.setUsername(username);
+        ProfileParentFrame.setVisible(true);
+        ProfileParentFrame.pack();
+        ProfileParentFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButtonPROFILEActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,12 +238,12 @@ public class MainPageParent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Booking;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton profile;
     private javax.swing.JButton viewEvent;
     // End of variables declaration//GEN-END:variables
 }
