@@ -232,7 +232,7 @@ public class children extends javax.swing.JFrame {
 
                 
 
-                    String query = "INSERT INTO `user`(`email`, `username`, `password`,`role`,`LocationCoordinate`) VALUES (?,?,?,?,?)";
+                    String query = "INSERT INTO `children`(`userID`, `Father`, `Mother`) VALUES (?,?,?)";
 
                     pst = con.prepareStatement(query);
                      pst.setString(1, username1);
