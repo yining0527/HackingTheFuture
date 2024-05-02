@@ -39,9 +39,9 @@ public class children extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        mother = new javax.swing.JTextField();
         Next = new javax.swing.JButton();
-        email = new javax.swing.JTextField();
+        father = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,10 +96,10 @@ public class children extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("Information");
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        username.addActionListener(new java.awt.event.ActionListener() {
+        mother.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mother.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameActionPerformed(evt);
+                motherActionPerformed(evt);
             }
         });
 
@@ -113,10 +113,10 @@ public class children extends javax.swing.JFrame {
             }
         });
 
-        email.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        email.addActionListener(new java.awt.event.ActionListener() {
+        father.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        father.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
+                fatherActionPerformed(evt);
             }
         });
 
@@ -129,10 +129,6 @@ public class children extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 255));
         jLabel6.setText("Father Username:");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Public\\Documents\\HackingTheFuture\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Children (1).png")); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Public\\Documents\\HackingTheFuture\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Quiz.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,10 +146,10 @@ public class children extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(father, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(mother, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -172,11 +168,11 @@ public class children extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(father, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mother, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
@@ -211,38 +207,19 @@ public class children extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+    private void motherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motherActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_motherActionPerformed
 
-//        try{
-//            //Get the values from the text fields
-//            String user = username.getText().trim();
-//            String pass = new String(password.getPassword()).trim();
-//            
-//            //Write the data to the file
-//            FileWriter writer = new FileWriter("C:\\FileTypeAThon\\storagedata.txt",true);
-//            
-//            writer.write(user+ "-" + pass + "\n");
-//            
-//            writer.close();
-//            
-//            JOptionPane.showMessageDialog(this,"Successful Registration");
-//        
-//        }catch(IOException ex){
-//            ex.printStackTrace();
-//            JOptionPane.showInternalMessageDialog(this, "An error occurred");
-//        }
-    }//GEN-LAST:event_usernameActionPerformed
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+    private void fatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fatherActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
+    }//GEN-LAST:event_fatherActionPerformed
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         //        try{
             //Get the values from the text fields
-            String email1 = email.getText().trim();
-            String user = username.getText().trim();
+            String email1 = father.getText().trim();
+            String user = mother.getText().trim();
             
 
             if (user.isEmpty() || email1.isEmpty()) {
@@ -253,25 +230,14 @@ public class children extends javax.swing.JFrame {
             try {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
-                PreparedStatement psCheckUsername = con.prepareStatement("SELECT * FROM `user` WHERE `username` = ?");
-                psCheckUsername.setString(1, user);
-                ResultSet usernameResult = psCheckUsername.executeQuery();
-
-                // Check if email exists
-                PreparedStatement psCheckEmail = con.prepareStatement("SELECT * FROM `user` WHERE `email` = ?");
-                psCheckEmail.setString(1, email1);
-                ResultSet emailResult = psCheckEmail.executeQuery();
-
-                if (usernameResult.next() || emailResult.next()) {
-                    JOptionPane.showMessageDialog(null, "Username or email already exists. Please choose different credentials.");
-
-                } else {
+                
 
                     String query = "INSERT INTO `user`(`email`, `username`, `password`,`role`,`LocationCoordinate`) VALUES (?,?,?,?,?)";
 
                     pst = con.prepareStatement(query);
-                    pst.setString(1, email.getText());
-                    pst.setString(2, username.getText());
+                     pst.setString(1, username1);
+                    pst.setString(2, father.getText());
+                    pst.setString(3, mother.getText());
                    
                     pst.executeUpdate();
 
@@ -284,7 +250,7 @@ public class children extends javax.swing.JFrame {
                     LoginFrame.pack();
                     LoginFrame.setLocationRelativeTo(null);
 
-                }
+                
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
@@ -332,7 +298,7 @@ public class children extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Next;
-    private javax.swing.JTextField email;
+    private javax.swing.JTextField father;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -342,6 +308,6 @@ public class children extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField username;
+    private javax.swing.JTextField mother;
     // End of variables declaration//GEN-END:variables
 }
