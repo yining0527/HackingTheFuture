@@ -17,7 +17,7 @@ public class MainMainPage extends javax.swing.JFrame {
      */
     public MainMainPage() {
         initComponents();
-        setPreferredSize(new Dimension(900,600));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
     }
 

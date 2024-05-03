@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Stack;
 
 /**
  *
@@ -23,6 +24,7 @@ public class ViewEventPage extends javax.swing.JFrame {
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
+    private Stack<Class<?>> navigationHistory;
 
     /**
      * Creates new form EventPage
@@ -35,6 +37,11 @@ public class ViewEventPage extends javax.swing.JFrame {
         fetchLiveEvents();
         fetchUpcomingEvents();
 
+    }
+
+    public ViewEventPage(Stack<Class<?>> navigationHistory) {
+        initComponents();
+        this.navigationHistory = navigationHistory;
     }
 
 // Method to fetch live events from the database
@@ -94,94 +101,93 @@ public class ViewEventPage extends javax.swing.JFrame {
     }
 
     private void displayLiveEvents(javax.swing.JTextArea liveEventTextArea, ResultSet resultSet) throws SQLException {
-    StringBuilder liveEventsBuilder = new StringBuilder();
+        StringBuilder liveEventsBuilder = new StringBuilder();
 
-    while (resultSet.next()) {
-        String eventTitle = resultSet.getString("event title");
-        String eventDescription = resultSet.getString("event description");
-        String eventVenue = resultSet.getString("event venue");
+        while (resultSet.next()) {
+            String eventTitle = resultSet.getString("event title");
+            String eventDescription = resultSet.getString("event description");
+            String eventVenue = resultSet.getString("event venue");
 
-        String eventDateStr = resultSet.getString("event date");
-        String eventStartTimeStr = resultSet.getString("event start time");
-        String eventEndTimeStr = resultSet.getString("event end time");
+            String eventDateStr = resultSet.getString("event date");
+            String eventStartTimeStr = resultSet.getString("event start time");
+            String eventEndTimeStr = resultSet.getString("event end time");
 
-        String[] dateParts = eventDateStr.split("/");
-        int year = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int day = Integer.parseInt(dateParts[2]);
+            String[] dateParts = eventDateStr.split("/");
+            int year = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+            int day = Integer.parseInt(dateParts[2]);
 
-        String[] startTimeParts = eventStartTimeStr.split(":");
-        int startHour = Integer.parseInt(startTimeParts[0]);
-        int startMinute = Integer.parseInt(startTimeParts[1]);
-        int startSecond = Integer.parseInt(startTimeParts[2]);
+            String[] startTimeParts = eventStartTimeStr.split(":");
+            int startHour = Integer.parseInt(startTimeParts[0]);
+            int startMinute = Integer.parseInt(startTimeParts[1]);
+            int startSecond = Integer.parseInt(startTimeParts[2]);
 
-        String[] endTimeParts = eventEndTimeStr.split(":");
-        int endHour = Integer.parseInt(endTimeParts[0]);
-        int endMinute = Integer.parseInt(endTimeParts[1]);
-        int endSecond = Integer.parseInt(endTimeParts[2]);
+            String[] endTimeParts = eventEndTimeStr.split(":");
+            int endHour = Integer.parseInt(endTimeParts[0]);
+            int endMinute = Integer.parseInt(endTimeParts[1]);
+            int endSecond = Integer.parseInt(endTimeParts[2]);
 
-        LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
-        LocalDateTime eventEndDateTime = LocalDateTime.of(year, month, day, endHour, endMinute, endSecond);
+            LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
+            LocalDateTime eventEndDateTime = LocalDateTime.of(year, month, day, endHour, endMinute, endSecond);
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
+            LocalDateTime currentDateTime = LocalDateTime.now();
 
-        if (currentDateTime.isEqual(eventStartDateTime) || (currentDateTime.isAfter(eventStartDateTime) && currentDateTime.isBefore(eventEndDateTime))) {
-            liveEventsBuilder.append("Event: ").append(eventTitle).append("\n")
-                    .append("Venue: ").append(eventVenue).append("\n")
-                    .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
-                    append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
+            if (currentDateTime.isEqual(eventStartDateTime) || (currentDateTime.isAfter(eventStartDateTime) && currentDateTime.isBefore(eventEndDateTime))) {
+                liveEventsBuilder.append("Event: ").append(eventTitle).append("\n")
+                        .append("Venue: ").append(eventVenue).append("\n")
+                        .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
+                        append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
+            }
         }
+
+        liveEventTextArea.setText(liveEventsBuilder.toString());
+        liveEventTextArea.setEditable(false);
     }
 
-    liveEventTextArea.setText(liveEventsBuilder.toString());
-    liveEventTextArea.setEditable(false);
-}
+    private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea, ResultSet resultSet) throws SQLException {
+        StringBuilder upcomingEventsBuilder = new StringBuilder();
+        int count = 0;
 
-private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea, ResultSet resultSet) throws SQLException {
-    StringBuilder upcomingEventsBuilder = new StringBuilder();
-    int count = 0;
+        while (resultSet.next() && count < 3) {
+            String eventTitle = resultSet.getString("event title");
+            String eventDescription = resultSet.getString("event description");
+            String eventVenue = resultSet.getString("event venue");
 
-    while (resultSet.next() && count < 3) {
-        String eventTitle = resultSet.getString("event title");
-        String eventDescription = resultSet.getString("event description");
-        String eventVenue = resultSet.getString("event venue");
+            String eventDateStr = resultSet.getString("event date");
+            String eventStartTimeStr = resultSet.getString("event start time");
+            String eventEndTimeStr = resultSet.getString("event end time");
 
-        String eventDateStr = resultSet.getString("event date");
-        String eventStartTimeStr = resultSet.getString("event start time");
-        String eventEndTimeStr = resultSet.getString("event end time");
+            String[] dateParts = eventDateStr.split("/");
+            int year = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+            int day = Integer.parseInt(dateParts[2]);
 
-        String[] dateParts = eventDateStr.split("/");
-        int year = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int day = Integer.parseInt(dateParts[2]);
+            String[] startTimeParts = eventStartTimeStr.split(":");
+            int startHour = Integer.parseInt(startTimeParts[0]);
+            int startMinute = Integer.parseInt(startTimeParts[1]);
+            int startSecond = Integer.parseInt(startTimeParts[2]);
 
-        String[] startTimeParts = eventStartTimeStr.split(":");
-        int startHour = Integer.parseInt(startTimeParts[0]);
-        int startMinute = Integer.parseInt(startTimeParts[1]);
-        int startSecond = Integer.parseInt(startTimeParts[2]);
+            String[] endTimeParts = eventEndTimeStr.split(":");
+            int endHour = Integer.parseInt(endTimeParts[0]);
+            int endMinute = Integer.parseInt(endTimeParts[1]);
+            int endSecond = Integer.parseInt(endTimeParts[2]);
 
-        String[] endTimeParts = eventEndTimeStr.split(":");
-        int endHour = Integer.parseInt(endTimeParts[0]);
-        int endMinute = Integer.parseInt(endTimeParts[1]);
-        int endSecond = Integer.parseInt(endTimeParts[2]);
+            LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
 
-        LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
+            LocalDateTime currentDateTime = LocalDateTime.now();
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
-
-        if (currentDateTime.isBefore(eventStartDateTime)) {
-            upcomingEventsBuilder.append("Event: ").append(eventTitle).append("\n")
-                    .append("Venue: ").append(eventVenue).append("\n")
-                    .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
-                    append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
-            count++;
+            if (currentDateTime.isBefore(eventStartDateTime)) {
+                upcomingEventsBuilder.append("Event: ").append(eventTitle).append("\n")
+                        .append("Venue: ").append(eventVenue).append("\n")
+                        .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
+                        append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
+                count++;
+            }
         }
+
+        upcomingEventsTextArea.setText(upcomingEventsBuilder.toString());
+        upcomingEventsTextArea.setEditable(false);
     }
-
-    upcomingEventsTextArea.setText(upcomingEventsBuilder.toString());
-    upcomingEventsTextArea.setEditable(false);
-}
-
 
 //    private void fetchEvents() {
 //    try {
@@ -248,6 +254,7 @@ private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea,
         liveEventTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         upcomingEventsTextArea = new javax.swing.JTextArea();
+        backButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -284,37 +291,56 @@ private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea,
         upcomingEventsTextArea.setRows(5);
         jScrollPane3.setViewportView(upcomingEventsTextArea);
 
+        backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(makeBooking)
-                .addGap(29, 29, 29))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(81, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(makeBooking))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backButton)))
+                        .addGap(29, 29, 29))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel4)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backButton)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(makeBooking)
-                .addGap(21, 21, 21))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -337,7 +363,7 @@ private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea,
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addComponent(jLabel1)
@@ -356,21 +382,43 @@ private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea,
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void makeBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeBookingActionPerformed
-        MakeBookingsPage makeBookingsPageFrame = new MakeBookingsPage();
-        makeBookingsPageFrame.setVisible(true);
-        makeBookingsPageFrame.pack();
-        makeBookingsPageFrame.setLocationRelativeTo(null);
+        BookEventPage MakeBookingEventPageFrame = new BookEventPage();
+        MakeBookingEventPageFrame.setVisible(true);
+        MakeBookingEventPageFrame.pack();
+        MakeBookingEventPageFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_makeBookingActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+
+//        if (navigationHistory != null && !navigationHistory.isEmpty()) {
+//            navigationHistory.pop(); // Remove current screen from history
+//            if (!navigationHistory.isEmpty()) {
+//                // Navigate back to the previous screen
+//                Class<?> previousScreen = navigationHistory.peek();
+//                try {
+//                    javax.swing.JFrame previousFrame = (javax.swing.JFrame) previousScreen.newInstance();
+//                    previousFrame.setVisible(true);
+//                    previousFrame.pack();
+//                    previousFrame.setLocationRelativeTo(null);
+//                    this.dispose();
+//                } catch (InstantiationException | IllegalAccessException ex) {
+//                    // Handle exception
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }
+
+            
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,6 +463,7 @@ private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea,
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -10,16 +10,17 @@ import java.awt.Dimension;
  *
  * @author Asus
  */
-public class BookingsPage extends javax.swing.JFrame {
+public class BookingDestinationPage extends javax.swing.JFrame {
 
     /**
      * Creates new form EventPage
      */
-    public BookingsPage() {
+    public BookingDestinationPage() {
         initComponents();
         setPreferredSize(new Dimension(900,600));
         setResizable(true);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -203,7 +204,7 @@ public class BookingsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_timeSlotActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MakeBookingsPage makeBookingsPageFrame = new MakeBookingsPage();
+        ShowDestinationPage makeBookingsPageFrame = new ShowDestinationPage();
         makeBookingsPageFrame.setVisible(true);
         makeBookingsPageFrame.pack();
         makeBookingsPageFrame.setLocationRelativeTo(null);
@@ -227,14 +228,16 @@ public class BookingsPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookingDestinationPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookingDestinationPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookingDestinationPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookingsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookingDestinationPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -242,7 +245,7 @@ public class BookingsPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                BookingsPage MakeBookingsPageFrame = new BookingsPage();
+                BookingDestinationPage MakeBookingsPageFrame = new BookingDestinationPage();
                 MakeBookingsPageFrame.setVisible(true);
                 MakeBookingsPageFrame.pack();
                 MakeBookingsPageFrame.setLocationRelativeTo(null);

@@ -5,6 +5,7 @@
 package hackingthefuture;
 
 import java.awt.Dimension;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +14,20 @@ import javax.swing.JOptionPane;
  */
 public class AttemptQuizPage extends javax.swing.JFrame {
 
+    private Stack<Class<?>> navigationHistory = new Stack<>();
+
     /**
      * Creates new form EventPage
      */
     public AttemptQuizPage() {
         initComponents();
-        setPreferredSize(new Dimension(900,600));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+    }
+
+    public AttemptQuizPage(Stack<Class<?>> navigationHistory) {
+        initComponents();
+        this.navigationHistory = navigationHistory;
     }
 
     /**
@@ -37,7 +45,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         QuizizzLink = new javax.swing.JTextField();
         completeButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,11 +78,11 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -86,7 +94,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
                         .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3)
@@ -100,9 +108,9 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(QuizizzLink, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(92, 92, 92))
         );
@@ -159,7 +167,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
     }//GEN-LAST:event_QuizizzLinkActionPerformed
 
     private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
-String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing whitespaces
+        String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing whitespaces
 
         if (quizLink.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please don't forget to paste the quiz link before attempting it", "Reminder", JOptionPane.INFORMATION_MESSAGE);
@@ -167,14 +175,39 @@ String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing w
             JOptionPane.showMessageDialog(null, "Please copy the valid quiz link", "Invalid Link", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
-        
 
-    }
+        }
     }//GEN-LAST:event_completeButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+//        if (navigationHistory != null && !navigationHistory.isEmpty()) {
+//            navigationHistory.pop(); // Remove current screen from history
+//            if (!navigationHistory.isEmpty()) {
+//                // Navigate back to the previous screen
+//                Class<?> previousScreen = navigationHistory.peek();
+//                try {
+//                    javax.swing.JFrame previousFrame = (javax.swing.JFrame) previousScreen.newInstance();
+//                    previousFrame.setVisible(true);
+//                    previousFrame.pack();
+//                    previousFrame.setLocationRelativeTo(null);
+//                    this.dispose();
+//                } catch (InstantiationException | IllegalAccessException ex) {
+//                    // Handle exception
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }
+
+         // Create an instance of ViewQuizPage
+    
+        ViewQuizPage ViewQuizPageFrame = new ViewQuizPage();
+        ViewQuizPageFrame.setPreferredSize(new Dimension(900, 600));
+        ViewQuizPageFrame.setVisible(true);
+        ViewQuizPageFrame.pack();
+        ViewQuizPageFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,8 +254,8 @@ String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing w
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField QuizizzLink;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton completeButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

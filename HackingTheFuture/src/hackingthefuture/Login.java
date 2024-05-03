@@ -242,7 +242,7 @@ public class Login extends JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-    // TODO add your handling code here:
+        // TODO add your handling code here:
         boolean found = false;  //Declare found variable
 
         String user = username.getText().trim();
@@ -298,6 +298,8 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(this, "Successful Login!");
             this.setVisible(false);
 
+            
+
             switch (role) {
                 case "parent":
                     MainPageParent MainPageParentsFrame = new MainPageParent();
@@ -331,7 +333,6 @@ public class Login extends JFrame {
         // TODO add your handling code here:
         SignUp SignUpFrame = new SignUp();
         SignUpFrame.setVisible(true);
-
         SignUpFrame.pack();
         SignUpFrame.setLocationRelativeTo(null);
 

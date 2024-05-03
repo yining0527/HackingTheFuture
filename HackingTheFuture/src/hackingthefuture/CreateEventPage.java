@@ -63,6 +63,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         createEventButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         eventEndTime = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,6 +146,13 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,7 +160,10 @@ public class CreateEventPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createEventButton)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(createEventButton))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(eventTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +206,9 @@ public class CreateEventPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(createEventButton)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createEventButton)
+                    .addComponent(backButton))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -331,6 +344,15 @@ public class CreateEventPage extends javax.swing.JFrame {
     private void eventEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventEndTimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eventEndTimeActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+        ViewEventPageFrame.setVisible(true);
+        ViewEventPageFrame.pack();
+        ViewEventPageFrame.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_backButtonActionPerformed
     private boolean validateEventData() {
         // Check if required fields are empty
         if (eventTitle.getText().isEmpty()
@@ -408,6 +430,7 @@ public class CreateEventPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton createEventButton;
     private javax.swing.JTextField eventDate;
     private javax.swing.JTextField eventDescription;

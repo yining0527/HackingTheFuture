@@ -11,6 +11,7 @@ import java.awt.Dimension;
  * @author Asus
  */
 public class MainPageParent extends javax.swing.JFrame {
+
     private String username;
 
     /**
@@ -18,12 +19,16 @@ public class MainPageParent extends javax.swing.JFrame {
      */
     public MainPageParent() {
         initComponents();
-        setPreferredSize(new Dimension(900,600));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
     }
-    
-     public void setUsername(String transferUsername) {
+
+    public void setUsername(String transferUsername) {
         this.username = transferUsername;
+    }
+    
+    public String getUsername(){
+        return username;
     }
 
     /**
@@ -173,10 +178,10 @@ public class MainPageParent extends javax.swing.JFrame {
 
     private void BookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingActionPerformed
         // TODO add your handling code here:
-        BookingsPage MakeBookingsPageFrame = new BookingsPage();
-        MakeBookingsPageFrame.setVisible(true);
-        MakeBookingsPageFrame.pack();
-        MakeBookingsPageFrame.setLocationRelativeTo(null);
+        ShowDestinationPage showDestinationPage = new ShowDestinationPage(getUsername());
+        showDestinationPage.setVisible(true);
+        showDestinationPage.pack();
+        showDestinationPage.setLocationRelativeTo(null);
     }//GEN-LAST:event_BookingActionPerformed
 
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed

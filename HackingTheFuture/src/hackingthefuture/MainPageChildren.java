@@ -38,7 +38,6 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        nextButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         viewAndattemptQuiz = new javax.swing.JButton();
         viewEvent = new javax.swing.JButton();
@@ -58,14 +57,6 @@ public class MainPageChildren extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("======================================================================================");
-
-        nextButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        nextButton.setText("Next");
-        nextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("ROLE: STUDENTS");
@@ -126,10 +117,6 @@ public class MainPageChildren extends javax.swing.JFrame {
                             .addComponent(viewAndattemptQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nextButton)
-                        .addGap(33, 33, 33))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +154,7 @@ public class MainPageChildren extends javax.swing.JFrame {
                 .addComponent(viewEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
                 .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(nextButton)
-                .addGap(17, 17, 17))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,14 +172,6 @@ public class MainPageChildren extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        BookingsPage BookingsPageFrame = new BookingsPage();
-        BookingsPageFrame.setVisible(true);
-        BookingsPageFrame.pack();
-        BookingsPageFrame.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_nextButtonActionPerformed
 
     private void viewAndattemptQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAndattemptQuizActionPerformed
         // TODO add your handling code here:
@@ -288,7 +265,6 @@ public class MainPageChildren extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton nextButton;
     private javax.swing.JToggleButton profile;
     private javax.swing.JButton viewAndattemptQuiz;
     private javax.swing.JButton viewEvent;
