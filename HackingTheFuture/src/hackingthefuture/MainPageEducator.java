@@ -11,6 +11,7 @@ import java.awt.Dimension;
  * @author Asus
  */
 public class MainPageEducator extends javax.swing.JFrame {
+    private String username;
 
     /**
      * Creates new form EventPage
@@ -21,6 +22,10 @@ public class MainPageEducator extends javax.swing.JFrame {
         setResizable(true);
     }
 
+    public void setUsername(String transferUsername) {
+        this.username = transferUsername;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,8 +43,8 @@ public class MainPageEducator extends javax.swing.JFrame {
         createQuiz = new javax.swing.JButton();
         viewEvent = new javax.swing.JButton();
         createEvent = new javax.swing.JButton();
-        profile = new javax.swing.JToggleButton();
         discussion = new javax.swing.JButton();
+        jButtonPROFILE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,15 +89,20 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
 
-        profile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profile.setText("Profile");
-
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         discussion.setText("Discussion");
         discussion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 discussionActionPerformed(evt);
+            }
+        });
+
+        jButtonPROFILE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonPROFILE.setText("Profile");
+        jButtonPROFILE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPROFILEActionPerformed(evt);
             }
         });
 
@@ -107,8 +117,9 @@ public class MainPageEducator extends javax.swing.JFrame {
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(profile)
-                        .addGap(288, 288, 288)
+                        .addGap(13, 13, 13)
+                        .addComponent(jButtonPROFILE)
+                        .addGap(270, 270, 270)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
@@ -136,8 +147,8 @@ public class MainPageEducator extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(profile)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1)
+                            .addComponent(jButtonPROFILE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -148,7 +159,7 @@ public class MainPageEducator extends javax.swing.JFrame {
                 .addComponent(viewEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,6 +203,15 @@ public class MainPageEducator extends javax.swing.JFrame {
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_discussionActionPerformed
+
+    private void jButtonPROFILEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPROFILEActionPerformed
+        // TODO add your handling code here:
+        ProfileEducator ProfileEducatorFrame = new ProfileEducator();
+        ProfileEducatorFrame.setUsername(username);
+        ProfileEducatorFrame.setVisible(true);
+        ProfileEducatorFrame.pack();
+        ProfileEducatorFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButtonPROFILEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,12 +259,12 @@ public class MainPageEducator extends javax.swing.JFrame {
     private javax.swing.JButton createEvent;
     private javax.swing.JButton createQuiz;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton profile;
     private javax.swing.JButton viewEvent;
     // End of variables declaration//GEN-END:variables
 }

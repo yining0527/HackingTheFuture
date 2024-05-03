@@ -24,7 +24,7 @@ public class MainPageParent extends javax.swing.JFrame {
     
      public void setUsername(String transferUsername) {
         this.username = transferUsername;
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

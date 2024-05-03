@@ -308,7 +308,7 @@ public class Login extends JFrame {
                     break;
                 case "educator":
                     MainPageEducator MainPageEducatorsFrame = new MainPageEducator();
-//                    MainPageEducatorsFrame.setUsername(loggedInUsername);
+                    MainPageEducatorsFrame.setUsername(loggedInUsername);
                     MainPageEducatorsFrame.setVisible(true);
                     MainPageEducatorsFrame.pack();
                     MainPageEducatorsFrame.setLocationRelativeTo(null);

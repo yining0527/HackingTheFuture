@@ -14,36 +14,29 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class ProfileParent extends javax.swing.JFrame {
+public class ProfileEducator extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     
     // Variables for user information
     private String email;
     private String username;
-    private String password;
     private String role;
     private String locationCoordinate;
-    private ArrayList<String> childrenNames = new ArrayList<>();
-
 
     /**
-     * Creates new form UserAccountParent
+     * Creates new form ProfileEducator
      */
-    public ProfileParent() {
+    public ProfileEducator() {
         initComponents();
         this.username = username;  // Set the username
-        
     }
     
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
         takeInformation();
-        takeChildren();
-}
-
+    }
     
     private void takeInformation() {
         System.out.println("take information");
@@ -85,46 +78,7 @@ public class ProfileParent extends javax.swing.JFrame {
         jLabelShowROLE.setText(role);
         jLabelShowLOCATIONCOORDINATE.setText(locationCoordinate);
     }
-    
-    private void takeChildren() {
-    System.out.println("take children");
-    try {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-        System.out.println("Database connection successful.");
 
-        String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";
-        pst = con.prepareStatement(queryChildren);
-        pst.setString(1, username); // Set the username parameter at index 1
-
-        System.out.println("SQL Query for children: " + queryChildren); // Print SQL query for debugging
-        System.out.println("Username: " + username); // Print username for debugging
-
-        ResultSet rs = pst.executeQuery();
-
-        while (rs.next()) {
-            String childName = rs.getString("Children");
-            childrenNames.add(childName); // Add child's username to the ArrayList
-        }
-
-        con.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Print stack trace for debugging
-        System.err.println("Error executing SQL query for children: " + e.getMessage());
-    }
-
-    System.out.println("Children Names: " + childrenNames);
-
-    // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
-   StringBuilder childrenDisplay = new StringBuilder("<html>");
-   for (String child : childrenNames) {
-       childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
-   }
-   childrenDisplay.append("</html>"); // Close the HTML tag
-   jLabelShowCHILDREN.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
-}
-
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,12 +96,14 @@ public class ProfileParent extends javax.swing.JFrame {
         jLabelUSERNAME = new javax.swing.JLabel();
         jLabelROLE = new javax.swing.JLabel();
         jLabelLOCATIONCOORDINATE = new javax.swing.JLabel();
-        jLabelCHILDREN = new javax.swing.JLabel();
         jLabelShowUSERNAME = new javax.swing.JLabel();
         jLabelShowEMAIL = new javax.swing.JLabel();
         jLabelShowROLE = new javax.swing.JLabel();
         jLabelShowLOCATIONCOORDINATE = new javax.swing.JLabel();
-        jLabelShowCHILDREN = new javax.swing.JLabel();
+        jLabelLQUIZZESCREATED = new javax.swing.JLabel();
+        jLabelEVENTSCREATED = new javax.swing.JLabel();
+        jLabelShowQUIZZESCREATED = new javax.swing.JLabel();
+        jLabelShowEVENTSCREATED = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -182,11 +138,6 @@ public class ProfileParent extends javax.swing.JFrame {
         jLabelLOCATIONCOORDINATE.setForeground(new java.awt.Color(153, 153, 255));
         jLabelLOCATIONCOORDINATE.setText("Location Coordinate");
 
-        jLabelCHILDREN.setBackground(new java.awt.Color(102, 102, 102));
-        jLabelCHILDREN.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelCHILDREN.setForeground(new java.awt.Color(153, 153, 255));
-        jLabelCHILDREN.setText("Child / Children");
-
         jLabelShowUSERNAME.setBackground(new java.awt.Color(102, 102, 102));
         jLabelShowUSERNAME.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelShowUSERNAME.setForeground(new java.awt.Color(153, 153, 255));
@@ -207,11 +158,25 @@ public class ProfileParent extends javax.swing.JFrame {
         jLabelShowLOCATIONCOORDINATE.setForeground(new java.awt.Color(153, 153, 255));
         jLabelShowLOCATIONCOORDINATE.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabelShowCHILDREN.setBackground(new java.awt.Color(102, 102, 102));
-        jLabelShowCHILDREN.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabelShowCHILDREN.setForeground(new java.awt.Color(153, 153, 255));
-        jLabelShowCHILDREN.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabelShowCHILDREN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelLQUIZZESCREATED.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelLQUIZZESCREATED.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelLQUIZZESCREATED.setForeground(new java.awt.Color(153, 153, 255));
+        jLabelLQUIZZESCREATED.setText("Quizzes Created");
+
+        jLabelEVENTSCREATED.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelEVENTSCREATED.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelEVENTSCREATED.setForeground(new java.awt.Color(153, 153, 255));
+        jLabelEVENTSCREATED.setText("Events Created");
+
+        jLabelShowQUIZZESCREATED.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelShowQUIZZESCREATED.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabelShowQUIZZESCREATED.setForeground(new java.awt.Color(153, 153, 255));
+        jLabelShowQUIZZESCREATED.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabelShowEVENTSCREATED.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelShowEVENTSCREATED.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabelShowEVENTSCREATED.setForeground(new java.awt.Color(153, 153, 255));
+        jLabelShowEVENTSCREATED.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -226,6 +191,10 @@ public class ProfileParent extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabelLQUIZZESCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelShowQUIZZESCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,18 +203,18 @@ public class ProfileParent extends javax.swing.JFrame {
                                             .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(91, 91, 91))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabelCHILDREN, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelShowCHILDREN, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelEVENTSCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(182, Short.MAX_VALUE))
+                                .addComponent(jLabelShowEVENTSCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,25 +223,29 @@ public class ProfileParent extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(jLabelLQUIZZESCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowQUIZZESCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCHILDREN, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowCHILDREN, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(185, Short.MAX_VALUE))
+                    .addComponent(jLabelEVENTSCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowEVENTSCREATED, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -286,30 +259,30 @@ public class ProfileParent extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(76, 76, 76)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(199, 199, 199)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,26 +311,20 @@ public class ProfileParent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfileParent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileEducator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfileParent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileEducator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfileParent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileEducator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfileParent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfileEducator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ProfileParent ProfileParentFrame = new ProfileParent();
-                ProfileParentFrame.pack(); // Pack the frame before displaying it
-                ProfileParentFrame.setVisible(true);
-                ProfileParentFrame.setLocationRelativeTo(null);
+                new ProfileEducator().setVisible(true);
             }
         });
     }
@@ -366,13 +333,15 @@ public class ProfileParent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelCHILDREN;
     private javax.swing.JLabel jLabelEMAIL;
+    private javax.swing.JLabel jLabelEVENTSCREATED;
     private javax.swing.JLabel jLabelLOCATIONCOORDINATE;
+    private javax.swing.JLabel jLabelLQUIZZESCREATED;
     private javax.swing.JLabel jLabelROLE;
-    private javax.swing.JLabel jLabelShowCHILDREN;
     private javax.swing.JLabel jLabelShowEMAIL;
+    private javax.swing.JLabel jLabelShowEVENTSCREATED;
     private javax.swing.JLabel jLabelShowLOCATIONCOORDINATE;
+    private javax.swing.JLabel jLabelShowQUIZZESCREATED;
     private javax.swing.JLabel jLabelShowROLE;
     private javax.swing.JLabel jLabelShowUSERNAME;
     private javax.swing.JLabel jLabelUSERNAME;
