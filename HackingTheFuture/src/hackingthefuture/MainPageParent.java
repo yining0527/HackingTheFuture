@@ -44,6 +44,7 @@ public class MainPageParent extends javax.swing.JFrame {
         viewEvent = new javax.swing.JButton();
         discussion = new javax.swing.JButton();
         jButtonPROFILE = new javax.swing.JButton();
+        jButtonDATASTORAGE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +97,14 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
 
+        jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonDATASTORAGE.setText("Export Data");
+        jButtonDATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDATASTORAGEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,6 +122,8 @@ public class MainPageParent extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jButtonPROFILE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonDATASTORAGE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(278, 278, 278)
@@ -132,7 +143,8 @@ public class MainPageParent extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jButtonPROFILE))
+                    .addComponent(jButtonPROFILE)
+                    .addComponent(jButtonDATASTORAGE))
                 .addComponent(jLabel6)
                 .addGap(52, 52, 52)
                 .addComponent(Booking, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,6 +204,12 @@ public class MainPageParent extends javax.swing.JFrame {
         ProfileParentFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButtonPROFILEActionPerformed
 
+    private void jButtonDATASTORAGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDATASTORAGEActionPerformed
+        // TODO add your handling code here:
+        DataStorage DataStorageFrame = new DataStorage();
+        DataStorageFrame.setUsername(username);
+    }//GEN-LAST:event_jButtonDATASTORAGEActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +256,7 @@ public class MainPageParent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Booking;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButtonDATASTORAGE;
     private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

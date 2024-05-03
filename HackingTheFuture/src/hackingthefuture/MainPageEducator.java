@@ -45,6 +45,7 @@ public class MainPageEducator extends javax.swing.JFrame {
         createEvent = new javax.swing.JButton();
         discussion = new javax.swing.JButton();
         jButtonPROFILE = new javax.swing.JButton();
+        jButtonDATASTORAGE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +107,14 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
 
+        jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonDATASTORAGE.setText("Export Data");
+        jButtonDATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDATASTORAGEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -119,7 +128,9 @@ public class MainPageEducator extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jButtonPROFILE)
-                        .addGap(270, 270, 270)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDATASTORAGE)
+                        .addGap(180, 180, 180)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
@@ -148,7 +159,8 @@ public class MainPageEducator extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jButtonPROFILE))))
+                            .addComponent(jButtonPROFILE)
+                            .addComponent(jButtonDATASTORAGE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -213,6 +225,12 @@ public class MainPageEducator extends javax.swing.JFrame {
         ProfileEducatorFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButtonPROFILEActionPerformed
 
+    private void jButtonDATASTORAGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDATASTORAGEActionPerformed
+        // TODO add your handling code here:
+        DataStorage DataStorageFrame = new DataStorage();
+        DataStorageFrame.setUsername(username);
+    }//GEN-LAST:event_jButtonDATASTORAGEActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +277,7 @@ public class MainPageEducator extends javax.swing.JFrame {
     private javax.swing.JButton createEvent;
     private javax.swing.JButton createQuiz;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButtonDATASTORAGE;
     private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

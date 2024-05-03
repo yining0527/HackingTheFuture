@@ -44,6 +44,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         viewEvent = new javax.swing.JButton();
         profile = new javax.swing.JToggleButton();
         discussion = new javax.swing.JButton();
+        DATASTORAGE = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +105,14 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
 
+        DATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        DATASTORAGE.setText("Export Data");
+        DATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DATASTORAGEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,6 +135,8 @@ public class MainPageChildren extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(profile)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DATASTORAGE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(278, 278, 278)
@@ -145,7 +156,9 @@ public class MainPageChildren extends javax.swing.JFrame {
                             .addComponent(jLabel1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(profile)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(profile)
+                            .addComponent(DATASTORAGE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addGap(54, 54, 54)
@@ -154,7 +167,7 @@ public class MainPageChildren extends javax.swing.JFrame {
                 .addComponent(viewEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
                 .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(nextButton)
                 .addGap(17, 17, 17))
         );
@@ -218,6 +231,13 @@ public class MainPageChildren extends javax.swing.JFrame {
         ViewQuizPageFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_discussionActionPerformed
 
+    private void DATASTORAGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DATASTORAGEActionPerformed
+        // TODO add your handling code here:
+        DataStorage DataStorageFrame = new DataStorage();
+        DataStorageFrame.setUsername(username);
+    }//GEN-LAST:event_DATASTORAGEActionPerformed
+ 
+    
     /**
      * @param args the command line arguments
      */
@@ -262,6 +282,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton DATASTORAGE;
     private javax.swing.JButton discussion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
