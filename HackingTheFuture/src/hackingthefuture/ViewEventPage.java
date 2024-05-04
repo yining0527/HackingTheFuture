@@ -416,7 +416,11 @@ public class ViewEventPage extends javax.swing.JFrame {
 //                }
 //            }
 //        }
-
+  ShowDestinationPage makeBookingsPageFrame = new ShowDestinationPage();
+        makeBookingsPageFrame.setVisible(true);
+        makeBookingsPageFrame.pack();
+        makeBookingsPageFrame.setLocationRelativeTo(null);
+        this.dispose();
             
     }//GEN-LAST:event_backButtonActionPerformed
 

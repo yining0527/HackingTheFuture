@@ -209,7 +209,7 @@ public class CreateEventPage extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createEventButton)
                     .addComponent(backButton))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -221,7 +221,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -347,10 +347,10 @@ public class CreateEventPage extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
-        ViewEventPageFrame.setVisible(true);
-        ViewEventPageFrame.pack();
-        ViewEventPageFrame.setLocationRelativeTo(null);
+        MainPageEducator MainPageEducatorsFrame = new MainPageEducator();
+       MainPageEducatorsFrame.setVisible(true);
+        MainPageEducatorsFrame.pack();
+        MainPageEducatorsFrame.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_backButtonActionPerformed
     private boolean validateEventData() {

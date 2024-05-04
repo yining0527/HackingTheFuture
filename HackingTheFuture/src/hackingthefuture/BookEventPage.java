@@ -5,6 +5,13 @@
 package hackingthefuture;
 
 import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
 
 /**
  *
@@ -12,9 +19,22 @@ import java.awt.Dimension;
  */
 public class BookEventPage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EventPage
-     */
+    java.sql.Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement psCheckUserExists = null;
+    ResultSet resultSet = null;
+
+    // Variables to store event details
+    private String title;
+    private String description;
+    private String venue;
+    private String date;
+    private String startTime;
+    private String endTime;
+    private String userID;
+    private String bookingID;
+    private String bookingDate;
+
     public BookEventPage() {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
@@ -196,6 +216,63 @@ public class BookEventPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+        // Prompt user to enter event name
+        String title = JOptionPane.showInputDialog(this, "Enter event name:");
+//        if (title == null || title.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Event name cannot be empty. Please try again.");
+//            return;
+//        }
+//
+//        try {
+//            // Establish database connection
+//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+//
+//            // Check if the event already exists based on title
+//            String query = "SELECT * FROM `event` WHERE `eventName` = ?";
+//            pst = con.prepareStatement(query);
+//            pst.setString(1, title);
+//
+//            resultSet = pst.executeQuery();
+//
+//            if (resultSet.next()) {
+//                // Event already exists
+//                JOptionPane.showMessageDialog(null, "EVENT ALREADY EXISTS");
+//            } else {
+//                // Event does not exist, insert it into the database
+//                String insertQuery = "INSERT INTO `event`(`userID`, `BookingID`, `BookingDate`, `eventName`, `eventDate`) VALUES (?, ?, ?, ?, ?)";
+//                pst = con.prepareStatement(insertQuery);
+//                // Assuming you have variables for userID, bookingID, bookingDate, and eventDate
+//                pst.setString(1, userID);
+//                pst.setString(2, bookingID);
+//                pst.setString(3, bookingDate);
+//                pst.setString(4, title); // Assuming title holds the event name
+//                pst.setString(5, date); // Assuming date holds the event date
+//                pst.executeUpdate();
+//
+//                JOptionPane.showMessageDialog(null, "EVENT SAVED SUCCESSFULLY");
+//
+//                // Optionally, you can hide the current frame here if needed
+//                // this.setVisible(false);
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        } finally {
+//            // Close resources in the finally block to ensure they're released properly
+//            try {
+//                if (resultSet != null) {
+//                    resultSet.close();
+//                }
+//                if (pst != null) {
+//                    pst.close();
+//                }
+//                if (con != null) {
+//                    con.close();
+//                }
+//            } catch (SQLException ex) {
+//                JOptionPane.showMessageDialog(null, ex);
+//            }
+//        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_doneButtonActionPerformed
 
@@ -206,6 +283,15 @@ public class BookEventPage extends javax.swing.JFrame {
         ViewEventPageFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+    private boolean validateEventData() {
+        // Check if required fields are empty
+        if (liveEvent1.getText().trim().isEmpty() && upComingEvent1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in the name of event.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true; // All validation checks passed
+    }
 
     /**
      * @param args the command line arguments
