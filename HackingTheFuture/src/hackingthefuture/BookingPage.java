@@ -65,17 +65,4 @@ public class BookingPage {
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
     }
-
-    // Method to fetch live events from the database
-    private void fetchLiveEvents() {
-        try (Connection conn = getConnection()) {
-            String liveEventsQuery = "SELECT * FROM `event` WHERE `eventDate` = CURDATE()";
-            try (PreparedStatement pst = conn.prepareStatement(liveEventsQuery)) {
-                ResultSet resultSet = pst.executeQuery();
-                // Display live events or perform other actions
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 }

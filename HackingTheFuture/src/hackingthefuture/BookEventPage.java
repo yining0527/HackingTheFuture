@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,26 +19,35 @@ import java.sql.Connection;
  */
 public class BookEventPage extends javax.swing.JFrame {
 
-    java.sql.Connection con = null;
+    Connection con = null;
     PreparedStatement pst = null;
-    PreparedStatement psCheckUserExists = null;
-    ResultSet resultSet = null;
 
-    // Variables to store event details
-    private String title;
-    private String description;
-    private String venue;
-    private String date;
-    private String startTime;
-    private String endTime;
-    private String userID;
-    private String bookingID;
-    private String bookingDate;
+    // Variables for user information
+    private String email;
+    public String username;
+    private String role;
+    private int points;
+    private int pointsToAdd;
+    
 
+    /**
+     * Creates new form EventPage
+     */
     public BookEventPage() {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+    }
+
+    public BookEventPage(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+    }
+    
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -53,25 +62,15 @@ public class BookEventPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        liveEvent1 = new javax.swing.JTextPane();
+        liveEvent = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         doneButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        liveEvent2 = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        liveEvent3 = new javax.swing.JTextPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        liveEvent4 = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        upComingEvent1 = new javax.swing.JTextPane();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        upComingEvent2 = new javax.swing.JTextPane();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        upComingEvent3 = new javax.swing.JTextPane();
+        upComingEvent = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +81,7 @@ public class BookEventPage extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Booking Event");
 
-        jScrollPane2.setViewportView(liveEvent1);
+        jScrollPane2.setViewportView(liveEvent);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,20 +110,10 @@ public class BookEventPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Live Event : ");
 
-        jScrollPane3.setViewportView(liveEvent2);
-
-        jScrollPane4.setViewportView(liveEvent3);
-
-        jScrollPane5.setViewportView(liveEvent4);
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Upcoming Event:");
 
-        jScrollPane7.setViewportView(upComingEvent1);
-
-        jScrollPane8.setViewportView(upComingEvent2);
-
-        jScrollPane9.setViewportView(upComingEvent3);
+        jScrollPane7.setViewportView(upComingEvent);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,15 +128,13 @@ public class BookEventPage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(doneButton))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(319, 319, 319)
                         .addComponent(jLabel1))
@@ -158,9 +145,7 @@ public class BookEventPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(doneButton)
-                .addGap(41, 41, 41))
+                .addGap(41, 795, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,30 +156,20 @@ public class BookEventPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
                         .addComponent(backButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(122, 122, 122)
                         .addComponent(doneButton)))
                 .addGap(17, 17, 17))
         );
@@ -216,89 +191,163 @@ public class BookEventPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
-        // Prompt user to enter event name
-        String title = JOptionPane.showInputDialog(this, "Enter event name:");
-//        if (title == null || title.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Event name cannot be empty. Please try again.");
-//            return;
-//        }
-//
-//        try {
-//            // Establish database connection
-//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-//
-//            // Check if the event already exists based on title
-//            String query = "SELECT * FROM `event` WHERE `eventName` = ?";
-//            pst = con.prepareStatement(query);
-//            pst.setString(1, title);
-//
-//            resultSet = pst.executeQuery();
-//
-//            if (resultSet.next()) {
-//                // Event already exists
-//                JOptionPane.showMessageDialog(null, "EVENT ALREADY EXISTS");
-//            } else {
-//                // Event does not exist, insert it into the database
-//                String insertQuery = "INSERT INTO `event`(`userID`, `BookingID`, `BookingDate`, `eventName`, `eventDate`) VALUES (?, ?, ?, ?, ?)";
-//                pst = con.prepareStatement(insertQuery);
-//                // Assuming you have variables for userID, bookingID, bookingDate, and eventDate
-//                pst.setString(1, userID);
-//                pst.setString(2, bookingID);
-//                pst.setString(3, bookingDate);
-//                pst.setString(4, title); // Assuming title holds the event name
-//                pst.setString(5, date); // Assuming date holds the event date
-//                pst.executeUpdate();
-//
-//                JOptionPane.showMessageDialog(null, "EVENT SAVED SUCCESSFULLY");
-//
-//                // Optionally, you can hide the current frame here if needed
-//                // this.setVisible(false);
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        } finally {
-//            // Close resources in the finally block to ensure they're released properly
-//            try {
-//                if (resultSet != null) {
-//                    resultSet.close();
-//                }
-//                if (pst != null) {
-//                    pst.close();
-//                }
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(null, ex);
-//            }
-//        }
-
         // TODO add your handling code here:
+        String liveEventText = liveEvent.getText();
+        String upComingEventText = upComingEvent.getText();
+        
+        int numberOfLiveEvents = 0;
+        int numberOfUpcomingEvents = 0;
+
+        // Count the number of events
+        if(!liveEventText.isEmpty()){
+            numberOfLiveEvents = countEvents(liveEventText);
+        }
+        
+        if(!upComingEventText.isEmpty()){
+            numberOfUpcomingEvents = countEvents(upComingEventText);
+        }
+
+        System.out.println(numberOfLiveEvents);
+        System.out.println(numberOfUpcomingEvents);
+        // Calculate total points based on the number of events
+        int totalEvents = numberOfLiveEvents + numberOfUpcomingEvents;
+        System.out.println(totalEvents);
+        // Add the total points
+        pointsToAdd = 5 * totalEvents;
+        addPoints(pointsToAdd);
+        JOptionPane.showMessageDialog(null, "You have earned " + pointsToAdd + " points!", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_doneButtonActionPerformed
 
+    
+    private int countEvents(String eventText) {
+        // Split the text by newline character
+        String[] events = eventText.split("\n");
+        int numberOfEvents = events.length;
+        System.out.println(numberOfEvents);
+        for (String event : events) {
+            // Trim whitespace from the event string
+            event = event.trim();
+            System.out.println(event);
+            if (!isEventValid(event)) {
+                JOptionPane.showMessageDialog(null, "No such event: " + event);
+                numberOfEvents--;
+            }
+        }
+        System.out.println(numberOfEvents);
+        // Return the number of events
+        return numberOfEvents;
+    }
+
+    private void addPoints(int pointsToAdd) {
+        System.out.println(pointsToAdd);
+
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.points = rs.getInt("points");
+
+                // Add the points to the existing points
+                this.points += pointsToAdd;
+
+                // Update the database with the new points
+                String updateQuery = "UPDATE `user` SET `points` = ? WHERE `username` = ?";
+                pst = con.prepareStatement(updateQuery);
+                pst.setInt(1, this.points);
+                pst.setString(2, username);
+                pst.executeUpdate();
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(points);
+    }
+
+    private boolean isEventValid(String userInput) {
+        boolean eventValid = false;
+        try {
+            // Establish connection to the database
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // SQL query to retrieve events from the database
+            String query = "SELECT * FROM `event` WHERE `event title` = ?"; // Adjust query according to your database schema
+
+            // Create a prepared statement for the query
+            pst = con.prepareStatement(query);
+
+            // Set the event title parameter
+            pst.setString(1, userInput);
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = pst.executeQuery();
+
+            // Iterate through the result set
+            while (resultSet.next()) {
+                // Get the event name from the result set
+                String eventName = resultSet.getString("event title");
+
+                // Compare the user input with the event name
+                if (userInput.equalsIgnoreCase(eventName)) {
+                    // If there's a match, set eventValid to true and break the loop
+                    eventValid = true;
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            // Handle any SQL exceptions
+            ex.printStackTrace();
+        } finally {
+            // Close the result set, statement, and connection
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return eventValid;
+    }
+
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+
+        ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);
-        this.dispose();
+        
     }//GEN-LAST:event_backButtonActionPerformed
-    private boolean validateEventData() {
-        // Check if required fields are empty
-        if (liveEvent1.getText().trim().isEmpty() && upComingEvent1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in the name of event.", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true; // All validation checks passed
-    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* Set the Nimbus look and feel */                     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -318,6 +367,18 @@ public class BookEventPage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(BookEventPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -345,18 +406,8 @@ public class BookEventPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextPane liveEvent1;
-    private javax.swing.JTextPane liveEvent2;
-    private javax.swing.JTextPane liveEvent3;
-    private javax.swing.JTextPane liveEvent4;
-    private javax.swing.JTextPane upComingEvent1;
-    private javax.swing.JTextPane upComingEvent2;
-    private javax.swing.JTextPane upComingEvent3;
+    private javax.swing.JTextPane liveEvent;
+    private javax.swing.JTextPane upComingEvent;
     // End of variables declaration//GEN-END:variables
 }

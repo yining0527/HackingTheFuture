@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -31,6 +32,10 @@ public class CreateQuizPage extends javax.swing.JFrame {
     private String description;
     private String theme;
     private String content;
+    
+    private int numberOfQuizzes;
+    private String username;
+    private String email;
 
     /**
      * Creates new form EventPage
@@ -39,6 +44,13 @@ public class CreateQuizPage extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+    }
+    
+    public CreateQuizPage(String username){
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;
     }
 
     /**
@@ -63,6 +75,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
         createQuizButton = new javax.swing.JButton();
         quizTitle = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,22 +182,37 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Quiz");
 
+        backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(backButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
+                .addContainerGap()
+                .addComponent(backButton)
+                .addGap(152, 152, 152)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
@@ -230,7 +258,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
 
     private void createQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createQuizButtonActionPerformed
 
-        System.out.println("happy");
+         System.out.println("happy");
         
         title = quizTitle.getText();
         description = quizDescription.getText();
@@ -278,7 +306,8 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 pst.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "QUIZ SAVED SUCCESSFULLY");
-
+                addNumberOfQuizzes();
+                this.dispose();
                 // Optionally, you can hide the current frame here if needed
                 // this.setVisible(false);
             }
@@ -288,6 +317,58 @@ public class CreateQuizPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_createQuizButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
+    
+    private void addNumberOfQuizzes() {
+
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.numberOfQuizzes = rs.getInt("numberOfQuizzes");
+
+                // Add the points to the existing points
+                this.numberOfQuizzes += 1;
+
+                // Update the database with the new points
+                String updateQuery = "UPDATE `user` SET `numberOfQuizzes` = ? WHERE `username` = ?";
+                pst = con.prepareStatement(updateQuery);
+                pst.setInt(1, this.numberOfQuizzes);
+                pst.setString(2, username);
+                pst.executeUpdate();
+                
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(numberOfQuizzes);
+    }
+    
+    
     private boolean isValidQuizTheme(String theme) {
         // Define valid quiz themes
         String[] validThemes = {"Science", "Technology", "Engineering", "Mathematics"};
@@ -343,6 +424,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton createQuizButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

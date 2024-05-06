@@ -25,10 +25,10 @@ public class children extends javax.swing.JFrame {
 
     }
     public void setUsername(String transferUsername){
-        username1 = transferUsername;
-       
-        
+        username1 = transferUsername; 
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

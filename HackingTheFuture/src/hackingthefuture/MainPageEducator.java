@@ -11,6 +11,7 @@ import java.awt.Dimension;
  * @author Asus
  */
 public class MainPageEducator extends javax.swing.JFrame {
+
     private String username;
 
     /**
@@ -18,14 +19,18 @@ public class MainPageEducator extends javax.swing.JFrame {
      */
     public MainPageEducator() {
         initComponents();
-        setPreferredSize(new Dimension(900,600));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
     }
 
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
     }
-    
+
+    public String getUsername() {
+        return username;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,7 +195,7 @@ public class MainPageEducator extends javax.swing.JFrame {
 
     private void createQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createQuizActionPerformed
         // TODO add your handling code here:
-        CreateQuizPage CreateQuizPageFrame = new CreateQuizPage();
+        CreateQuizPage CreateQuizPageFrame = new CreateQuizPage(getUsername());
         CreateQuizPageFrame.setVisible(true);
         CreateQuizPageFrame.pack();
         CreateQuizPageFrame.setLocationRelativeTo(null);
@@ -198,7 +203,7 @@ public class MainPageEducator extends javax.swing.JFrame {
 
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+        ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);
@@ -206,7 +211,7 @@ public class MainPageEducator extends javax.swing.JFrame {
 
     private void createEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventActionPerformed
         // TODO add your handling code here:
-        CreateEventPage CreateEventPageFrame = new CreateEventPage();
+        CreateEventPage CreateEventPageFrame = new CreateEventPage(getUsername());
         CreateEventPageFrame.setVisible(true);
         CreateEventPageFrame.pack();
         CreateEventPageFrame.setLocationRelativeTo(null);
@@ -214,6 +219,11 @@ public class MainPageEducator extends javax.swing.JFrame {
 
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
+
+        Discussion ViewQuizPageFrame = new Discussion();
+        ViewQuizPageFrame.setVisible(true);
+        ViewQuizPageFrame.pack();
+        ViewQuizPageFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_discussionActionPerformed
 
     private void jButtonPROFILEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPROFILEActionPerformed

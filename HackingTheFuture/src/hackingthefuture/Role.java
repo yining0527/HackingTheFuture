@@ -20,6 +20,9 @@ public class Role extends javax.swing.JFrame {
     String role = null;
 
     private String username, email, pass;
+    private int numberOfQuizzes;
+    private int numberOfEvents;
+    private int points;
 
     public Role() {
         initComponents();
@@ -28,7 +31,6 @@ public class Role extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButtonEducator); // Add your radio buttons to the ButtonGroup
         buttonGroup1.add(jRadioButtonParent);
         buttonGroup1.add(jRadioButtonChildren);
-
 
     }
 
@@ -286,18 +288,21 @@ public class Role extends javax.swing.JFrame {
                 NoChildFrame.setLocationRelativeTo(null);
 
             } else if (role.equalsIgnoreCase("children")) {
+                setPoints();
                 children children = new children();
                 children.setUsername(username);
                 children.setVisible(true);
                 children.pack();
                 children.setLocationRelativeTo(null);
-            } else {
-
+            } else if (role.equalsIgnoreCase("educator")) {
+                setNumberOfQuizzesAndEvents();
                 Login LoginFrame = new Login();
                 LoginFrame.setVisible(true);
                 LoginFrame.pack();
                 LoginFrame.setLocationRelativeTo(null);
+
             }
+
         }
 
 
@@ -309,6 +314,102 @@ public class Role extends javax.swing.JFrame {
         double max = 500.0;
         double randomCoordinate = min + (max - min) * rand.nextDouble();
         return Math.round(randomCoordinate * 10.0) / 10.0; // Round to one decimal place
+    }
+
+    public void setNumberOfQuizzesAndEvents() {
+        System.out.println("Take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                // Check if numberOfEvents is NULL and set it to 0
+                this.numberOfEvents = rs.getInt("numberOfEvents");
+                if (rs.wasNull()) {
+                    this.numberOfEvents = 0;
+                }
+
+                // Check if quizz is NULL and set it to 0
+                this.numberOfQuizzes = rs.getInt("numberOfQuizzes");
+                if (rs.wasNull()) {
+                    this.numberOfQuizzes = 0;
+                }
+
+                // Update the database with the new points
+                String updateQuery = "UPDATE `user` SET `numberOfEvents` = ?, `numberOfQuizzes` = ? WHERE `username` = ?";
+                pst = con.prepareStatement(updateQuery);
+                pst.setInt(1, this.numberOfEvents);
+                pst.setInt(2, this.numberOfQuizzes);
+                pst.setString(3, username);
+                pst.executeUpdate();
+
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(numberOfEvents);
+        System.out.println(numberOfQuizzes);
+    }
+
+    public void setPoints() {
+        System.out.println("Take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                // Check if points is NULL and set it to 0
+                this.points = rs.getInt("points");
+                if (rs.wasNull()) {
+                    this.points = 0;
+                }
+                // Update the database with the new points
+                String updateQuery = "UPDATE `user` SET `points` = ? WHERE `username` = ?";
+                pst = con.prepareStatement(updateQuery);
+                pst.setInt(1, this.points);
+                pst.setString(2, username);
+                pst.executeUpdate();
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(points);
     }
 
 
@@ -327,7 +428,6 @@ public class Role extends javax.swing.JFrame {
         role = "parent";
     }//GEN-LAST:event_jRadioButtonParentActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

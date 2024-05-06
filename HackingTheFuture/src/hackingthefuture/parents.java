@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class parents extends javax.swing.JFrame {
 
@@ -15,27 +16,28 @@ public class parents extends javax.swing.JFrame {
     PreparedStatement pst = null;
     PreparedStatement psCheckUserExists = null;
     ResultSet resultSet = null;
-    
+
     private String username;
+    private String child;
+    private int siblingOrder;
     private int numofChild;
     private int noOffilling;
-    
 
     public parents() {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
-       
 
     }
-    public void setUsername(String transferUsername,int  totalofChildren){
+
+    public void setUsername(String transferUsername, int totalofChildren) {
         username = transferUsername;
         numofChild = totalofChildren;
-        System.out.println( username+numofChild);
+        System.out.println(username + numofChild);
         for (int i = 1; i <= numofChild; i++) {
             choice1.add(Integer.toString(i));
         }
-        noOffilling=0;
+        noOffilling = 0;
         choice1.select(0);
     }
 
@@ -213,18 +215,16 @@ public class parents extends javax.swing.JFrame {
 
     private void signUp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUp1ActionPerformed
         // TODO add your handling code here:
-        
-          if(noOffilling<numofChild){
-            String child = childID.getText().trim();
-            int selectedIndex = choice1.getSelectedIndex();
-            String order1 =  choice1.getItem(selectedIndex);
-            int siblingOrder = Integer.parseInt(order1);
-            
 
+        if (noOffilling < numofChild) {
+            child = childID.getText().trim();
+            int selectedIndex = choice1.getSelectedIndex();
+            String order1 = choice1.getItem(selectedIndex);
+            siblingOrder = Integer.parseInt(order1);
 
             if (child.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Children name cannot be empty!");
-            return;
+                JOptionPane.showMessageDialog(this, "Children name cannot be empty!");
+                return;
             }
 
             // Check if a sibling order is selected
@@ -232,6 +232,8 @@ public class parents extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a sibling order!");
                 return;
             }
+
+            addInformation();
 
             try {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
@@ -245,25 +247,67 @@ public class parents extends javax.swing.JFrame {
                 pst.executeUpdate();
 
                 choice1.remove(choice1.getSelectedIndex());
-                noOffilling=noOffilling+1;
+                noOffilling = noOffilling + 1;
                 childID.setText("");
                 System.out.println(noOffilling);
-                
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
-            
-         }if(noOffilling==numofChild){
-                this.setVisible(false);
-                
-                Login LoginFrame = new Login();
-                LoginFrame.setVisible(true);
-                LoginFrame.pack();
-                LoginFrame.setLocationRelativeTo(null);
-         }
-         
+
+        }
+        if (noOffilling == numofChild) {
+            this.setVisible(false);
+
+            Login LoginFrame = new Login();
+            LoginFrame.setVisible(true);
+            LoginFrame.pack();
+            LoginFrame.setLocationRelativeTo(null);
+        }
+
     }//GEN-LAST:event_signUp1ActionPerformed
+
+    private void addInformation() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                String existingChild = rs.getString("childrenName");
+
+                if (existingChild == null) {
+                    // If child name is null, update it with the new child's name
+                    String updateQuery = "UPDATE `user` SET `childrenName` = ?, `siblingsOrder` = ? WHERE `username` = ?";
+                    pst = con.prepareStatement(updateQuery);
+                    pst.setString(1, child);
+                    pst.setInt(2, siblingOrder);
+                    pst.setString(3, username);
+                    pst.executeUpdate();
+                }
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(child);
+        System.out.println(siblingOrder);
+    }
 
     /**
      * @param args the command line arguments

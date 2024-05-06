@@ -9,6 +9,7 @@ package hackingthefuture;
  * @author yingying
  */
 
+import java.awt.Dimension;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -24,12 +25,16 @@ public class ProfileEducator extends javax.swing.JFrame {
     private String username;
     private String role;
     private String locationCoordinate;
+    private int numberOfQuizzes;
+    private int numberOfEvents;
 
     /**
      * Creates new form ProfileEducator
      */
     public ProfileEducator() {
         initComponents();
+        setPreferredSize(new Dimension(900,600));
+        setResizable(true);
         this.username = username;  // Set the username
     }
     
@@ -58,6 +63,8 @@ public class ProfileEducator extends javax.swing.JFrame {
                 this.email = rs.getString("email");
                 this.role = rs.getString("role");
                 this.locationCoordinate = rs.getString("LocationCoordinate");
+                this.numberOfQuizzes = rs.getInt("numberOfQuizzes");
+                this.numberOfEvents = rs.getInt("numberOfEvents");
             } else {
                 System.out.println("ResultSet is empty.");
             }
@@ -77,6 +84,10 @@ public class ProfileEducator extends javax.swing.JFrame {
         jLabelShowUSERNAME.setText(username);
         jLabelShowROLE.setText(role);
         jLabelShowLOCATIONCOORDINATE.setText(locationCoordinate);
+        jLabelShowQUIZZESCREATED.setText(String.valueOf(numberOfQuizzes));
+        jLabelShowEVENTSCREATED.setText(String.valueOf(numberOfEvents));
+        
+        
     }
 
     /**
@@ -105,6 +116,7 @@ public class ProfileEducator extends javax.swing.JFrame {
         jLabelShowQUIZZESCREATED = new javax.swing.JLabel();
         jLabelShowEVENTSCREATED = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +264,14 @@ public class ProfileEducator extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Account");
 
+        backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -263,7 +283,10 @@ public class ProfileEducator extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -271,7 +294,9 @@ public class ProfileEducator extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(199, 199, 199)
+                .addContainerGap()
+                .addComponent(backButton)
+                .addGap(170, 170, 170)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -293,6 +318,11 @@ public class ProfileEducator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,6 +360,7 @@ public class ProfileEducator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

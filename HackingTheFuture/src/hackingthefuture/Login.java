@@ -298,8 +298,6 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(this, "Successful Login!");
             this.setVisible(false);
 
-            
-
             switch (role) {
                 case "parent":
                     MainPageParent MainPageParentsFrame = new MainPageParent();
@@ -367,12 +365,7 @@ public class Login extends JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

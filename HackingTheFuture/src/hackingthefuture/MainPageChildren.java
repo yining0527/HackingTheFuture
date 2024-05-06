@@ -25,6 +25,10 @@ public class MainPageChildren extends javax.swing.JFrame {
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
     }
+    
+    public String getUsername(){
+        return username;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,7 +180,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     private void viewAndattemptQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAndattemptQuizActionPerformed
         // TODO add your handling code here:
         
-        ViewQuizPage ViewQuizPageFrame = new ViewQuizPage();
+        ViewQuizPage ViewQuizPageFrame = new ViewQuizPage(getUsername());
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);
@@ -185,7 +189,7 @@ public class MainPageChildren extends javax.swing.JFrame {
 
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+        ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);

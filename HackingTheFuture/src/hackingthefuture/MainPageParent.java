@@ -186,7 +186,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+        ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);

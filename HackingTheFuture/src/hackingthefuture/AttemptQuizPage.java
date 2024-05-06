@@ -5,8 +5,14 @@
 package hackingthefuture;
 
 import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Stack;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +21,14 @@ import javax.swing.JOptionPane;
 public class AttemptQuizPage extends javax.swing.JFrame {
 
     private Stack<Class<?>> navigationHistory = new Stack<>();
+    Connection con = null;
+    PreparedStatement pst = null;
+
+    // Variables for user information
+    private String email;
+    public String username;
+    private String role;
+    private int points;
 
     /**
      * Creates new form EventPage
@@ -23,11 +37,24 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+        this.username = username;
+    }
+
+    public AttemptQuizPage(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
     }
 
     public AttemptQuizPage(Stack<Class<?>> navigationHistory) {
         initComponents();
         this.navigationHistory = navigationHistory;
+    }
+
+    // Setter method to set the username
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -166,6 +193,56 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_QuizizzLinkActionPerformed
 
+    private boolean isQuizValid(String userInput) {
+        boolean quizValid = false;
+        try {
+            // Establish connection to the database
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // SQL query to retrieve events from the database
+            String query = "SELECT * FROM `quiz` WHERE `quiz content` = ?"; // Adjust query according to your database schema
+
+            // Create a prepared statement for the query
+            pst = con.prepareStatement(query);
+
+            // Set the event title parameter
+            pst.setString(1, userInput);
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = pst.executeQuery();
+
+            // Iterate through the result set
+            while (resultSet.next()) {
+                // Get the event name from the result set
+                String quizlink = resultSet.getString("quiz content");
+
+                // Compare the user input with the event name
+                if (userInput.equalsIgnoreCase(quizlink)) {
+                    // If there's a match, set eventValid to true and break the loop
+                    quizValid = true;
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            // Handle any SQL exceptions
+            ex.printStackTrace();
+        } finally {
+            // Close the result set, statement, and connection
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return quizValid;
+    }
+    
     private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
         String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing whitespaces
 
@@ -173,11 +250,62 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please don't forget to paste the quiz link before attempting it", "Reminder", JOptionPane.INFORMATION_MESSAGE);
         } else if (!quizLink.startsWith("https://")) {
             JOptionPane.showMessageDialog(null, "Please copy the valid quiz link", "Invalid Link", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if(!isQuizValid(quizLink)){
+            JOptionPane.showMessageDialog(null, "No such quizz");
+        }else {
+            addPoints(2);
             JOptionPane.showMessageDialog(null, "You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
-
+            this.dispose();
         }
+
+
+
     }//GEN-LAST:event_completeButtonActionPerformed
+
+    private void addPoints(int pointsToAdd) {
+
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.points = rs.getInt("points");
+
+                // Add the points to the existing points
+                this.points += pointsToAdd;
+
+                // Update the database with the new points
+                String updateQuery = "UPDATE `user` SET `points` = ? WHERE `username` = ?";
+                pst = con.prepareStatement(updateQuery);
+                pst.setInt(1, this.points);
+                pst.setString(2, username);
+                pst.executeUpdate();
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println(username);
+        System.out.println(points);
+    }
+
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -199,14 +327,11 @@ public class AttemptQuizPage extends javax.swing.JFrame {
 //            }
 //        }
 
-         // Create an instance of ViewQuizPage
-    
+        // Create an instance of ViewQuizPage
         ViewQuizPage ViewQuizPageFrame = new ViewQuizPage();
-        ViewQuizPageFrame.setPreferredSize(new Dimension(900, 600));
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);
-        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
