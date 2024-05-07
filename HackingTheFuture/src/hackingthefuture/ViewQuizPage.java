@@ -18,16 +18,20 @@ import java.util.Stack;
  * @author Asus
  */
 public class ViewQuizPage extends javax.swing.JFrame {
-
+private String email;
+    public String username;
+    private String role;
+    private String locationCoordinate;
     Connection con;
     PreparedStatement pst;
-    ResultSet rs;
-    public String username;
+    ResultSet rs;;
 
     /**
      * Creates new form EventPage
      */
-    public ViewQuizPage() {
+    
+    
+     public ViewQuizPage() {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
@@ -36,22 +40,62 @@ public class ViewQuizPage extends javax.swing.JFrame {
         displayEngineeringQuizzes();
         displayMathematicsQuizzes();
     }
-    
-    public ViewQuizPage(String username){
-        
-        initComponents();
-        setPreferredSize(new Dimension(900, 600));
-        setResizable(true);
-        this.username = username;
-        displayScienceQuizzes();
-        displayTechnologyQuizzes();
-        displayEngineeringQuizzes();
-        displayMathematicsQuizzes();
-    }
-    
     public String getUsername(){
         return username;
     }
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+     public ViewQuizPage(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
+        displayScienceQuizzes();
+        displayTechnologyQuizzes();
+        displayEngineeringQuizzes();
+        displayMathematicsQuizzes();
+    }
+    private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
+    }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
 
     private void displayScienceQuizzes() {
         // Fetch and display Science-themed quizzes from your dataset
@@ -190,7 +234,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         AttemptQuizButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         engList = new javax.swing.JTextPane();
-        returnButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -271,14 +314,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         engList.setBackground(new java.awt.Color(255, 255, 153));
         jScrollPane5.setViewportView(engList);
 
-        returnButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        returnButton.setText("Return");
-        returnButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                returnButtonActionPerformed(evt);
-            }
-        });
-
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -309,8 +344,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(returnButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(AttemptQuizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -337,7 +371,9 @@ public class ViewQuizPage extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(backButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(backButton)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -364,15 +400,9 @@ public class ViewQuizPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AttemptQuizButton)
-                        .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(returnButton)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AttemptQuizButton)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -462,14 +492,13 @@ public class ViewQuizPage extends javax.swing.JFrame {
         //        displayScienceQuizzes();
     }//GEN-LAST:event_scienceButtonActionPerformed
 
-    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-    }//GEN-LAST:event_returnButtonActionPerformed
-
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageChildren childrenFrame = new MainPageChildren();
+            childrenFrame.setUsername(username);
+            childrenFrame.setVisible(true);
+            childrenFrame.pack();
+            childrenFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -508,6 +537,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
                 ViewQuizPageFrame.setVisible(true);
                 ViewQuizPageFrame.pack();
                 ViewQuizPageFrame.setLocationRelativeTo(null);
+                ViewQuizPageFrame.takeInformation(); 
             }
         });
     }
@@ -530,7 +560,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane mathList;
     private javax.swing.JButton mathematicsButton;
-    private javax.swing.JButton returnButton;
     private javax.swing.JButton scienceButton;
     private javax.swing.JTextPane techList;
     private javax.swing.JButton technologyButton;

@@ -36,7 +36,6 @@ public class ProfileParent extends javax.swing.JFrame {
     public ProfileParent() {
         initComponents();
         setPreferredSize(new Dimension(900,600));
-        setResizable(true);
         this.username = username;  // Set the username
         
     }
@@ -46,6 +45,9 @@ public class ProfileParent extends javax.swing.JFrame {
         takeInformation();
         takeChildren();
 }
+    public String getUsername(){
+        return username;
+    }
 
     
     private void takeInformation() {
@@ -340,7 +342,11 @@ public class ProfileParent extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageParent ParentFrame = new MainPageParent();
+        ParentFrame.setUsername(username);
+        ParentFrame.setVisible(true);
+        ParentFrame.pack();
+        ParentFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

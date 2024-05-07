@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.time.LocalDateTime;
 import java.sql.Timestamp;
+import java.util.Stack;
 
 /**
  *
@@ -21,15 +23,77 @@ public class WritingPost extends javax.swing.JFrame {
 
     Connection con = null;
     PreparedStatement pst = null;
+    ResultSet rs;
+    public String username;
+    private String email;
+    private String role;
+    private String locationCoordinate;
 
 
     /**
      * Creates new form EventPage
      */
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+    
+    
+    private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
+    }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
+    
     public WritingPost() {
         initComponents();
         setPreferredSize(new Dimension(900,600));
         setResizable(true);
+        contentField.setLineWrap(true);       // Enable line wrapping
+        contentField.setWrapStyleWord(true);  // Wrap at word boundaries
+    }
+    public WritingPost(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
         contentField.setLineWrap(true);       // Enable line wrapping
         contentField.setWrapStyleWord(true);  // Wrap at word boundaries
     }
@@ -53,6 +117,7 @@ public class WritingPost extends javax.swing.JFrame {
         titleField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         contentField = new javax.swing.JTextArea();
+        BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +154,13 @@ public class WritingPost extends javax.swing.JFrame {
         contentField.setRows(5);
         jScrollPane1.setViewportView(contentField);
 
+        BackButton.setText("back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,13 +183,14 @@ public class WritingPost extends javax.swing.JFrame {
                         .addContainerGap(293, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(319, 319, 319))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Submit)
-                        .addGap(64, 64, 64))))
+                .addComponent(jLabel1)
+                .addGap(319, 319, 319))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(BackButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Submit)
+                .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +209,9 @@ public class WritingPost extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(300, 300, 300))
+                        .addGap(262, 262, 262)
+                        .addComponent(BackButton)
+                        .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(1, 1, 1)
@@ -203,7 +278,7 @@ public class WritingPost extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "POSTED SUCCESSFULLY");
                  //Hide the SignUp frame
                 this.setVisible(false);
-                Discussion ViewQuizPageFrame = new Discussion();
+                Discussion ViewQuizPageFrame = new Discussion(getUsername());
                 ViewQuizPageFrame.setVisible(true);
                 ViewQuizPageFrame.pack();
                 ViewQuizPageFrame.setLocationRelativeTo(null);
@@ -214,6 +289,14 @@ public class WritingPost extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_SubmitActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        // TODO add your handling code here:
+         Discussion DiscussionFrame = new Discussion(getUsername());
+         DiscussionFrame.setVisible(true);
+         DiscussionFrame.pack();
+         DiscussionFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,11 +348,13 @@ public class WritingPost extends javax.swing.JFrame {
                 WritingPostFrame.setVisible(true);
                 WritingPostFrame.pack();
                 WritingPostFrame.setLocationRelativeTo(null);
+                WritingPostFrame.takeInformation(); 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton Submit;
     private javax.swing.JTextArea contentField;
     private javax.swing.JLabel jLabel1;

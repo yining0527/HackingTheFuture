@@ -66,7 +66,7 @@
                           <Component id="backButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="66" max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
                   <Component id="jPanel2" min="-2" pref="669" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -127,7 +127,7 @@
                           <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                           <Component id="quizTitle" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
+                      <EmptySpace pref="127" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -152,7 +152,7 @@
                       <Component id="quizContent" min="-2" pref="48" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="createQuizButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

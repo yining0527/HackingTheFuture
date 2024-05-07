@@ -19,20 +19,73 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class Discussion extends javax.swing.JFrame {
-
+    private String email;
+    private String role;
+    private String locationCoordinate;
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
     public String username;
 
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+     private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
+    }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
     /**
      * Creates new form EventPage
      */
     public Discussion() {
         initComponents();
+        setPreferredSize(new Dimension(900,600));
+        setResizable(true);
+    }
+    public Discussion(String username) {
+        initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
-        fetchPost();
+        this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
     }
 
     /**
@@ -151,12 +204,41 @@ public class Discussion extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        switch (role) {
+        case "educator":
+            MainPageEducator eduFrame = new MainPageEducator();
+            eduFrame.setUsername(username);
+            eduFrame.setVisible(true);
+            eduFrame.pack();
+            eduFrame.setLocationRelativeTo(null);
+            break;
+        case "parent":
+            MainPageParent parentFrame = new MainPageParent();
+            parentFrame.setUsername(username);
+            parentFrame.setVisible(true);
+            parentFrame.pack();
+            parentFrame.setLocationRelativeTo(null);
+            break;
+        case "children":
+            MainPageChildren childrenFrame = new MainPageChildren();
+            childrenFrame.setUsername(username);
+            childrenFrame.setVisible(true);
+            childrenFrame.pack();
+            childrenFrame.setLocationRelativeTo(null);
+            break;
+        default:
+            // Handle the case when the role is unknown or not supported
+            System.out.println("Unsupported role: " + role);
+            break;
+    }
+
+    // Close the current Discussion frame
+    this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void writePostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writePostActionPerformed
         // TODO add your handling code here:
-        WritingPost WritingPostFrame = new WritingPost();
+        WritingPost WritingPostFrame = new WritingPost(getUsername());
         WritingPostFrame.setVisible(true);
         WritingPostFrame.pack();
         WritingPostFrame.setLocationRelativeTo(null);
@@ -268,10 +350,11 @@ public class Discussion extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                Discussion ViewQuizPageFrame = new Discussion();
-                ViewQuizPageFrame.setVisible(true);
-                ViewQuizPageFrame.pack();
-                ViewQuizPageFrame.setLocationRelativeTo(null);
+                Discussion DiscussionFrame = new Discussion();
+                DiscussionFrame.setVisible(true);
+                DiscussionFrame.pack();
+                DiscussionFrame.setLocationRelativeTo(null);
+                DiscussionFrame.takeInformation(); 
             }
         });
     }

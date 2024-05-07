@@ -50,6 +50,7 @@ public class MainPageParent extends javax.swing.JFrame {
         discussion = new javax.swing.JButton();
         jButtonPROFILE = new javax.swing.JButton();
         jButtonDATASTORAGE = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,13 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,6 +137,8 @@ public class MainPageParent extends javax.swing.JFrame {
                 .addComponent(jButtonPROFILE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonDATASTORAGE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(278, 278, 278)
@@ -149,7 +159,8 @@ public class MainPageParent extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(jButtonPROFILE)
-                    .addComponent(jButtonDATASTORAGE))
+                    .addComponent(jButtonDATASTORAGE)
+                    .addComponent(jButton1))
                 .addComponent(jLabel6)
                 .addGap(52, 52, 52)
                 .addComponent(Booking, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,10 +205,10 @@ public class MainPageParent extends javax.swing.JFrame {
 
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
-        Discussion ViewQuizPageFrame = new Discussion();
-        ViewQuizPageFrame.setVisible(true);
-        ViewQuizPageFrame.pack();
-        ViewQuizPageFrame.setLocationRelativeTo(null);
+        Discussion DiscussionFrame = new Discussion(getUsername());
+         DiscussionFrame.setVisible(true);
+         DiscussionFrame.pack();
+         DiscussionFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_discussionActionPerformed
 
     private void jButtonPROFILEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPROFILEActionPerformed
@@ -214,6 +225,15 @@ public class MainPageParent extends javax.swing.JFrame {
         DataStorage DataStorageFrame = new DataStorage();
         DataStorageFrame.setUsername(username);
     }//GEN-LAST:event_jButtonDATASTORAGEActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Login LoginFrame = new Login();
+        LoginFrame.setVisible(true);
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,6 +281,7 @@ public class MainPageParent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Booking;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDATASTORAGE;
     private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;

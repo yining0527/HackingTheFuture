@@ -34,13 +34,15 @@ public class ProfileEducator extends javax.swing.JFrame {
     public ProfileEducator() {
         initComponents();
         setPreferredSize(new Dimension(900,600));
-        setResizable(true);
         this.username = username;  // Set the username
     }
     
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
         takeInformation();
+    }
+    public String getUsername(){
+        return username;
     }
     
     private void takeInformation() {
@@ -321,7 +323,11 @@ public class ProfileEducator extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageEducator EduFrame = new MainPageEducator();
+        EduFrame.setUsername(username);
+        EduFrame.setVisible(true);
+        EduFrame.pack();
+        EduFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -354,7 +360,10 @@ public class ProfileEducator extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfileEducator().setVisible(true);
+                ProfileEducator ProfileEdu= new ProfileEducator();
+                ProfileEdu.pack(); // Pack the frame before displaying it
+                ProfileEdu.setVisible(true);
+                ProfileEdu.setLocationRelativeTo(null);
             }
         });
     }

@@ -148,7 +148,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     public List<ShowDestinationPage> readBookingDestination() {
         List<ShowDestinationPage> destinations = new ArrayList<>();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
+            Scanner inputStream = new Scanner(new FileInputStream("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
             while (inputStream.hasNextLine()) {
                 String name = inputStream.nextLine().trim();
                 if (!inputStream.hasNextLine()) {
@@ -352,11 +352,11 @@ public void displayAvailableTimeSlots(String destinationName, String locationID)
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-    BookingDestinationPage MakeBookingsPageFrame = new BookingDestinationPage();
-        MakeBookingsPageFrame.setVisible(true);
-        MakeBookingsPageFrame.pack();
-        MakeBookingsPageFrame.setLocationRelativeTo(null);
-        this.dispose();
+    MainPageParent ParentFrame = new MainPageParent();
+        ParentFrame.setUsername(username);
+        ParentFrame.setVisible(true);
+        ParentFrame.pack();
+        ParentFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void DestinationIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationIDActionPerformed

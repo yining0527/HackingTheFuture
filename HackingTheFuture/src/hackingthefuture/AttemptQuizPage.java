@@ -28,6 +28,8 @@ public class AttemptQuizPage extends javax.swing.JFrame {
     private String email;
     public String username;
     private String role;
+    private String locationCoordinate;
+    ResultSet rs;
     private int points;
 
     /**
@@ -37,25 +39,67 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
-        this.username = username;
     }
 
-    public AttemptQuizPage(String username) {
+    public String getUsername(){
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+     public AttemptQuizPage(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
         this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
     }
+    private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
+    }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
 
     public AttemptQuizPage(Stack<Class<?>> navigationHistory) {
         initComponents();
         this.navigationHistory = navigationHistory;
     }
 
-    // Setter method to set the username
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -327,8 +371,8 @@ public class AttemptQuizPage extends javax.swing.JFrame {
 //            }
 //        }
 
-        // Create an instance of ViewQuizPage
-        ViewQuizPage ViewQuizPageFrame = new ViewQuizPage();
+        ViewQuizPage ViewQuizPageFrame = new ViewQuizPage(getUsername());
+        ViewQuizPageFrame.setUsername(username);
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);
@@ -372,6 +416,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 AttemptQuizPageFrame.setVisible(true);
                 AttemptQuizPageFrame.pack();
                 AttemptQuizPageFrame.setLocationRelativeTo(null);
+                AttemptQuizPageFrame.takeInformation(); 
 
             }
         });

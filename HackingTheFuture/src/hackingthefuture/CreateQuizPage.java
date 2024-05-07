@@ -32,10 +32,11 @@ public class CreateQuizPage extends javax.swing.JFrame {
     private String description;
     private String theme;
     private String content;
-    
+     private String email;
+    public String username;
+    private String role;
+    private String locationCoordinate;
     private int numberOfQuizzes;
-    private String username;
-    private String email;
 
     /**
      * Creates new form EventPage
@@ -45,13 +46,61 @@ public class CreateQuizPage extends javax.swing.JFrame {
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
     }
-    
-    public CreateQuizPage(String username){
+    public String getUsername(){
+        return username;
+    }
+     public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+    public CreateQuizPage(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
-        this.username = username;
+        this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
     }
+    
+    
+    private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
+    }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -320,7 +369,11 @@ public class CreateQuizPage extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageEducator EduFrame = new MainPageEducator();
+        EduFrame.setUsername(username);
+        EduFrame.setVisible(true);
+        EduFrame.pack();
+        EduFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_backButtonActionPerformed
     
     private void addNumberOfQuizzes() {
@@ -419,6 +472,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 CreateQuizPageFrame.setVisible(true);
                 CreateQuizPageFrame.pack();
                 CreateQuizPageFrame.setLocationRelativeTo(null);
+                CreateQuizPageFrame.takeInformation(); 
             }
         });
     }

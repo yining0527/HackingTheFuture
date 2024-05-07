@@ -45,7 +45,9 @@ public class ProfileStudent extends javax.swing.JFrame {
         takeInformation();
         takeParents();
     }
-    
+    public String getUsername(){
+        return username;
+    }
     private void takeInformation() {
         System.out.println("take information");
         try {
@@ -94,7 +96,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     {
         System.out.println("take father");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
@@ -389,7 +391,11 @@ public class ProfileStudent extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageChildren childrenFrame = new MainPageChildren();
+        childrenFrame.setUsername(username);
+        childrenFrame.setVisible(true);
+        childrenFrame.pack();
+        childrenFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

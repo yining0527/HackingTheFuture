@@ -51,6 +51,7 @@ public class MainPageEducator extends javax.swing.JFrame {
         discussion = new javax.swing.JButton();
         jButtonPROFILE = new javax.swing.JButton();
         jButtonDATASTORAGE = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +121,13 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,14 +136,16 @@ public class MainPageEducator extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jButtonPROFILE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonDATASTORAGE)
-                        .addGap(180, 180, 180)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(87, 87, 87)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
@@ -165,7 +175,8 @@ public class MainPageEducator extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jButtonPROFILE)
-                            .addComponent(jButtonDATASTORAGE))))
+                            .addComponent(jButtonDATASTORAGE)
+                            .addComponent(jButton1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -220,10 +231,10 @@ public class MainPageEducator extends javax.swing.JFrame {
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
 
-        Discussion ViewQuizPageFrame = new Discussion();
-        ViewQuizPageFrame.setVisible(true);
-        ViewQuizPageFrame.pack();
-        ViewQuizPageFrame.setLocationRelativeTo(null);
+        Discussion DiscussionFrame = new Discussion(getUsername());
+         DiscussionFrame.setVisible(true);
+         DiscussionFrame.pack();
+         DiscussionFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_discussionActionPerformed
 
     private void jButtonPROFILEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPROFILEActionPerformed
@@ -240,6 +251,15 @@ public class MainPageEducator extends javax.swing.JFrame {
         DataStorage DataStorageFrame = new DataStorage();
         DataStorageFrame.setUsername(username);
     }//GEN-LAST:event_jButtonDATASTORAGEActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Login LoginFrame = new Login();
+        LoginFrame.setVisible(true);
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,6 +307,7 @@ public class MainPageEducator extends javax.swing.JFrame {
     private javax.swing.JButton createEvent;
     private javax.swing.JButton createQuiz;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDATASTORAGE;
     private javax.swing.JButton jButtonPROFILE;
     private javax.swing.JLabel jLabel1;

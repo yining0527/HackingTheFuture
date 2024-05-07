@@ -29,26 +29,73 @@ public class CreateEventPage extends javax.swing.JFrame {
     private String date;
     private String startTime;
     private String endTime;
-    
-    private int numberOfEvents;
-    private String username;
     private String email;
+    public String username;
+    private String role;
+    private String locationCoordinate;
+    private int numberOfEvents;
 
     /**
      * Creates new form EventPage
      */
-    public CreateEventPage() {
+     public String getUsername(){
+        return username;
+    }
+    public CreateEventPage(){
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+    }
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+    public CreateEventPage(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+        this.username = username;  // Set the username
+        takeInformation(); // Retrieve user information
     }
     
-    public CreateEventPage(String username){
-        initComponents();
-        setPreferredSize(new Dimension(900, 600));
-        setResizable(true);
-        this.username = username;
+    
+    private void takeInformation() {
+    System.out.println("take information");
+    try {
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+        System.out.println("Database connection successful.");
+
+        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+        pst = con.prepareStatement(querySD);
+        pst.setString(1, username); // Set the username parameter at index 1
+
+        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+        System.out.println("Username: " + username); // Print username for debugging
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("ResultSet contains data.");
+            this.email = rs.getString("email");
+            this.role = rs.getString("role");
+            this.locationCoordinate = rs.getString("LocationCoordinate");
+        } else {
+            System.out.println("ResultSet is empty.");
+        }
+
+        con.close();
+    } catch (SQLException e) {
+        e.printStackTrace(); // Print stack trace for debugging
+        System.err.println("Error executing SQL query: " + e.getMessage());
     }
+    
+    // Add a print statement to check the value of locationCoordinate
+    System.out.println("Location Coordinate: " + locationCoordinate);
+
+    System.out.println("Email: " + email);
+    System.out.println(username);
+    System.out.println(role);
+    System.out.println(locationCoordinate);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,7 +256,7 @@ public class CreateEventPage extends javax.swing.JFrame {
                 .addComponent(eventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createEventButton)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
@@ -231,7 +278,7 @@ public class CreateEventPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(33, Short.MAX_VALUE)
+                        .addContainerGap(32, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -409,7 +456,11 @@ public class CreateEventPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        MainPageEducator EduFrame = new MainPageEducator();
+        EduFrame.setUsername(username);
+        EduFrame.setVisible(true);
+        EduFrame.pack();
+        EduFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
     private boolean validateEventData() {
         // Check if required fields are empty
@@ -483,6 +534,7 @@ public class CreateEventPage extends javax.swing.JFrame {
                 CreateEventPageFrame.setVisible(true);
                 CreateEventPageFrame.pack();
                 CreateEventPageFrame.setLocationRelativeTo(null);
+                CreateEventPageFrame.takeInformation(); 
             }
         });
     }

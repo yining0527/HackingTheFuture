@@ -192,7 +192,7 @@
                           <Component id="jLabelEVENTSCREATED" min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="jLabelShowEVENTSCREATED" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="157" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

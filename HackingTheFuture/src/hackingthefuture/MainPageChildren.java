@@ -48,6 +48,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         profile = new javax.swing.JToggleButton();
         discussion = new javax.swing.JButton();
         DATASTORAGE = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +109,13 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,12 +136,14 @@ public class MainPageChildren extends javax.swing.JFrame {
                                 .addComponent(profile)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(DATASTORAGE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(278, 278, 278)
                                 .addComponent(jLabel8)
                                 .addGap(35, 35, 35))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE))))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,7 +159,8 @@ public class MainPageChildren extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(profile)
-                            .addComponent(DATASTORAGE))))
+                            .addComponent(DATASTORAGE)
+                            .addComponent(jButton1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addGap(54, 54, 54)
@@ -165,7 +176,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +217,7 @@ public class MainPageChildren extends javax.swing.JFrame {
 
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
-        Discussion ViewQuizPageFrame = new Discussion();
+        Discussion ViewQuizPageFrame = new Discussion(getUsername());
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);
@@ -217,6 +228,15 @@ public class MainPageChildren extends javax.swing.JFrame {
         DataStorage DataStorageFrame = new DataStorage();
         DataStorageFrame.setUsername(username);
     }//GEN-LAST:event_DATASTORAGEActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Login LoginFrame = new Login();
+        LoginFrame.setVisible(true);
+        LoginFrame.pack();
+        LoginFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
  
     
     /**
@@ -265,6 +285,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton DATASTORAGE;
     private javax.swing.JButton discussion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
