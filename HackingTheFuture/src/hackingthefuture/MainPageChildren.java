@@ -200,7 +200,7 @@ public class MainPageChildren extends javax.swing.JFrame {
 
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
+        SViewEventPage ViewEventPageFrame = new SViewEventPage(getUsername());
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class Discussion extends javax.swing.JFrame {
+
     private String email;
     private String role;
     private String locationCoordinate;
@@ -27,67 +28,92 @@ public class Discussion extends javax.swing.JFrame {
     ResultSet rs;
     public String username;
 
-    public String getUsername(){
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-        takeInformation(); // Retrieve user information
-    }
-     private void takeInformation() {
-    System.out.println("take information");
-    try {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-        System.out.println("Database connection successful.");
-
-        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
-        pst = con.prepareStatement(querySD);
-        pst.setString(1, username); // Set the username parameter at index 1
-
-        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-        System.out.println("Username: " + username); // Print username for debugging
-
-        ResultSet rs = pst.executeQuery();
-
-        if (rs.next()) {
-            System.out.println("ResultSet contains data.");
-            this.email = rs.getString("email");
-            this.role = rs.getString("role");
-            this.locationCoordinate = rs.getString("LocationCoordinate");
-        } else {
-            System.out.println("ResultSet is empty.");
-        }
-
-        con.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Print stack trace for debugging
-        System.err.println("Error executing SQL query: " + e.getMessage());
-    }
-    
-    // Add a print statement to check the value of locationCoordinate
-    System.out.println("Location Coordinate: " + locationCoordinate);
-
-    System.out.println("Email: " + email);
-    System.out.println(username);
-    System.out.println(role);
-    System.out.println(locationCoordinate);
-}
-    /**
-     * Creates new form EventPage
-     */
     public Discussion() {
         initComponents();
-        setPreferredSize(new Dimension(900,600));
+        setPreferredSize(new Dimension(900, 600));
         setResizable(true);
+        fetchPost(); // Move fetchPost() call here to fetch posts after initializing UI
     }
+    
+    // Method to fetch the four most recent posts
+    private void fetchPost() {
+        try {
+            // Connect to the database
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Query to fetch the four most recent posts
+            String postDetails = "SELECT * FROM `discussion` ORDER BY `time` DESC LIMIT 4";
+            pst = con.prepareStatement(postDetails);
+            ResultSet resultSet = pst.executeQuery();
+
+            // Display the fetched posts in the text area
+            displayPost(postField, resultSet);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public Discussion(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
         this.username = username;  // Set the username
+        fetchPost();
         takeInformation(); // Retrieve user information
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+        takeInformation(); // Retrieve user information
+    }
+
+    private void takeInformation() {
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.role = rs.getString("role");
+                this.locationCoordinate = rs.getString("LocationCoordinate");
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        // Add a print statement to check the value of locationCoordinate
+        System.out.println("Location Coordinate: " + locationCoordinate);
+
+        System.out.println("Email: " + email);
+        System.out.println(username);
+        System.out.println(role);
+        System.out.println(locationCoordinate);
+    }
+
+    /**
+     * Creates new form EventPage
+     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -205,35 +231,35 @@ public class Discussion extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         switch (role) {
-        case "educator":
-            MainPageEducator eduFrame = new MainPageEducator();
-            eduFrame.setUsername(username);
-            eduFrame.setVisible(true);
-            eduFrame.pack();
-            eduFrame.setLocationRelativeTo(null);
-            break;
-        case "parent":
-            MainPageParent parentFrame = new MainPageParent();
-            parentFrame.setUsername(username);
-            parentFrame.setVisible(true);
-            parentFrame.pack();
-            parentFrame.setLocationRelativeTo(null);
-            break;
-        case "children":
-            MainPageChildren childrenFrame = new MainPageChildren();
-            childrenFrame.setUsername(username);
-            childrenFrame.setVisible(true);
-            childrenFrame.pack();
-            childrenFrame.setLocationRelativeTo(null);
-            break;
-        default:
-            // Handle the case when the role is unknown or not supported
-            System.out.println("Unsupported role: " + role);
-            break;
-    }
+            case "educator":
+                MainPageEducator eduFrame = new MainPageEducator();
+                eduFrame.setUsername(username);
+                eduFrame.setVisible(true);
+                eduFrame.pack();
+                eduFrame.setLocationRelativeTo(null);
+                break;
+            case "parent":
+                MainPageParent parentFrame = new MainPageParent();
+                parentFrame.setUsername(username);
+                parentFrame.setVisible(true);
+                parentFrame.pack();
+                parentFrame.setLocationRelativeTo(null);
+                break;
+            case "children":
+                MainPageChildren childrenFrame = new MainPageChildren();
+                childrenFrame.setUsername(username);
+                childrenFrame.setVisible(true);
+                childrenFrame.pack();
+                childrenFrame.setLocationRelativeTo(null);
+                break;
+            default:
+                // Handle the case when the role is unknown or not supported
+                System.out.println("Unsupported role: " + role);
+                break;
+        }
 
-    // Close the current Discussion frame
-    this.dispose();
+        // Close the current Discussion frame
+        this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void writePostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writePostActionPerformed
@@ -245,24 +271,7 @@ public class Discussion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_writePostActionPerformed
 
-    // Method to fetch the four most recent posts
-    private void fetchPost() {
-        try {
-            // Connect to the database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-
-            // Query to fetch the four most recent posts
-            String postDetails = "SELECT * FROM `discussion` ORDER BY `time` DESC LIMIT 4";
-            pst = con.prepareStatement(postDetails);
-            ResultSet resultSet = pst.executeQuery();
-
-            // Display the fetched posts in the text area
-            displayPost(postField, resultSet);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
+    
 
     private void fetchAllPosts() {
         try {
@@ -354,7 +363,7 @@ public class Discussion extends javax.swing.JFrame {
                 DiscussionFrame.setVisible(true);
                 DiscussionFrame.pack();
                 DiscussionFrame.setLocationRelativeTo(null);
-                DiscussionFrame.takeInformation(); 
+                DiscussionFrame.takeInformation();
             }
         });
     }

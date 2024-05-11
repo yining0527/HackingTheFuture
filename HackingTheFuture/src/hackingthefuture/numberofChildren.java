@@ -147,7 +147,7 @@ public class numberofChildren extends javax.swing.JFrame {
         jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTextPane1);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Public\\Documents\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Childrenn (1).png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hackingthefuture/Image/Childrenn (1).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

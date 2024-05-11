@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,6 +31,7 @@ public class BookEventPage extends javax.swing.JFrame {
     ResultSet rs;
     PreparedStatement psCheckUserExists = null;
     ResultSet resultSet = null;
+    private boolean success = false;
 
     /**
      * Creates new form EventPage
@@ -239,16 +239,16 @@ public class BookEventPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String liveEventText = liveEvent.getText();
         String upComingEventText = upComingEvent.getText();
-        
+
         int numberOfLiveEvents = 0;
         int numberOfUpcomingEvents = 0;
 
         // Count the number of events
-        if(!liveEventText.isEmpty()){
+        if (!liveEventText.isEmpty()) {
             numberOfLiveEvents = countEvents(liveEventText);
         }
-        
-        if(!upComingEventText.isEmpty()){
+
+        if (!upComingEventText.isEmpty()) {
             numberOfUpcomingEvents = countEvents(upComingEventText);
         }
 
@@ -258,9 +258,15 @@ public class BookEventPage extends javax.swing.JFrame {
         int totalEvents = numberOfLiveEvents + numberOfUpcomingEvents;
         System.out.println(totalEvents);
         // Add the total points
-        pointsToAdd = 5 * totalEvents;
-        addPoints(pointsToAdd);
-        JOptionPane.showMessageDialog(null, "You have earned " + pointsToAdd + " points!", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+        if (success) {
+            pointsToAdd = 5 * totalEvents;
+            addPoints(pointsToAdd);
+            JOptionPane.showMessageDialog(null, "You have earned " + pointsToAdd + " points!", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please change the clashed or repeated event!");
+            return;
+        }
+
         this.dispose();
     }//GEN-LAST:event_doneButtonActionPerformed
 
@@ -275,9 +281,11 @@ public class BookEventPage extends javax.swing.JFrame {
             event = event.trim();
             System.out.println(event);
             if (!isEventValid(event)) {
+                checkClashingOrRepeatedEvent(event, takeEventDate(event));
                 JOptionPane.showMessageDialog(null, "No such event: " + event);
                 numberOfEvents--;
             }
+            writeBookingInfo(event);
         }
         System.out.println(numberOfEvents);
         // Return the number of events
@@ -379,6 +387,116 @@ public class BookEventPage extends javax.swing.JFrame {
         return eventValid;
     }
 
+    private String takeEventDate(String eventName) {
+        String eventDate = null; // Initialize eventDate variable
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String queryChildren = "SELECT * FROM `event` WHERE `event title` = ?";
+            pst = con.prepareStatement(queryChildren);
+            pst.setString(1, eventName); // Set the eventName parameter
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                eventDate = rs.getString("event date");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query for children: " + e.getMessage());
+        }
+
+        return eventDate;
+    }
+    
+    private void writeBookingInfo(String eventName) {
+        try {
+            // Retrieve the event date using takeEventDate method
+            String eventDate = takeEventDate(eventName);
+            if (eventDate != null) { // Check if eventDate is not null
+                checkClashingOrRepeatedEvent(eventName, eventDate);
+            } else {
+                JOptionPane.showMessageDialog(null, "Event date not found for event: " + eventName);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void checkClashingOrRepeatedEvent(String eventName, String eventDate) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String queryChildren = "SELECT * FROM `bookingevent` WHERE `username` = ?";
+            pst = con.prepareStatement(queryChildren);
+            pst.setString(1, username); // Set the username parameter at index 1
+
+            System.out.println("SQL Query for children: " + queryChildren); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String existingEventName = rs.getString("eventName");
+                String existingEventDate = rs.getString("eventDate");
+
+                if (eventName.equals(existingEventName)) {
+                    JOptionPane.showMessageDialog(null, eventName + " already registered!");
+                    return;
+                } else if (eventDate.equals(existingEventDate)) {
+                    JOptionPane.showMessageDialog(null, eventName + " clashed with other event!");
+                    return;
+                } else {
+                    success = true;
+                }
+            }
+
+            // If no clashes or repeated events found, proceed with inserting the new event
+            insertBookingEvent(eventName, eventDate);
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query for children: " + e.getMessage());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void insertBookingEvent(String eventName, String eventDate) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            String query = "INSERT INTO `bookingevent`(`username`, `eventName`, `eventDate`) VALUES (?,?,?)";
+
+            pst = con.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, eventName);
+            pst.setString(3, eventDate);
+            pst.executeUpdate();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 
         SViewEventPage SViewEventPageFrame = new SViewEventPage(getUsername());

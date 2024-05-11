@@ -134,9 +134,7 @@ public class parents extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(153, 153, 255));
         jLabel6.setText("Siblings order:");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Public\\Documents\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Children (1).png")); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Public\\Documents\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Quiz.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hackingthefuture/Image/Quiz.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -289,7 +287,7 @@ public class parents extends javax.swing.JFrame {
                     // If child name is null, update it with the new child's name
                     String updateQuery = "UPDATE `user` SET `childrenName` = ?, `siblingsOrder` = ? WHERE `username` = ?";
                     pst = con.prepareStatement(updateQuery);
-                    pst.setString(1, child);
+                    pst.setString(1, childID.getText());
                     pst.setInt(2, siblingOrder);
                     pst.setString(3, username);
                     pst.executeUpdate();

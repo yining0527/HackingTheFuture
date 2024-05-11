@@ -277,8 +277,18 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/hackingthefuture/Image/Children (1).png"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/hackingthefuture/Image/Teacher (1).png"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="signUp">
               <Properties>
@@ -298,6 +308,11 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/hackingthefuture/Image/Parent (1).png"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

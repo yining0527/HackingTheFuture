@@ -41,65 +41,66 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         setResizable(true);
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
         takeInformation(); // Retrieve user information
     }
-     public AttemptQuizPage(String username) {
+
+    public AttemptQuizPage(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
         this.username = username;  // Set the username
         takeInformation(); // Retrieve user information
     }
+
     private void takeInformation() {
-    System.out.println("take information");
-    try {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-        System.out.println("Database connection successful.");
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
 
-        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
-        pst = con.prepareStatement(querySD);
-        pst.setString(1, username); // Set the username parameter at index 1
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
 
-        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-        System.out.println("Username: " + username); // Print username for debugging
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
 
-        ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            System.out.println("ResultSet contains data.");
-            this.email = rs.getString("email");
-            this.role = rs.getString("role");
-            this.locationCoordinate = rs.getString("LocationCoordinate");
-        } else {
-            System.out.println("ResultSet is empty.");
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.role = rs.getString("role");
+                this.locationCoordinate = rs.getString("LocationCoordinate");
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
 
-        con.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Print stack trace for debugging
-        System.err.println("Error executing SQL query: " + e.getMessage());
-    }
-    
-    // Add a print statement to check the value of locationCoordinate
-    System.out.println("Location Coordinate: " + locationCoordinate);
+        // Add a print statement to check the value of locationCoordinate
+        System.out.println("Location Coordinate: " + locationCoordinate);
 
-    System.out.println("Email: " + email);
-    System.out.println(username);
-    System.out.println(role);
-    System.out.println(locationCoordinate);
-}
+        System.out.println("Email: " + email);
+        System.out.println(username);
+        System.out.println(role);
+        System.out.println(locationCoordinate);
+    }
 
     public AttemptQuizPage(Stack<Class<?>> navigationHistory) {
         initComponents();
         this.navigationHistory = navigationHistory;
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,7 +287,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         }
         return quizValid;
     }
-    
+
     private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
         String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing whitespaces
 
@@ -294,14 +295,13 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please don't forget to paste the quiz link before attempting it", "Reminder", JOptionPane.INFORMATION_MESSAGE);
         } else if (!quizLink.startsWith("https://")) {
             JOptionPane.showMessageDialog(null, "Please copy the valid quiz link", "Invalid Link", JOptionPane.ERROR_MESSAGE);
-        } else if(!isQuizValid(quizLink)){
+        } else if (!isQuizValid(quizLink)) {
             JOptionPane.showMessageDialog(null, "No such quizz");
-        }else {
+        } else {
             addPoints(2);
             JOptionPane.showMessageDialog(null, "You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
-
 
 
     }//GEN-LAST:event_completeButtonActionPerformed
@@ -353,29 +353,14 @@ public class AttemptQuizPage extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-//        if (navigationHistory != null && !navigationHistory.isEmpty()) {
-//            navigationHistory.pop(); // Remove current screen from history
-//            if (!navigationHistory.isEmpty()) {
-//                // Navigate back to the previous screen
-//                Class<?> previousScreen = navigationHistory.peek();
-//                try {
-//                    javax.swing.JFrame previousFrame = (javax.swing.JFrame) previousScreen.newInstance();
-//                    previousFrame.setVisible(true);
-//                    previousFrame.pack();
-//                    previousFrame.setLocationRelativeTo(null);
-//                    this.dispose();
-//                } catch (InstantiationException | IllegalAccessException ex) {
-//                    // Handle exception
-//                    ex.printStackTrace();
-//                }
-//            }
-//        }
 
+        this.dispose();
         ViewQuizPage ViewQuizPageFrame = new ViewQuizPage(getUsername());
         ViewQuizPageFrame.setUsername(username);
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);
+
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -416,7 +401,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 AttemptQuizPageFrame.setVisible(true);
                 AttemptQuizPageFrame.pack();
                 AttemptQuizPageFrame.setLocationRelativeTo(null);
-                AttemptQuizPageFrame.takeInformation(); 
+                AttemptQuizPageFrame.takeInformation();
 
             }
         });
