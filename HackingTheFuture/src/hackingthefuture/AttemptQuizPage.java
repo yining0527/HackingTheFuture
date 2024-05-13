@@ -48,6 +48,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
     public void setUsername(String username) {
         this.username = username;
         takeInformation(); // Retrieve user information
+        fillCombo();
     }
 
     public AttemptQuizPage(String username) {
@@ -56,6 +57,8 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         setResizable(true);
         this.username = username;  // Set the username
         takeInformation(); // Retrieve user information
+        fillCombo();
+
     }
 
     private void takeInformation() {
@@ -115,9 +118,9 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        QuizizzLink = new javax.swing.JTextField();
         completeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        LinkBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,13 +138,6 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Please enter the Quizizz Link:");
 
-        QuizizzLink.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        QuizizzLink.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuizizzLinkActionPerformed(evt);
-            }
-        });
-
         completeButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         completeButton.setText("Complete");
         completeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +154,13 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             }
         });
 
+        LinkBox.setBackground(new java.awt.Color(204, 204, 255));
+        LinkBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LinkBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -170,17 +173,17 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3)
-                    .addComponent(QuizizzLink, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(LinkBox, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(165, 165, 165)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(QuizizzLink, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(LinkBox, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +205,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -234,45 +237,25 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void QuizizzLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuizizzLinkActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_QuizizzLinkActionPerformed
-
     private boolean isQuizValid(String userInput) {
         boolean quizValid = false;
         try {
-            // Establish connection to the database
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
-            // SQL query to retrieve events from the database
-            String query = "SELECT * FROM `quiz` WHERE `quiz content` = ?"; // Adjust query according to your database schema
-
-            // Create a prepared statement for the query
+            String query = "SELECT * FROM `quiz` WHERE `quiz title` = ?";
             pst = con.prepareStatement(query);
-
-            // Set the event title parameter
             pst.setString(1, userInput);
 
-            // Execute the query and obtain the result set
             ResultSet resultSet = pst.executeQuery();
 
-            // Iterate through the result set
-            while (resultSet.next()) {
-                // Get the event name from the result set
-                String quizlink = resultSet.getString("quiz content");
-
-                // Compare the user input with the event name
-                if (userInput.equalsIgnoreCase(quizlink)) {
-                    // If there's a match, set eventValid to true and break the loop
-                    quizValid = true;
-                    break;
-                }
+            // Check if the result set has any rows (quiz title found)
+            if (resultSet.next()) {
+                quizValid = true;
             }
+
         } catch (SQLException ex) {
-            // Handle any SQL exceptions
             ex.printStackTrace();
         } finally {
-            // Close the result set, statement, and connection
             try {
                 if (pst != null) {
                     pst.close();
@@ -283,24 +266,24 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         return quizValid;
     }
 
     private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
-        String quizLink = QuizizzLink.getText().trim(); // Remove leading and trailing whitespaces
+        String quizTitle = (String) LinkBox.getSelectedItem();
 
-        if (quizLink.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please don't forget to paste the quiz link before attempting it", "Reminder", JOptionPane.INFORMATION_MESSAGE);
-        } else if (!quizLink.startsWith("https://")) {
-            JOptionPane.showMessageDialog(null, "Please copy the valid quiz link", "Invalid Link", JOptionPane.ERROR_MESSAGE);
-        } else if (!isQuizValid(quizLink)) {
-            JOptionPane.showMessageDialog(null, "No such quizz");
+        if (quizTitle == null || quizTitle.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a quiz title before attempting the quiz", "Reminder", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            addPoints(2);
-            JOptionPane.showMessageDialog(null, "You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            // Check if the selected quiz title is valid
+            if (isQuizValid(quizTitle)) {
+                addPoints(2);
+                JOptionPane.showMessageDialog(null, "You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a valid quiz title", "Invalid Quiz Title", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
 
@@ -363,6 +346,43 @@ public class AttemptQuizPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void LinkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LinkBoxActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_LinkBoxActionPerformed
+
+    private void fillCombo() {
+        try {
+            // Establish the database connection
+            System.out.println("Attempting database connection...");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Prepare the SQL query to fetch all quiz contents
+            String allQuizzesQuery = "SELECT `quiz title` FROM `quiz`";
+            System.out.println("Executing SQL query: " + allQuizzesQuery);
+            PreparedStatement pst = con.prepareStatement(allQuizzesQuery);
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = pst.executeQuery();
+
+            // Clear existing items in the LinkBox before adding new items
+            LinkBox.removeAllItems();
+
+            // Iterate through the result set and add quiz contents to the LinkBox
+            while (resultSet.next()) {
+                String quizTitle = resultSet.getString("quiz title");
+                System.out.println("Adding quiz content to LinkBox: " + quizTitle);
+                LinkBox.addItem(quizTitle); // Add quiz content as an item to the LinkBox
+            }
+
+            // Close the resources
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("Error executing SQL query: " + ex.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -402,13 +422,14 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 AttemptQuizPageFrame.pack();
                 AttemptQuizPageFrame.setLocationRelativeTo(null);
                 AttemptQuizPageFrame.takeInformation();
+                AttemptQuizPageFrame.fillCombo();
 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField QuizizzLink;
+    private javax.swing.JComboBox<String> LinkBox;
     private javax.swing.JButton backButton;
     private javax.swing.JButton completeButton;
     private javax.swing.JLabel jLabel1;

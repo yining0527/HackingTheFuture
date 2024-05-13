@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,58 +44,63 @@ public class BookEventPage extends javax.swing.JFrame {
         setResizable(true);
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
         takeInformation(); // Retrieve user information
+        fillCombo();
     }
-     public BookEventPage(String username) {
+
+    public BookEventPage(String username) {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
         this.username = username;  // Set the username
         takeInformation(); // Retrieve user information
+        fillCombo();
     }
+
     private void takeInformation() {
-    System.out.println("take information");
-    try {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-        System.out.println("Database connection successful.");
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
 
-        String querySD = "SELECT * FROM `user` WHERE `username` = ?";
-        pst = con.prepareStatement(querySD);
-        pst.setString(1, username); // Set the username parameter at index 1
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
 
-        System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-        System.out.println("Username: " + username); // Print username for debugging
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + username); // Print username for debugging
 
-        ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            System.out.println("ResultSet contains data.");
-            this.email = rs.getString("email");
-            this.role = rs.getString("role");
-            this.locationCoordinate = rs.getString("LocationCoordinate");
-        } else {
-            System.out.println("ResultSet is empty.");
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.role = rs.getString("role");
+                this.locationCoordinate = rs.getString("LocationCoordinate");
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
         }
 
-        con.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Print stack trace for debugging
-        System.err.println("Error executing SQL query: " + e.getMessage());
-    }
-    
-    // Add a print statement to check the value of locationCoordinate
-    System.out.println("Location Coordinate: " + locationCoordinate);
+        // Add a print statement to check the value of locationCoordinate
+        System.out.println("Location Coordinate: " + locationCoordinate);
 
-    System.out.println("Email: " + email);
-    System.out.println(username);
-    System.out.println(role);
-    System.out.println(locationCoordinate);
-}
+        System.out.println("Email: " + email);
+        System.out.println(username);
+        System.out.println(role);
+        System.out.println(locationCoordinate);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,16 +113,11 @@ public class BookEventPage extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        liveEvent = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         doneButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        upComingEvent = new javax.swing.JTextPane();
+        eventBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,11 +128,9 @@ public class BookEventPage extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Booking Event");
 
-        jScrollPane2.setViewportView(liveEvent);
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Enter the Name of Events You Want To Join:");
+        jLabel4.setText("Choose the Name of Events You Want To Join:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,45 +152,42 @@ public class BookEventPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Live Event : ");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Upcoming Event:");
-
-        jScrollPane7.setViewportView(upComingEvent);
+        eventBox.setForeground(new java.awt.Color(204, 204, 255));
+        eventBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(654, 654, 654)
+                        .addComponent(doneButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(319, 319, 319)
+                        .addComponent(jLabel1)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(doneButton))))
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(backButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(backButton)
-                .addGap(41, 795, Short.MAX_VALUE))
+                .addGap(211, 211, 211)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eventBox, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,23 +196,14 @@ public class BookEventPage extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
                 .addComponent(jLabel6)
-                .addGap(35, 35, 35)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(eventBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(backButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(doneButton)))
+                    .addComponent(backButton)
+                    .addComponent(doneButton))
                 .addGap(17, 17, 17))
         );
 
@@ -223,7 +211,7 @@ public class BookEventPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,61 +224,21 @@ public class BookEventPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
-        // TODO add your handling code here:
-        String liveEventText = liveEvent.getText();
-        String upComingEventText = upComingEvent.getText();
+        String eventTitle = (String) eventBox.getSelectedItem();
 
-        int numberOfLiveEvents = 0;
-        int numberOfUpcomingEvents = 0;
-
-        // Count the number of events
-        if (!liveEventText.isEmpty()) {
-            numberOfLiveEvents = countEvents(liveEventText);
-        }
-
-        if (!upComingEventText.isEmpty()) {
-            numberOfUpcomingEvents = countEvents(upComingEventText);
-        }
-
-        System.out.println(numberOfLiveEvents);
-        System.out.println(numberOfUpcomingEvents);
-        // Calculate total points based on the number of events
-        int totalEvents = numberOfLiveEvents + numberOfUpcomingEvents;
-        System.out.println(totalEvents);
-        // Add the total points
-        if (success) {
-            pointsToAdd = 5 * totalEvents;
-            addPoints(pointsToAdd);
-            JOptionPane.showMessageDialog(null, "You have earned " + pointsToAdd + " points!", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+        if (eventTitle == null || eventTitle.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please select a event title before booking the event", "Reminder", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Please change the clashed or repeated event!");
-            return;
+            // Check if the selected quiz title is valid
+            if (isEventValid(eventTitle) && !checkClashingOrRepeatedEvent(eventTitle, takeEventDate(eventTitle))) {
+                addPoints(5);
+                insertBookingEvent(eventTitle, takeEventDate(eventTitle));
+                JOptionPane.showMessageDialog(null, "Event successfully booked. You have earned 2 marks", "Marks Earned", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } 
         }
-
-        this.dispose();
+       
     }//GEN-LAST:event_doneButtonActionPerformed
-
-    
-    private int countEvents(String eventText) {
-        // Split the text by newline character
-        String[] events = eventText.split("\n");
-        int numberOfEvents = events.length;
-        System.out.println(numberOfEvents);
-        for (String event : events) {
-            // Trim whitespace from the event string
-            event = event.trim();
-            System.out.println(event);
-            if (!isEventValid(event)) {
-                checkClashingOrRepeatedEvent(event, takeEventDate(event));
-                JOptionPane.showMessageDialog(null, "No such event: " + event);
-                numberOfEvents--;
-            }
-            writeBookingInfo(event);
-        }
-        System.out.println(numberOfEvents);
-        // Return the number of events
-        return numberOfEvents;
-    }
 
     private void addPoints(int pointsToAdd) {
         System.out.println(pointsToAdd);
@@ -412,32 +360,30 @@ public class BookEventPage extends javax.swing.JFrame {
 
         return eventDate;
     }
-    
-    private void writeBookingInfo(String eventName) {
-        try {
-            // Retrieve the event date using takeEventDate method
-            String eventDate = takeEventDate(eventName);
-            if (eventDate != null) { // Check if eventDate is not null
-                checkClashingOrRepeatedEvent(eventName, eventDate);
-            } else {
-                JOptionPane.showMessageDialog(null, "Event date not found for event: " + eventName);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
-    
-    private void checkClashingOrRepeatedEvent(String eventName, String eventDate) {
+
+//    private String writeBookingInfo(String eventName) {
+//        try {
+//            // Retrieve the event date using takeEventDate method
+//            String eventDate = takeEventDate(eventName);
+//            if (eventDate != null) { // Check if eventDate is not null
+//                checkClashingOrRepeatedEvent(eventName, eventDate);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Event date not found for event: " + eventName);
+//            }
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, ex);
+//        }
+//    }
+
+    private boolean checkClashingOrRepeatedEvent(String eventName, String eventDate) {
+        boolean clashedOrRepeated = false;
+        
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-            System.out.println("Database connection successful.");
 
             String queryChildren = "SELECT * FROM `bookingevent` WHERE `username` = ?";
             pst = con.prepareStatement(queryChildren);
             pst.setString(1, username); // Set the username parameter at index 1
-
-            System.out.println("SQL Query for children: " + queryChildren); // Print SQL query for debugging
-            System.out.println("Username: " + username); // Print username for debugging
 
             ResultSet rs = pst.executeQuery();
 
@@ -447,17 +393,13 @@ public class BookEventPage extends javax.swing.JFrame {
 
                 if (eventName.equals(existingEventName)) {
                     JOptionPane.showMessageDialog(null, eventName + " already registered!");
-                    return;
+                    clashedOrRepeated = true;
                 } else if (eventDate.equals(existingEventDate)) {
                     JOptionPane.showMessageDialog(null, eventName + " clashed with other event!");
-                    return;
-                } else {
-                    success = true;
+                    clashedOrRepeated = true;
                 }
             }
 
-            // If no clashes or repeated events found, proceed with inserting the new event
-            insertBookingEvent(eventName, eventDate);
         } catch (SQLException e) {
             e.printStackTrace(); // Print stack trace for debugging
             System.err.println("Error executing SQL query for children: " + e.getMessage());
@@ -470,8 +412,9 @@ public class BookEventPage extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
+        return clashedOrRepeated;
     }
-    
+
     private void insertBookingEvent(String eventName, String eventDate) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
@@ -495,8 +438,8 @@ public class BookEventPage extends javax.swing.JFrame {
             }
         }
     }
-    
-    
+
+
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 
         SViewEventPage SViewEventPageFrame = new SViewEventPage(getUsername());
@@ -504,8 +447,100 @@ public class BookEventPage extends javax.swing.JFrame {
         SViewEventPageFrame.setVisible(true);
         SViewEventPageFrame.pack();
         SViewEventPageFrame.setLocationRelativeTo(null);
-        
+
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void eventBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eventBoxActionPerformed
+
+    private void fetchLiveEvents() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Query to fetch live events
+            String liveEventsQuery = "SELECT `event title` FROM `event` WHERE `event date` = CURDATE()";
+            pst = con.prepareStatement(liveEventsQuery);
+            ResultSet resultSet = pst.executeQuery();
+
+            // Create an ArrayList to store live events
+            List<String> liveEventsList = new ArrayList<>();
+
+            // Add live events to the ArrayList
+            while (resultSet.next()) {
+                String eventTitle = resultSet.getString("event title");
+                liveEventsList.add(eventTitle);
+            }
+
+            // Clear existing items in the eventBox before adding new items
+            eventBox.removeAllItems();
+
+            // Add live events to the eventBox
+            for (String event : liveEventsList) {
+                eventBox.addItem(event);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void fetchUpcomingEvents() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            // Query to fetch closest upcoming events (limit to 3)
+            String upcomingEventsQuery = "SELECT `event title` FROM `event` WHERE `event date` > CURDATE() ORDER BY `event date` LIMIT 3";
+            pst = con.prepareStatement(upcomingEventsQuery);
+            ResultSet resultSet = pst.executeQuery();
+
+            // Clear existing items in the eventBox before adding new items
+            eventBox.removeAllItems();
+
+            // Add each upcoming event to the eventBox
+            while (resultSet.next()) {
+                String eventTitle = resultSet.getString("event title");
+                eventBox.addItem(eventTitle);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void fillCombo() {
+        fetchLiveEvents();
+        fetchUpcomingEvents();
+//        try {
+//            // Establish the database connection
+//            System.out.println("Attempting database connection...");
+//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+//
+//            // Prepare the SQL query to fetch all quiz contents
+//            String allEventsQuery = "SELECT `event title` FROM `event`";
+//            System.out.println("Executing SQL query: " + allEventsQuery);
+//            PreparedStatement pst = con.prepareStatement(allEventsQuery);
+//
+//            // Execute the query and obtain the result set
+//            ResultSet resultSet = pst.executeQuery();
+//
+//            // Clear existing items in the LinkBox before adding new items
+//            eventBox.removeAllItems();
+//
+//            // Iterate through the result set and add quiz contents to the LinkBox
+//            while (resultSet.next()) {
+//                String eventTitle = resultSet.getString("event title");
+//                System.out.println("Adding quiz content to LinkBox: " + eventTitle);
+//                eventBox.addItem(eventTitle); // Add quiz content as an item to the LinkBox
+//            }
+//
+//            // Close the resources
+//            con.close();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//            System.err.println("Error executing SQL query: " + ex.getMessage());
+//        }
+    }
 
     /**
      * @param args the command line arguments
@@ -557,6 +592,7 @@ public class BookEventPage extends javax.swing.JFrame {
                 MakeBookingEventPageFrame.pack();
                 MakeBookingEventPageFrame.setLocationRelativeTo(null);
                 MakeBookingEventPageFrame.takeInformation();
+                MakeBookingEventPageFrame.fillCombo();
             }
         });
     }
@@ -564,15 +600,10 @@ public class BookEventPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton doneButton;
+    private javax.swing.JComboBox<String> eventBox;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextPane liveEvent;
-    private javax.swing.JTextPane upComingEvent;
     // End of variables declaration//GEN-END:variables
 }

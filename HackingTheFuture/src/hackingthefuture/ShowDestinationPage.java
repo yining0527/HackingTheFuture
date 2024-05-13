@@ -20,7 +20,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import java.util.stream.Collectors;
-
+import javax.swing.JTextArea;
 
 /**
  *
@@ -278,6 +278,36 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         }
     }
 
+    private boolean bookingExists(String childName, String visitDate) {
+        String query = "SELECT COUNT(*) FROM bookingdestination WHERE childName = ? AND visitDate = ?";
+
+        try ( Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, childName);
+            preparedStatement.setString(2, visitDate);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // If count > 0, booking exists; otherwise, it doesn't
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private boolean isValidDateFormat(String date) {
+        String regex = "\\d{4}/\\d{2}/\\d{2}";
+
+        if (!date.matches(regex)) {
+            return false; // Return false if the format doesn't match
+        }
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -301,7 +331,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        childrenUsername = new javax.swing.JLabel();
         childUsername = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         chooseTimeSlot = new javax.swing.JTextArea();
@@ -334,7 +364,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jScrollPane5.setViewportView(displayDestination);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Child username");
+        jLabel2.setText("Enter destination ID for booking ");
 
         DestinationID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         DestinationID.addActionListener(new java.awt.event.ActionListener() {
@@ -346,7 +376,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Selected booking for                ");
 
-        DestinationName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DestinationName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(DestinationName);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -363,8 +393,8 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Enter the time slot");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Enter destination ID for booking ");
+        childrenUsername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        childrenUsername.setText("Child username");
 
         childUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         childUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -374,9 +404,11 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         });
 
         chooseTimeSlot.setColumns(20);
+        chooseTimeSlot.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         chooseTimeSlot.setRows(5);
         jScrollPane2.setViewportView(chooseTimeSlot);
 
+        visitDate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         visitDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 visitDateActionPerformed(evt);
@@ -405,29 +437,25 @@ public class ShowDestinationPage extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(33, 33, 33)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                                    .addComponent(DestinationID, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(visitDate)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(childUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bookButton)
-                .addGap(204, 204, 204))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(childUsername)
+                                            .addComponent(DestinationID, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(bookButton)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(visitDate)))))
+                            .addComponent(childrenUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,32 +466,41 @@ public class ShowDestinationPage extends javax.swing.JFrame {
                     .addComponent(backButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(childUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(childrenUsername)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(childUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DestinationID, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(visitDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(bookButton)
-                .addGap(15, 15, 15))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(visitDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addComponent(bookButton)
+                        .addGap(35, 35, 35))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -483,8 +520,59 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
-        insertBookingDestination(username, childUsername.getText(), DestinationName.getText(), visitDate.getText());
-    }//GEN-LAST:event_bookButtonActionPerformed
+        JTextArea textArea = chooseTimeSlot;
+
+        String enteredDate = visitDate.getText().trim();
+
+        if (!isValidDateFormat(enteredDate)) {
+            JOptionPane.showMessageDialog(this, "Please enter the date in the format yyyy/mm/dd.", "Date Format Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if the format is incorrect
+        }
+
+        // Split the text area content by newline to get individual dates
+        String[] availableDates = textArea.getText().split("\\n");
+
+        // Check if the entered date is in the list of available dates
+        boolean dateFound = false;
+        for (String date : availableDates) {
+            // Extract the date part without the "[n] " prefix
+            String trimmedDate = date.substring(date.indexOf(" ") + 1);
+
+            if (trimmedDate.equals(enteredDate)) {
+              dateFound = true;
+                break;
+            }
+        }
+
+        if (!dateFound) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date shown in available time slots.", "Invalid Date", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+
+        // If the format is correct and the date is valid, proceed to check for existing booking
+        String childName = childUsername.getText();
+        String destination = DestinationName.getText();
+        String selectedVisitDate = visitDate.getText();
+
+        // Check if a booking already exists for the child on the selected visit date
+        if (bookingExists(childName, selectedVisitDate)) {
+            JOptionPane.showMessageDialog(this, "A booking already exists for this child on the selected visit date.", "Booking Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // If no booking exists and the date is valid, proceed with the booking
+        try {
+          
+            insertBookingDestination(username, childName, destination, selectedVisitDate);
+            JOptionPane.showMessageDialog(this, "You have successfully booked the visit", "Booking Successful", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Booking successful.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to book the visit. Please try again later.", "Booking Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Booking failed: " + ex.getMessage());
+        }
+    }
+//nsertBookingDestination(username, childUsername.getText(), DestinationName.getText(), visitDate.getText());    }//GEN-LAST:event_bookButtonActionPerformed
 
     private void DestinationIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationIDActionPerformed
         // Get the entered destination ID from the text field
@@ -499,15 +587,12 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         // Iterate through each line to find the matching destination ID
         for (String line : lines) {
             if (line.startsWith("[" + destinationID + "]")) {
-                // Extract the destination name from the line
-                destinationName = line.substring(line.indexOf("]") + 2);
+             destinationName = line.substring(line.indexOf("]") + 2);
                 break;
             }
         }
 
-        // Display the retrieved destination name in the DestinationName plane
         DestinationName.setText(destinationName.trim());
-//        storeDestinationInDatabase(destinationName);
 
     }//GEN-LAST:event_DestinationIDActionPerformed
 
@@ -534,37 +619,13 @@ public class ShowDestinationPage extends javax.swing.JFrame {
             System.out.println("No event dates found for the child.");
         }
 
-        // Now you can proceed with displaying available time slots or performing other actions based on the event dates.
-        // For example:
+       
         displayAvailableTimeSlots(childEventDates);
     }//GEN-LAST:event_childUsernameActionPerformed
 
     private void visitDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitDateActionPerformed
-        // Get the entered date ID from the text field
-        int dateID = Integer.parseInt(visitDate.getText());
 
-        // Retrieve the dates displayed in the displayDestination area
-        String[] dates = chooseTimeSlot.getText().split("\n");
 
-        // Initialize selected date as "Invalid Visit Date"
-        String selectedDate = "Invalid Visit Date";
-
-        // Iterate through each line to find the matching date ID
-        for (String date : dates) {
-            // Assuming each date line starts with a date ID in square brackets, e.g., "[1] 2024-05-08"
-            if (date.startsWith("[" + dateID + "]")) {
-                // Extract the date from the line (excluding the date ID)
-                selectedDate = date.substring(date.indexOf("]") + 2);
-                break;
-            }
-        }
-
-        // Display the retrieved date in a separate component (assuming visitDate is a JTextField)
-        // Replace visitDate with the appropriate component you want to update
-        // For example, if you want to display the selected date in a JTextPane named selectedDatePane:
-        // selectedDatePane.setText(selectedDate.trim());
-        visitDate.setText(selectedDate.trim());
-        //storeDestinationInDatabase(destinationName); // Uncomment if needed
     }//GEN-LAST:event_visitDateActionPerformed
 
     /**
@@ -619,6 +680,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton bookButton;
     private javax.swing.JTextField childUsername;
+    private javax.swing.JLabel childrenUsername;
     private javax.swing.JTextArea chooseTimeSlot;
     private javax.swing.JTextArea displayDestination;
     private javax.swing.JLabel jLabel1;
@@ -627,7 +689,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
