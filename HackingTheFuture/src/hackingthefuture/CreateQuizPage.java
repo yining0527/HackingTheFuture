@@ -125,24 +125,29 @@ public class CreateQuizPage extends javax.swing.JFrame {
         quizTitle = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
+        jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Create ");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(60, 190, 180, 60);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(650, 550));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("Quiz Title");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 153, 153));
         jLabel4.setText("Quiz Description");
 
         quizDescription.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -153,9 +158,11 @@ public class CreateQuizPage extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setText("Quiz Theme(Science/Technology/Engineering/Mathematics)");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("Quiz content(Quizizz Link)");
 
         quizTheme.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -172,6 +179,8 @@ public class CreateQuizPage extends javax.swing.JFrame {
             }
         });
 
+        createQuizButton.setBackground(new java.awt.Color(255, 153, 153));
+        createQuizButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         createQuizButton.setText("Create");
         createQuizButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +202,6 @@ public class CreateQuizPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(createQuizButton)
                     .addComponent(jLabel6)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -202,7 +210,11 @@ public class CreateQuizPage extends javax.swing.JFrame {
                     .addComponent(quizTheme)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(quizTitle))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createQuizButton)
+                .addGap(98, 98, 98))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,64 +235,35 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quizContent, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createQuizButton)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Quiz");
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(270, 0, 669, 564);
 
-        backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel2.setText("Quiz");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(90, 250, 149, 63);
+
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
+        backButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(backButton);
+        backButton.setBounds(15, 6, 72, 26);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\createQuizz.png")); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(backButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backButton)
-                .addGap(152, 152, 152)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(0, 0, 270, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -497,7 +480,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField quizContent;

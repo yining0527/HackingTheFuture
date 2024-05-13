@@ -131,20 +131,28 @@ public class Discussion extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         writePost = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
+        jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Discussion");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(330, 100, 300, 58);
 
         postField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         postField.setPreferredSize(new java.awt.Dimension(353, 185));
         jScrollPane1.setViewportView(postField);
 
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(83, 166, 723, 310);
+
+        seeAllPosts.setBackground(new java.awt.Color(255, 153, 153));
         seeAllPosts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         seeAllPosts.setText("More posts");
         seeAllPosts.addActionListener(new java.awt.event.ActionListener() {
@@ -152,15 +160,21 @@ public class Discussion extends javax.swing.JFrame {
                 seeAllPostsActionPerformed(evt);
             }
         });
+        jPanel1.add(seeAllPosts);
+        seeAllPosts.setBounds(739, 503, 120, 39);
 
-        backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
+        backButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(backButton);
+        backButton.setBounds(22, 12, 72, 26);
 
+        writePost.setBackground(new java.awt.Color(255, 153, 153));
         writePost.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         writePost.setText("Write post");
         writePost.addActionListener(new java.awt.event.ActionListener() {
@@ -168,56 +182,15 @@ public class Discussion extends javax.swing.JFrame {
                 writePostActionPerformed(evt);
             }
         });
+        jPanel1.add(writePost);
+        writePost.setBounds(32, 503, 119, 39);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(517, 12, 164, 148);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Discussion_1.png")); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(backButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(219, 219, 219))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(writePost, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(seeAllPosts)
-                        .addGap(55, 55, 55))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(94, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(writePost, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seeAllPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 900, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -386,6 +359,7 @@ public class Discussion extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane postField;

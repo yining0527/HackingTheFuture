@@ -118,24 +118,35 @@ public class BookEventPage extends javax.swing.JFrame {
         doneButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         eventBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
+        jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Booking Event");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(300, 40, 390, 60);
 
+        jLabel4.setBackground(new java.awt.Color(255, 153, 153));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(255, 153, 153));
         jLabel4.setText("Choose the Name of Events You Want To Join:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(240, 150, 485, 25);
 
+        jLabel6.setBackground(new java.awt.Color(255, 153, 153));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("======================================================================================");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(10, 90, 900, 20);
 
+        doneButton.setBackground(new java.awt.Color(255, 153, 153));
         doneButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         doneButton.setText("Done");
         doneButton.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +154,10 @@ public class BookEventPage extends javax.swing.JFrame {
                 doneButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(doneButton);
+        doneButton.setBounds(720, 500, 90, 31);
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -151,61 +165,24 @@ public class BookEventPage extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(backButton);
+        backButton.setBounds(100, 490, 72, 31);
 
+        eventBox.setBackground(new java.awt.Color(255, 153, 153));
         eventBox.setForeground(new java.awt.Color(204, 204, 255));
         eventBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventBoxActionPerformed(evt);
             }
         });
+        jPanel1.add(eventBox);
+        eventBox.setBounds(240, 190, 398, 51);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(654, 654, 654)
-                        .addComponent(doneButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel1)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(backButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eventBox, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel6)
-                .addGap(61, 61, 61)
-                .addComponent(jLabel4)
-                .addGap(28, 28, 28)
-                .addComponent(eventBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton)
-                    .addComponent(doneButton))
-                .addGap(17, 17, 17))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setText("jLabel2");
+        jLabel2.setPreferredSize(new java.awt.Dimension(900, 600));
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 900, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -602,6 +579,7 @@ public class BookEventPage extends javax.swing.JFrame {
     private javax.swing.JButton doneButton;
     private javax.swing.JComboBox<String> eventBox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
