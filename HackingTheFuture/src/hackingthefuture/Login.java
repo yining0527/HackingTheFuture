@@ -56,6 +56,7 @@ public class Login extends JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -78,15 +79,18 @@ public class Login extends JFrame {
 
         Right.setBackground(new java.awt.Color(204, 204, 255));
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
+        Right.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setLabelFor(Left);
         jLabel5.setText("<html>Hacking the future</html>");
         jLabel5.setToolTipText("");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Right.add(jLabel5);
+        jLabel5.setBounds(47, 164, 335, 135);
 
         jLabel6.setFont(new java.awt.Font("Ink Free", 0, 48)); // NOI18N
         jLabel6.setText("Hacking the future");
@@ -95,33 +99,15 @@ public class Login extends JFrame {
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel6.setVerifyInputWhenFocusTarget(false);
         jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Right.add(jLabel6);
+        jLabel6.setBounds(19, 164, 0, 58);
+        Right.add(jLabel8);
+        jLabel8.setBounds(47, 317, 0, 0);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\login.png")); // NOI18N
-
-        javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
-        Right.setLayout(RightLayout);
-        RightLayout.setHorizontalGroup(
-            RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
-                .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
-        RightLayout.setVerticalGroup(
-            RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RightLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel7.setText("jLabel7");
+        Right.add(jLabel7);
+        jLabel7.setBounds(0, 0, 410, 590);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
@@ -137,12 +123,12 @@ public class Login extends JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("LOGIN");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
         jLabel2.setText("Username / Gmail");
 
         username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -154,7 +140,7 @@ public class Login extends JFrame {
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("Password");
 
         password.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -164,7 +150,7 @@ public class Login extends JFrame {
             }
         });
 
-        login.setBackground(new java.awt.Color(153, 153, 255));
+        login.setBackground(new java.awt.Color(255, 153, 153));
         login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Login");
@@ -176,8 +162,8 @@ public class Login extends JFrame {
 
         jLabel4.setText("I don't have an account");
 
-        signUp.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        signUp.setForeground(new java.awt.Color(255, 51, 51));
+        signUp.setBackground(new java.awt.Color(255, 153, 153));
+        signUp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         signUp.setText("Sign Up");
         signUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +212,7 @@ public class Login extends JFrame {
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(login)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(signUp))
@@ -396,6 +382,7 @@ public class Login extends JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton login;

@@ -46,9 +46,10 @@ public class MainMainPage extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(320, 0, 330, 110);
+        jLabel1.setBounds(320, 30, 330, 110);
         jPanel1.add(jLabel9);
         jLabel9.setBounds(830, 14, 0, 0);
 
@@ -85,7 +86,7 @@ public class MainMainPage extends javax.swing.JFrame {
         jPanel1.add(signUp);
         signUp.setBounds(315, 136, 247, 62);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hackingthefuture/Image/123.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 910, 570);
 

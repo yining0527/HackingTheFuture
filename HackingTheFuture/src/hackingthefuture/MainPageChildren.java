@@ -49,22 +49,31 @@ public class MainPageChildren extends javax.swing.JFrame {
         discussion = new javax.swing.JButton();
         DATASTORAGE = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
+        jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Main Page");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(350, 30, 220, 40);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("======================================================================================");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(0, 60, 890, 20);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 153, 153));
         jLabel8.setText("ROLE: STUDENTS");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(760, 40, 120, 30);
 
         viewAndattemptQuiz.setBackground(new java.awt.Color(255, 255, 204));
         viewAndattemptQuiz.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -74,6 +83,8 @@ public class MainPageChildren extends javax.swing.JFrame {
                 viewAndattemptQuizActionPerformed(evt);
             }
         });
+        jPanel1.add(viewAndattemptQuiz);
+        viewAndattemptQuiz.setBounds(306, 135, 247, 62);
 
         viewEvent.setBackground(new java.awt.Color(204, 255, 255));
         viewEvent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -83,7 +94,10 @@ public class MainPageChildren extends javax.swing.JFrame {
                 viewEventActionPerformed(evt);
             }
         });
+        jPanel1.add(viewEvent);
+        viewEvent.setBounds(306, 269, 247, 62);
 
+        profile.setBackground(new java.awt.Color(255, 153, 153));
         profile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profile.setText("Profile");
         profile.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +105,8 @@ public class MainPageChildren extends javax.swing.JFrame {
                 profileActionPerformed(evt);
             }
         });
+        jPanel1.add(profile);
+        profile.setBounds(24, 18, 67, 22);
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -100,7 +116,10 @@ public class MainPageChildren extends javax.swing.JFrame {
                 discussionActionPerformed(evt);
             }
         });
+        jPanel1.add(discussion);
+        discussion.setBounds(306, 403, 247, 62);
 
+        DATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         DATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DATASTORAGE.setText("Export Data");
         DATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
@@ -108,69 +127,23 @@ public class MainPageChildren extends javax.swing.JFrame {
                 DATASTORAGEActionPerformed(evt);
             }
         });
+        jPanel1.add(DATASTORAGE);
+        DATASTORAGE.setBounds(97, 18, 96, 22);
 
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(205, 18, 72, 22);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(306, 306, 306)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(viewEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewAndattemptQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(profile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DATASTORAGE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(278, 278, 278)
-                                .addComponent(jLabel8)
-                                .addGap(35, 35, 35))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(profile)
-                            .addComponent(DATASTORAGE)
-                            .addComponent(jButton1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(54, 54, 54)
-                .addComponent(viewAndattemptQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(viewEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(discussion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 900, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -287,6 +260,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     private javax.swing.JButton discussion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
