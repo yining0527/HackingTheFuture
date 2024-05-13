@@ -210,7 +210,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jLabel2.setBounds(100, 260, 150, 70);
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hackingthefuture/Image/back2.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(0, 0, 310, 570);
