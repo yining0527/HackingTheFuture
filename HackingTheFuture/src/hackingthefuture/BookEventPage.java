@@ -482,7 +482,7 @@ public class BookEventPage extends javax.swing.JFrame {
             ResultSet resultSet = pst.executeQuery();
 
             // Clear existing items in the eventBox before adding new items
-            eventBox.removeAllItems();
+//            eventBox.removeAllItems();
 
             // Add each upcoming event to the eventBox
             while (resultSet.next()) {
