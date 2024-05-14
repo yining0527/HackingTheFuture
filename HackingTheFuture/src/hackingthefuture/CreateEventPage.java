@@ -125,6 +125,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,7 +136,6 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Create ");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(40, 180, 190, 60);
@@ -192,7 +192,6 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
 
-        eventStartTime.setEditable(false);
         eventStartTime.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         eventStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,7 +277,6 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel2.setBounds(235, 0, 659, 571);
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
         jLabel2.setText("Event");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(50, 240, 163, 63);
@@ -292,11 +290,16 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(17, 6, 72, 26);
+        jButton1.setBounds(17, 6, 72, 27);
         jPanel1.add(jLabel10);
         jLabel10.setBounds(32, 329, 163, 0);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\createEvent.png")); // NOI18N
+        jLabel11.setText("jLabel11");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(30, 340, 190, 180);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel9.setText("jLabel9");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(0, 0, 240, 580);
@@ -395,6 +398,10 @@ public class CreateEventPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "EVENT SAVED SUCCESSFULLY");
                 addNumberOfEvents();
                 this.dispose();
+                MainPageEducator MainPageEducatorsFrame = new MainPageEducator(getUsername());
+                MainPageEducatorsFrame.setVisible(true);
+                MainPageEducatorsFrame.pack();
+                MainPageEducatorsFrame.setLocationRelativeTo(null);
                 // Optionally, you can hide the current frame here if needed
                 // this.setVisible(false);
             }
@@ -548,6 +555,7 @@ public class CreateEventPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

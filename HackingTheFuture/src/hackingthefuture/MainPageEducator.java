@@ -31,6 +31,12 @@ public class MainPageEducator extends javax.swing.JFrame {
         return username;
     }
 
+    public MainPageEducator(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,19 +67,16 @@ public class MainPageEducator extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(360, 20, 220, 60);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("======================================================================================");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(0, 60, 910, 20);
+        jLabel6.setBounds(10, 70, 910, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 153, 153));
         jLabel8.setText("ROLE: EDUCATOR");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(750, 40, 130, 20);
@@ -133,7 +136,7 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonPROFILE);
-        jButtonPROFILE.setBounds(19, 16, 72, 22);
+        jButtonPROFILE.setBounds(19, 16, 72, 23);
 
         jButtonDATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -144,7 +147,7 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonDATASTORAGE);
-        jButtonDATASTORAGE.setBounds(109, 16, 96, 22);
+        jButtonDATASTORAGE.setBounds(109, 16, 100, 23);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -155,9 +158,9 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(223, 16, 72, 22);
+        jButton1.setBounds(223, 16, 72, 23);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 910, 570);

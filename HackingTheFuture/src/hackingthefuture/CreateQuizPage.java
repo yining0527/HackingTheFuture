@@ -134,7 +134,6 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Create ");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(60, 190, 180, 60);
@@ -205,12 +204,12 @@ public class CreateQuizPage extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(quizContent)
                     .addComponent(quizDescription)
                     .addComponent(quizTheme)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(quizTitle))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(quizTitle)
+                    .addComponent(quizContent))
+                .addContainerGap(129, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createQuizButton)
@@ -233,9 +232,9 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 .addComponent(quizTheme, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(quizContent, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(createQuizButton)
                 .addGap(51, 51, 51))
         );
@@ -244,10 +243,9 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jPanel2.setBounds(270, 0, 669, 564);
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
         jLabel2.setText("Quiz");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(90, 250, 149, 63);
+        jLabel2.setBounds(80, 260, 149, 63);
 
         backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -258,9 +256,9 @@ public class CreateQuizPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(15, 6, 72, 26);
+        backButton.setBounds(15, 6, 72, 27);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(0, 0, 270, 570);
@@ -351,6 +349,10 @@ public class CreateQuizPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "QUIZ SAVED SUCCESSFULLY");
                 addNumberOfQuizzes();
                 this.dispose();
+                MainPageEducator MainPageEducatorsFrame = new MainPageEducator(getUsername());
+                MainPageEducatorsFrame.setVisible(true);
+                MainPageEducatorsFrame.pack();
+                MainPageEducatorsFrame.setLocationRelativeTo(null);
                 // Optionally, you can hide the current frame here if needed
                 // this.setVisible(false);
             }

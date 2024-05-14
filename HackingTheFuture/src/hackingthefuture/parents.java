@@ -231,7 +231,6 @@ public class parents extends javax.swing.JFrame {
                 return;
             }
 
-            addInformation();
 
             try {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
@@ -265,47 +264,47 @@ public class parents extends javax.swing.JFrame {
 
     }//GEN-LAST:event_signUp1ActionPerformed
 
-    private void addInformation() {
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-            System.out.println("Database connection successful.");
-
-            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
-            pst = con.prepareStatement(querySD);
-            pst.setString(1, username); // Set the username parameter at index 1
-
-            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-            System.out.println("Username: " + username); // Print username for debugging
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                System.out.println("ResultSet contains data.");
-                String existingChild = rs.getString("childrenName");
-
-                if (existingChild == null) {
-                    // If child name is null, update it with the new child's name
-                    String updateQuery = "UPDATE `user` SET `childrenName` = ?, `siblingsOrder` = ? WHERE `username` = ?";
-                    pst = con.prepareStatement(updateQuery);
-                    pst.setString(1, childID.getText());
-                    pst.setInt(2, siblingOrder);
-                    pst.setString(3, username);
-                    pst.executeUpdate();
-                }
-            } else {
-                System.out.println("ResultSet is empty.");
-            }
-
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace(); // Print stack trace for debugging
-            System.err.println("Error executing SQL query: " + e.getMessage());
-        }
-
-        System.out.println(username);
-        System.out.println(child);
-        System.out.println(siblingOrder);
-    }
+//    private void addInformation() {
+//        try {
+//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+//            System.out.println("Database connection successful.");
+//
+//            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+//            pst = con.prepareStatement(querySD);
+//            pst.setString(1, username); // Set the username parameter at index 1
+//
+//            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+//            System.out.println("Username: " + username); // Print username for debugging
+//
+//            ResultSet rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                System.out.println("ResultSet contains data.");
+//                String existingChild = rs.getString("childrenName");
+//
+//                if (existingChild == null) {
+//                    // If child name is null, update it with the new child's name
+//                    String updateQuery = "UPDATE `user` SET `childrenName` = ?, `siblingsOrder` = ? WHERE `username` = ?";
+//                    pst = con.prepareStatement(updateQuery);
+//                    pst.setString(1, childID.getText());
+//                    pst.setInt(2, siblingOrder);
+//                    pst.setString(3, username);
+//                    pst.executeUpdate();
+//                }
+//            } else {
+//                System.out.println("ResultSet is empty.");
+//            }
+//
+//            con.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Print stack trace for debugging
+//            System.err.println("Error executing SQL query: " + e.getMessage());
+//        }
+//
+//        System.out.println(username);
+//        System.out.println(child);
+//        System.out.println(siblingOrder);
+//    }
 
     /**
      * @param args the command line arguments

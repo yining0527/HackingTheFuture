@@ -22,6 +22,13 @@ public class MainPageParent extends javax.swing.JFrame {
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
     }
+    
+    public MainPageParent(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+    }
 
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
@@ -60,22 +67,19 @@ public class MainPageParent extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(370, 20, 230, 48);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("======================================================================================");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(0, 50, 900, 20);
+        jLabel6.setBounds(0, 70, 900, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 153, 153));
         jLabel8.setText("ROLE: PARENT");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(750, 30, 110, 20);
+        jLabel8.setBounds(750, 40, 110, 20);
         jPanel1.add(jLabel9);
         jLabel9.setBounds(830, 14, 0, 0);
 
@@ -121,7 +125,7 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonPROFILE);
-        jButtonPROFILE.setBounds(19, 24, 72, 22);
+        jButtonPROFILE.setBounds(19, 24, 72, 23);
 
         jButtonDATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -132,7 +136,7 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonDATASTORAGE);
-        jButtonDATASTORAGE.setBounds(103, 24, 96, 22);
+        jButtonDATASTORAGE.setBounds(103, 24, 100, 23);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -143,9 +147,9 @@ public class MainPageParent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(217, 24, 72, 22);
+        jButton1.setBounds(217, 24, 72, 23);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 910, 560);

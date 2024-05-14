@@ -58,19 +58,16 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(350, 30, 220, 40);
+        jLabel1.setBounds(350, 20, 220, 48);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 153, 153));
         jLabel6.setText("======================================================================================");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(0, 60, 890, 20);
+        jLabel6.setBounds(0, 70, 890, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 153, 153));
         jLabel8.setText("ROLE: STUDENTS");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(760, 40, 120, 30);
@@ -106,7 +103,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(profile);
-        profile.setBounds(24, 18, 67, 22);
+        profile.setBounds(24, 18, 67, 23);
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -128,7 +125,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DATASTORAGE);
-        DATASTORAGE.setBounds(97, 18, 96, 22);
+        DATASTORAGE.setBounds(97, 18, 100, 23);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -139,9 +136,9 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(205, 18, 72, 22);
+        jButton1.setBounds(205, 18, 72, 23);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\l\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 900, 570);
 
