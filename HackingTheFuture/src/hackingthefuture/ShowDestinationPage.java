@@ -149,7 +149,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     public List<ShowDestinationPage> readBookingDestination() {
         List<ShowDestinationPage> destinations = new ArrayList<>();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
+            Scanner inputStream = new Scanner(new FileInputStream("C:\\Users\\USER\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
             while (inputStream.hasNextLine()) {
                 String name = inputStream.nextLine().trim();
                 if (!inputStream.hasNextLine()) {

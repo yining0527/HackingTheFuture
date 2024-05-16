@@ -117,7 +117,6 @@ public class ProfileEducator extends javax.swing.JFrame {
         jLabelShowEVENTSCREATED = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,10 +269,6 @@ public class ProfileEducator extends javax.swing.JFrame {
         });
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 570));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -342,7 +337,6 @@ public class ProfileEducator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelEMAIL;
     private javax.swing.JLabel jLabelEVENTSCREATED;
     private javax.swing.JLabel jLabelLOCATIONCOORDINATE;

@@ -322,7 +322,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
                 this.points += pointsToAdd;
 
                 // Update the database with the new points
-                String updateQuery = "UPDATE `user` SET `points` = ? WHERE `username` = ?";
+                String updateQuery = "UPDATE `user` SET `points` = ?  , `pointLastUpdated` = CURRENT_TIMESTAMP WHERE `username` = ?";
                 pst = con.prepareStatement(updateQuery);
                 pst.setInt(1, this.points);
                 pst.setString(2, username);

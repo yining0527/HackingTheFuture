@@ -45,11 +45,12 @@ public class MainPageChildren extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         viewAndattemptQuiz = new javax.swing.JButton();
         viewEvent = new javax.swing.JButton();
-        profile = new javax.swing.JToggleButton();
+        leaderboard = new javax.swing.JToggleButton();
         discussion = new javax.swing.JButton();
         DATASTORAGE = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        profile = new javax.swing.JLabel();
+        profile1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,16 +95,16 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1.add(viewEvent);
         viewEvent.setBounds(306, 269, 247, 62);
 
-        profile.setBackground(new java.awt.Color(255, 153, 153));
-        profile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        profile.setText("Profile");
-        profile.addActionListener(new java.awt.event.ActionListener() {
+        leaderboard.setBackground(new java.awt.Color(255, 153, 153));
+        leaderboard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        leaderboard.setText("Global Leaderboard");
+        leaderboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profileActionPerformed(evt);
+                leaderboardActionPerformed(evt);
             }
         });
-        jPanel1.add(profile);
-        profile.setBounds(24, 18, 67, 23);
+        jPanel1.add(leaderboard);
+        leaderboard.setBounds(30, 50, 180, 22);
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -125,7 +126,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DATASTORAGE);
-        DATASTORAGE.setBounds(97, 18, 100, 23);
+        DATASTORAGE.setBounds(97, 18, 100, 22);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -136,11 +137,20 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(205, 18, 72, 23);
+        jButton1.setBounds(205, 18, 72, 22);
+        jPanel1.add(profile);
+        profile.setBounds(0, 0, 900, 570);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 900, 570);
+        profile1.setBackground(new java.awt.Color(255, 153, 153));
+        profile1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        profile1.setText("Profile");
+        profile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profile1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(profile1);
+        profile1.setBounds(24, 18, 67, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,14 +186,15 @@ public class MainPageChildren extends javax.swing.JFrame {
         ViewEventPageFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_viewEventActionPerformed
 
-    private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
+    private void leaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaderboardActionPerformed
         // TODO add your handling code here:
-        ProfileStudent ProfileStudentFrame = new ProfileStudent();
-        ProfileStudentFrame.setUsername(username);
-        ProfileStudentFrame.setVisible(true);
-        ProfileStudentFrame.pack();
-        ProfileStudentFrame.setLocationRelativeTo(null);
-    }//GEN-LAST:event_profileActionPerformed
+        GlobalLeaderboard leaderboard = new GlobalLeaderboard();
+        leaderboard.setUsername(username);
+        leaderboard.setVisible(true);
+        leaderboard.pack();
+        leaderboard.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_leaderboardActionPerformed
 
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
@@ -207,6 +218,19 @@ public class MainPageChildren extends javax.swing.JFrame {
         LoginFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void profile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profile1ActionPerformed
+        // TODO add your handling code here:
+        ProfileStudent ProfileStudentFrame = new ProfileStudent();
+        ProfileStudentFrame.setUsername(username);
+        boolean isCurrentUser = username.equals(username);
+        ProfileStudentFrame.setUsernameAndButtonVisibility(username, !isCurrentUser);
+        ProfileStudentFrame.setInboxVisibility(username, isCurrentUser);
+        ProfileStudentFrame.setFriendshipStatusVisibility(username, isCurrentUser);
+        ProfileStudentFrame.setVisible(true);
+        ProfileStudentFrame.pack();
+        ProfileStudentFrame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_profile1ActionPerformed
  
     
     /**
@@ -257,11 +281,12 @@ public class MainPageChildren extends javax.swing.JFrame {
     private javax.swing.JButton discussion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton profile;
+    private javax.swing.JToggleButton leaderboard;
+    private javax.swing.JLabel profile;
+    private javax.swing.JToggleButton profile1;
     private javax.swing.JButton viewAndattemptQuiz;
     private javax.swing.JButton viewEvent;
     // End of variables declaration//GEN-END:variables

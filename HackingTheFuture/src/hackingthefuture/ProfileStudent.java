@@ -15,6 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+
 
 public class ProfileStudent extends javax.swing.JFrame {
     Connection con = null;
@@ -22,11 +27,13 @@ public class ProfileStudent extends javax.swing.JFrame {
     
     // Variables for user information
     private String email;
-    private String username;
+    private String currentUsername;
+    private String profileUsername;
     private String role;
     private String locationCoordinate;
     private String father;
     private String mother;
+    private ArrayList<String> friends = new ArrayList<>();
     
     private int points;
 
@@ -37,13 +44,23 @@ public class ProfileStudent extends javax.swing.JFrame {
         initComponents();
         setPreferredSize(new Dimension(900,600));
         setResizable(true);
-        this.username = username;  // Set the username
+        this.currentUsername = currentUsername;  // Set the username
     }
     
     public void setUsername(String transferUsername) {
-        this.username = transferUsername;
+        this.currentUsername = transferUsername;
         takeInformation();
         takeParents();
+        takeFriends();
+    }
+    
+    public void setLeaderboardUsername(String profileUsername)
+    {
+        this.profileUsername = profileUsername;
+        takeInformationLeaderboard();
+        takeParentsLeaderboard();
+        takeFriendsLeaderboard();
+        checkFriendshipAndDisplayButton();
     }
     
     private void takeInformation() {
@@ -54,10 +71,10 @@ public class ProfileStudent extends javax.swing.JFrame {
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
             pst = con.prepareStatement(querySD);
-            pst.setString(1, username); // Set the username parameter at index 1
+            pst.setString(1, currentUsername); // Set the username parameter at index 1
 
             System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-            System.out.println("Username: " + username); // Print username for debugging
+            System.out.println("Username: " + currentUsername); // Print username for debugging
 
             ResultSet rs = pst.executeQuery();
 
@@ -78,13 +95,13 @@ public class ProfileStudent extends javax.swing.JFrame {
         }
 
         System.out.println("Email: " + email);
-        System.out.println(username);
+        System.out.println(currentUsername);
         System.out.println(role);
         System.out.println(locationCoordinate);
         System.out.println(points);
 
         jLabelShowEMAIL.setText(email);
-        jLabelShowUSERNAME.setText(username);
+        jLabelShowUSERNAME.setText(currentUsername);
         jLabelShowROLE.setText(role);
         jLabelShowLOCATIONCOORDINATE.setText(locationCoordinate);
         jLabelShowPOINTS.setText(String.valueOf(points));
@@ -99,10 +116,10 @@ public class ProfileStudent extends javax.swing.JFrame {
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
             pst = con.prepareStatement(querySD);
-            pst.setString(1, username); // Set the username parameter at index 1
+            pst.setString(1, currentUsername); // Set the username parameter at index 1
 
             System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-            System.out.println("Username: " + username); // Print username for debugging
+            System.out.println("Username: " + currentUsername); // Print username for debugging
 
             ResultSet rs = pst.executeQuery();
 
@@ -126,6 +143,427 @@ public class ProfileStudent extends javax.swing.JFrame {
         jLabelShowFATHER.setText(father);
         jLabelShowMOTHER.setText(mother);
     }
+    
+    private void takeFriends()
+    {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";
+            pst = con.prepareStatement(queryFriends);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String friendName = "";
+                if(currentUsername.equals(rs.getString("sender_username")))
+                {
+                    friendName = rs.getString("receiver_username");
+                }
+                else if(currentUsername.equals(rs.getString("receiver_username")))
+                {
+                    friendName = rs.getString("sender_username");
+                }
+                
+                friends.add(friendName); // Add child's username to the ArrayList
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query for children: " + e.getMessage());
+        }
+
+        System.out.println("Friends Names: " + friends);
+
+        // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
+       StringBuilder childrenDisplay = new StringBuilder("<html>");
+       for (String child : friends) {
+           childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
+       }
+       childrenDisplay.append("</html>"); // Close the HTML tag
+       jLabelShowFRIENDS.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
+    }
+    
+    private void takeFriendsLeaderboard()
+    {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";
+            pst = con.prepareStatement(queryFriends);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String friendName = "";
+                if(profileUsername.equals(rs.getString("sender_username")))
+                {
+                    friendName = rs.getString("receiver_username");
+                }
+                else if(profileUsername.equals(rs.getString("receiver_username")))
+                {
+                    friendName = rs.getString("sender_username");
+                }
+                
+                friends.add(friendName); // Add child's username to the ArrayList
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query for children: " + e.getMessage());
+        }
+
+        System.out.println("Friends Names: " + friends);
+
+        // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
+       StringBuilder childrenDisplay = new StringBuilder("<html>");
+       for (String child : friends) {
+           childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
+       }
+       childrenDisplay.append("</html>"); // Close the HTML tag
+       jLabelShowFRIENDS.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
+    }
+    
+    private void takeInformationLeaderboard() {
+        System.out.println("take information");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, profileUsername); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + profileUsername); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.email = rs.getString("email");
+                this.role = rs.getString("role");
+                this.locationCoordinate = rs.getString("LocationCoordinate");
+                this.points = rs.getInt("points");
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println("Email: " + email);
+        System.out.println(profileUsername);
+        System.out.println(role);
+        System.out.println(locationCoordinate);
+        System.out.println(points);
+
+        jLabelShowEMAIL.setText(email);
+        jLabelShowUSERNAME.setText(profileUsername);
+        jLabelShowROLE.setText(role);
+        jLabelShowLOCATIONCOORDINATE.setText(locationCoordinate);
+        jLabelShowPOINTS.setText(String.valueOf(points));
+    }
+    
+    private void takeParentsLeaderboard()
+    {
+        System.out.println("take father");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, profileUsername); // Set the username parameter at index 1
+
+            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+            System.out.println("Username: " + profileUsername); // Print username for debugging
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ResultSet contains data.");
+                this.father = rs.getString("Father");
+                this.mother = rs.getString("Mother");
+            } else {
+                System.out.println("ResultSet is empty.");
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
+
+        System.out.println("father: " + father);
+        System.out.println("mother: " + mother);
+
+        jLabelShowFATHER.setText(father);
+        jLabelShowMOTHER.setText(mother);
+    }
+    
+    private void checkFriendshipAndDisplayButton() {
+        if (areAlreadyFriendsOrRequested(currentUsername, profileUsername) || currentUsername.equals(profileUsername)) {
+            jButtonSendFriendRequest.setVisible(false);  // Hide the button if they are already friends or the same user
+        } else {
+            jButtonSendFriendRequest.setVisible(true);   // Show the button otherwise
+        }
+    }
+    
+    private boolean areAlreadyFriendsOrRequested(String currentUser, String profileUser) {
+    boolean status = false;
+    // Update the SQL query to select the same number of columns in both parts of the UNION
+    String sql = "SELECT 1 FROM friends WHERE (user1_username = ? AND user2_username = ?) OR (user1_username = ? AND user2_username = ?) " +
+                 "UNION " +
+                 "SELECT 1 FROM friend_requests WHERE ((sender_username = ? AND receiver_username = ?) OR (sender_username = ? AND receiver_username = ?)) AND status = 'accepted'";
+    
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+         PreparedStatement pst = con.prepareStatement(sql)) {
+        
+        pst.setString(1, currentUser);
+        pst.setString(2, profileUser);
+        pst.setString(3, profileUser);
+        pst.setString(4, currentUser);
+        pst.setString(5, currentUser);
+        pst.setString(6, profileUser);
+        pst.setString(7, profileUser);
+        pst.setString(8, currentUser);
+        
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            status = true;  // There is either an existing friendship or an accepted friend request
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return status;
+}
+
+
+    
+    public void sendFriendRequest() {
+    String query = "INSERT INTO friend_requests (sender_username, receiver_username, request_date, status) VALUES (?, ?, CURRENT_TIMESTAMP, 'pending')";
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+         PreparedStatement pst = con.prepareStatement(query)) {
+        pst.setString(1, currentUsername);
+        pst.setString(2, profileUsername);
+        int result = pst.executeUpdate();
+        if (result > 0) {
+            JOptionPane.showMessageDialog(null, "Friend request sent successfully!");
+            updateFriendshipStatusLabel(currentUsername, profileUsername);
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to send friend request.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error sending friend request: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+
+
+    // Method to set username and manage visibility of the send request button
+    public void setUsernameAndButtonVisibility(String username, boolean showButton) {
+        this.currentUsername = username;
+        jButtonSendFriendRequest.setVisible(showButton);
+    }
+    
+    public void setInboxVisibility(String username, boolean showButton) {
+        this.currentUsername = username;
+        jButtonInbox.setVisible(showButton);
+    }
+    
+    public void setFriendshipStatusVisibility(String username, boolean showButton)
+    {
+        this.currentUsername = username;
+        jLabelShowFriendshipStatus.setVisible(!showButton);
+    }
+    
+    private void displayFriendRequests() {
+    JDialog requestDialog = new JDialog(this, "Friend Requests", true);
+    requestDialog.setLayout(new BorderLayout());
+
+    DefaultListModel<String> model = new DefaultListModel<>();
+    JList<String> list = new JList<>(model);
+    JScrollPane scrollPane = new JScrollPane(list);
+    requestDialog.add(scrollPane, BorderLayout.CENTER);
+
+    JPanel buttonPanel = new JPanel();
+    JButton acceptButton = new JButton("Accept");
+    JButton rejectButton = new JButton("Reject");
+    buttonPanel.add(acceptButton);
+    buttonPanel.add(rejectButton);
+    requestDialog.add(buttonPanel, BorderLayout.SOUTH);
+
+    // Add button actions
+    acceptButton.addActionListener(e -> acceptFriendRequest(list.getSelectedValue(), requestDialog));
+    rejectButton.addActionListener(e -> rejectFriendRequest(list.getSelectedValue(), requestDialog));
+
+    loadFriendRequests(model);  // Load friend requests into the list model
+
+    requestDialog.setSize(300, 400);
+    requestDialog.setLocationRelativeTo(this);
+    requestDialog.setVisible(true);
+}
+    
+    private void loadFriendRequests(DefaultListModel<String> model) {
+        System.out.println("load friend request");
+    String query = "SELECT * FROM friend_requests WHERE receiver_username = ? AND status = 'pending'";
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+         PreparedStatement pst = con.prepareStatement(query)) {
+        pst.setString(1, currentUsername);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            String entry = rs.getString("sender_username") + " (ID: " + rs.getInt("request_id") + ")";
+            model.addElement(entry);
+            System.out.println("Added to model: " + entry);  // Debug output
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+    
+    private void acceptFriendRequest(String requestDetail, JDialog dialog) {
+    System.out.println("acceptFriendRequest called with: " + requestDetail);
+    if (requestDetail != null && !requestDetail.isEmpty()) {
+        try {
+            String requestId = requestDetail.split("ID: ")[1].replace(")", "").trim();
+            System.out.println("Parsed request ID: " + requestId);
+
+            String queryUpdateRequest = "UPDATE friend_requests SET status = 'accepted' WHERE request_id = ?";
+            String queryInsertFriend = "INSERT INTO friends (user1_username, user2_username, friendship_date) SELECT sender_username, receiver_username, CURRENT_TIMESTAMP FROM friend_requests WHERE request_id = ?";
+
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+                 PreparedStatement pstUpdate = con.prepareStatement(queryUpdateRequest);
+                 PreparedStatement pstInsert = con.prepareStatement(queryInsertFriend)) {
+                
+                // First, update the friend request status
+                pstUpdate.setInt(1, Integer.parseInt(requestId));
+                int resultUpdate = pstUpdate.executeUpdate();
+                if (resultUpdate > 0) {
+                    // Then, insert the new friend record
+                    pstInsert.setInt(1, Integer.parseInt(requestId));
+                    int resultInsert = pstInsert.executeUpdate();
+                    if (resultInsert > 0) {
+                        JOptionPane.showMessageDialog(dialog, "Friend request accepted and friendship recorded.");
+                    } else {
+                        JOptionPane.showMessageDialog(dialog, "Friend request accepted but failed to record friendship.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(dialog, "No records updated for friend request.");
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(dialog, "Invalid request ID format: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(dialog, "SQL Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(dialog, "Error processing request: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    } else {
+        JOptionPane.showMessageDialog(dialog, "No request detail provided.");
+    }
+}
+
+
+
+private void rejectFriendRequest(String requestDetail, JDialog dialog) {
+    System.out.println("rejectFriendRequest called with: " + requestDetail);
+    if (requestDetail != null && !requestDetail.isEmpty()) {
+        try {
+            String requestId = requestDetail.split("ID: ")[1].replace(")", "").trim();
+            System.out.println("Parsed request ID: " + requestId);
+
+            String query = "UPDATE friend_requests SET status = 'rejected' WHERE request_id = ?";
+
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+                 PreparedStatement pst = con.prepareStatement(query)) {
+                pst.setInt(1, Integer.parseInt(requestId));
+                int result = pst.executeUpdate();
+                if (result > 0) {
+                    JOptionPane.showMessageDialog(dialog, "Friend request rejected.");
+                } else {
+                    JOptionPane.showMessageDialog(dialog, "No records updated. Request might already be processed.");
+                }
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(dialog, "Invalid request ID format: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(dialog, "SQL Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(dialog, "Error processing request: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    } else {
+        JOptionPane.showMessageDialog(dialog, "No request detail provided.");
+    }
+}
+
+public void updateFriendshipStatusLabel(String currentUser, String profileUser) {
+    String query = "SELECT sender_username, receiver_username, status FROM friend_requests WHERE (sender_username = ? AND receiver_username = ?) OR (sender_username = ? AND receiver_username = ?)";
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+         PreparedStatement pst = con.prepareStatement(query)) {
+        pst.setString(1, currentUser);
+        pst.setString(2, profileUser);
+        pst.setString(3, profileUser);
+        pst.setString(4, currentUser);
+
+        ResultSet rs = pst.executeQuery();
+        boolean foundRequest = false;
+
+        while (rs.next()) {
+            String senderUsername = rs.getString("sender_username");
+            String receiverUsername = rs.getString("receiver_username");
+            String status = rs.getString("status");
+
+            if ("accepted".equals(status)) {
+                if (currentUser.equals(senderUsername)) {
+                    jLabelShowFriendshipStatus.setText("You and " + receiverUsername + " are now friends.");
+                } else {
+                    jLabelShowFriendshipStatus.setText("You and " + senderUsername + " are now friends.");
+                }
+                foundRequest = true;
+                break;  // Once we find an accepted request, we can stop checking
+            } else if ("rejected".equals(status)) {
+                if (currentUser.equals(senderUsername)) {
+                    jLabelShowFriendshipStatus.setText(receiverUsername + " has rejected your friend request.");
+                } else {
+                    jLabelShowFriendshipStatus.setText("You have rejected the friend request from " + senderUsername + ".");
+                }
+                foundRequest = true;
+            } else if ("pending".equals(status)) {
+                if (currentUser.equals(senderUsername)) {
+                    jLabelShowFriendshipStatus.setText("Your friend request to " + receiverUsername + " is pending.");
+                    jButtonSendFriendRequest.setVisible(false);
+                } else {
+                    jLabelShowFriendshipStatus.setText(senderUsername + " has sent you a friend request.");
+                }
+                foundRequest = true;
+            }
+        }
+
+        if (!foundRequest) {
+            jLabelShowFriendshipStatus.setVisible(false);
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,9 +594,11 @@ public class ProfileStudent extends javax.swing.JFrame {
         jLabelShowPOINTS = new javax.swing.JLabel();
         jLabelPOINTS1 = new javax.swing.JLabel();
         jLabelShowFRIENDS = new javax.swing.JLabel();
+        jButtonSendFriendRequest = new javax.swing.JButton();
+        jButtonInbox = new javax.swing.JButton();
+        jLabelShowFriendshipStatus = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -245,6 +685,26 @@ public class ProfileStudent extends javax.swing.JFrame {
         jLabelShowFRIENDS.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelShowFRIENDS.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButtonSendFriendRequest.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonSendFriendRequest.setText("Send Friend Request");
+        jButtonSendFriendRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSendFriendRequestActionPerformed(evt);
+            }
+        });
+
+        jButtonInbox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonInbox.setText("Inbox");
+        jButtonInbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInboxActionPerformed(evt);
+            }
+        });
+
+        jLabelShowFriendshipStatus.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelShowFriendshipStatus.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabelShowFriendshipStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -252,74 +712,98 @@ public class ProfileStudent extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(91, 91, 91))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)))
                 .addContainerGap(157, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonSendFriendRequest))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonInbox)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelShowFriendshipStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(106, 106, 106))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonSendFriendRequest)
+                            .addComponent(jButtonInbox))
+                        .addGap(4, 4, 4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelShowFriendshipStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jLabel3)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelEMAIL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowROLE, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelROLE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelFATHER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowMOTHER, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelMOTHER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowPOINTS, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelPOINTS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabelUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 590, 568));
@@ -335,11 +819,7 @@ public class ProfileStudent extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 570));
+        jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,6 +842,16 @@ public class ProfileStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void jButtonSendFriendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendFriendRequestActionPerformed
+        // TODO add your handling code here:
+        sendFriendRequest();
+    }//GEN-LAST:event_jButtonSendFriendRequestActionPerformed
+
+    private void jButtonInboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInboxActionPerformed
+        // TODO add your handling code here:
+        displayFriendRequests();
+    }//GEN-LAST:event_jButtonInboxActionPerformed
+ 
     /**
      * @param args the command line arguments
      */
@@ -403,10 +893,11 @@ public class ProfileStudent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton jButtonInbox;
+    private javax.swing.JButton jButtonSendFriendRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelEMAIL;
     private javax.swing.JLabel jLabelFATHER;
     private javax.swing.JLabel jLabelLOCATIONCOORDINATE;
@@ -417,6 +908,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelShowEMAIL;
     private javax.swing.JLabel jLabelShowFATHER;
     private javax.swing.JLabel jLabelShowFRIENDS;
+    private javax.swing.JLabel jLabelShowFriendshipStatus;
     private javax.swing.JLabel jLabelShowLOCATIONCOORDINATE;
     private javax.swing.JLabel jLabelShowMOTHER;
     private javax.swing.JLabel jLabelShowPOINTS;
