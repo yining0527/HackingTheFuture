@@ -25,10 +25,11 @@ public class SViewEventPage extends javax.swing.JFrame {
     PreparedStatement pst;
     ResultSet rs;
     private Stack<Class<?>> navigationHistory;
-    private String email;
     public String username;
+    private String email;
     private String role;
     private String locationCoordinate;
+    
     public String getUsername(){
         return username;
     }
@@ -162,6 +163,8 @@ public class SViewEventPage extends javax.swing.JFrame {
     private void displayLiveEvents(javax.swing.JTextArea liveEventTextArea, ResultSet resultSet) throws SQLException {
         StringBuilder liveEventsBuilder = new StringBuilder();
 
+        LocalDate currentDate = LocalDate.now(); // Get current date
+
         while (resultSet.next()) {
             String eventTitle = resultSet.getString("event title");
             String eventDescription = resultSet.getString("event description");
@@ -171,31 +174,18 @@ public class SViewEventPage extends javax.swing.JFrame {
             String eventStartTimeStr = resultSet.getString("event start time");
             String eventEndTimeStr = resultSet.getString("event end time");
 
-            String[] dateParts = eventDateStr.split("/");
-            int year = Integer.parseInt(dateParts[0]);
-            int month = Integer.parseInt(dateParts[1]);
-            int day = Integer.parseInt(dateParts[2]);
+            // Parse event date string to LocalDate
+            LocalDate eventDate = LocalDate.parse(eventDateStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
-            String[] startTimeParts = eventStartTimeStr.split(":");
-            int startHour = Integer.parseInt(startTimeParts[0]);
-            int startMinute = Integer.parseInt(startTimeParts[1]);
-            int startSecond = Integer.parseInt(startTimeParts[2]);
-
-            String[] endTimeParts = eventEndTimeStr.split(":");
-            int endHour = Integer.parseInt(endTimeParts[0]);
-            int endMinute = Integer.parseInt(endTimeParts[1]);
-            int endSecond = Integer.parseInt(endTimeParts[2]);
-
-            LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
-            LocalDateTime eventEndDateTime = LocalDateTime.of(year, month, day, endHour, endMinute, endSecond);
-
-            LocalDateTime currentDateTime = LocalDateTime.now();
-
-            if (currentDateTime.isEqual(eventStartDateTime) || (currentDateTime.isAfter(eventStartDateTime) && currentDateTime.isBefore(eventEndDateTime))) {
+            // Compare event date with current date
+            if (eventDate.equals(currentDate)) {
+                // Customize the display format as needed
                 liveEventsBuilder.append("Event: ").append(eventTitle).append("\n")
                         .append("Venue: ").append(eventVenue).append("\n")
-                        .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
-                        append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
+                        .append("Description: ").append(eventDescription).append("\n")
+                        .append("Date: ").append(eventDateStr).append("\n")
+                        .append("Start time: ").append(eventStartTimeStr).append("\n")
+                        .append("End time: ").append(eventEndTimeStr).append("\n\n");
             }
         }
 
@@ -203,11 +193,14 @@ public class SViewEventPage extends javax.swing.JFrame {
         liveEventTextArea.setEditable(false);
     }
 
-    private void displayUpcomingEvents(javax.swing.JTextArea upcomingEventsTextArea, ResultSet resultSet) throws SQLException {
-        StringBuilder upcomingEventsBuilder = new StringBuilder();
+    private void displayUpcomingEvents(javax.swing.JTextArea liveEventTextArea, ResultSet resultSet) throws SQLException {
+        StringBuilder liveEventsBuilder = new StringBuilder();
+
+        LocalDate currentDate = LocalDate.now(); // Get current date
+        
         int count = 0;
 
-        while (resultSet.next() && count < 3) {
+        while (resultSet.next() & count < 3) {
             String eventTitle = resultSet.getString("event title");
             String eventDescription = resultSet.getString("event description");
             String eventVenue = resultSet.getString("event venue");
@@ -216,36 +209,24 @@ public class SViewEventPage extends javax.swing.JFrame {
             String eventStartTimeStr = resultSet.getString("event start time");
             String eventEndTimeStr = resultSet.getString("event end time");
 
-            String[] dateParts = eventDateStr.split("/");
-            int year = Integer.parseInt(dateParts[0]);
-            int month = Integer.parseInt(dateParts[1]);
-            int day = Integer.parseInt(dateParts[2]);
+            // Parse event date string to LocalDate
+            LocalDate eventDate = LocalDate.parse(eventDateStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
-            String[] startTimeParts = eventStartTimeStr.split(":");
-            int startHour = Integer.parseInt(startTimeParts[0]);
-            int startMinute = Integer.parseInt(startTimeParts[1]);
-            int startSecond = Integer.parseInt(startTimeParts[2]);
-
-            String[] endTimeParts = eventEndTimeStr.split(":");
-            int endHour = Integer.parseInt(endTimeParts[0]);
-            int endMinute = Integer.parseInt(endTimeParts[1]);
-            int endSecond = Integer.parseInt(endTimeParts[2]);
-
-            LocalDateTime eventStartDateTime = LocalDateTime.of(year, month, day, startHour, startMinute, startSecond);
-
-            LocalDateTime currentDateTime = LocalDateTime.now();
-
-            if (currentDateTime.isBefore(eventStartDateTime)) {
-                upcomingEventsBuilder.append("Event: ").append(eventTitle).append("\n")
+            // Compare event date with current date
+            if (eventDate.isAfter(currentDate)) {
+                // Customize the display format as needed
+                liveEventsBuilder.append("Event: ").append(eventTitle).append("\n")
                         .append("Venue: ").append(eventVenue).append("\n")
-                        .append("Description: ").append(eventDescription).append("\n").append("Date: ").append(eventDateStr).append("\n").
-                        append("Start time: ").append(eventStartTimeStr).append("\n").append("End time: ").append(eventEndTimeStr).append("\n").append("\n\n");
+                        .append("Description: ").append(eventDescription).append("\n")
+                        .append("Date: ").append(eventDateStr).append("\n")
+                        .append("Start time: ").append(eventStartTimeStr).append("\n")
+                        .append("End time: ").append(eventEndTimeStr).append("\n\n");
                 count++;
             }
         }
 
-        upcomingEventsTextArea.setText(upcomingEventsBuilder.toString());
-        upcomingEventsTextArea.setEditable(false);
+        liveEventTextArea.setText(liveEventsBuilder.toString());
+        liveEventTextArea.setEditable(false);
     }
 
 //    private void fetchEvents() {
