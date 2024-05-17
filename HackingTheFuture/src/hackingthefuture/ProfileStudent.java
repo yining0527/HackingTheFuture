@@ -34,6 +34,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private String father;
     private String mother;
     private ArrayList<String> friends = new ArrayList<>();
+    private ArrayList<String> friendsLeaderboard = new ArrayList<>();
     
     private int points;
 
@@ -208,7 +209,7 @@ public class ProfileStudent extends javax.swing.JFrame {
                     friendName = rs.getString("sender_username");
                 }
                 
-                friends.add(friendName); // Add child's username to the ArrayList
+                friendsLeaderboard.add(friendName); // Add child's username to the ArrayList
             }
 
             con.close();
@@ -221,7 +222,7 @@ public class ProfileStudent extends javax.swing.JFrame {
 
         // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
        StringBuilder childrenDisplay = new StringBuilder("<html>");
-       for (String child : friends) {
+       for (String child : friendsLeaderboard) {
            childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
        }
        childrenDisplay.append("</html>"); // Close the HTML tag
