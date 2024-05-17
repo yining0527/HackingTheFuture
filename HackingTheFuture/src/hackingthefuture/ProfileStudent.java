@@ -33,8 +33,9 @@ public class ProfileStudent extends javax.swing.JFrame {
     private String locationCoordinate;
     private String father;
     private String mother;
-    private ArrayList<String> friends = new ArrayList<>();
-    private ArrayList<String> friendsLeaderboard = new ArrayList<>();
+    private ArrayList<String> friends;
+    private ArrayList<String> friendsLeaderboard = new ArrayList<>();;
+    private JDialog requestDialog;
     
     private int points;
 
@@ -147,6 +148,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     
     private void takeFriends()
     {
+        friends = new ArrayList<>();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
@@ -366,6 +368,7 @@ public class ProfileStudent extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error sending friend request: " + ex.getMessage());
         ex.printStackTrace();
     }
+    
 }
 
 
@@ -387,7 +390,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     }
     
     private void displayFriendRequests() {
-    JDialog requestDialog = new JDialog(this, "Friend Requests", true);
+    requestDialog = new JDialog(this, "Friend Requests", true);
     requestDialog.setLayout(new BorderLayout());
 
     DefaultListModel<String> model = new DefaultListModel<>();
@@ -474,6 +477,9 @@ public class ProfileStudent extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(dialog, "No request detail provided.");
     }
+    requestDialog.setVisible(false);
+    displayFriendRequests();
+    takeFriends();
 }
 
 
@@ -510,6 +516,9 @@ private void rejectFriendRequest(String requestDetail, JDialog dialog) {
     } else {
         JOptionPane.showMessageDialog(dialog, "No request detail provided.");
     }
+    requestDialog.setVisible(false);
+    displayFriendRequests();
+    takeFriends();
 }
 
 public void updateFriendshipStatusLabel(String currentUser, String profileUser) {
@@ -594,10 +603,11 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelPOINTS = new javax.swing.JLabel();
         jLabelShowPOINTS = new javax.swing.JLabel();
         jLabelPOINTS1 = new javax.swing.JLabel();
-        jLabelShowFRIENDS = new javax.swing.JLabel();
         jButtonSendFriendRequest = new javax.swing.JButton();
         jButtonInbox = new javax.swing.JButton();
         jLabelShowFriendshipStatus = new javax.swing.JLabel();
+        jScrollPaneShowFRIENDS = new javax.swing.JScrollPane();
+        jLabelShowFRIENDS = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
 
@@ -682,10 +692,6 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelPOINTS1.setForeground(new java.awt.Color(255, 153, 153));
         jLabelPOINTS1.setText("Friend(s)");
 
-        jLabelShowFRIENDS.setBackground(new java.awt.Color(102, 102, 102));
-        jLabelShowFRIENDS.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabelShowFRIENDS.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jButtonSendFriendRequest.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonSendFriendRequest.setText("Send Friend Request");
         jButtonSendFriendRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -706,6 +712,12 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelShowFriendshipStatus.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelShowFriendshipStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jScrollPaneShowFRIENDS.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPaneShowFRIENDS.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabelShowFRIENDS.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jScrollPaneShowFRIENDS.setViewportView(jLabelShowFRIENDS);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -719,13 +731,13 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                             .addComponent(jLabelPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowROLE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowMOTHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowPOINTS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelShowEMAIL, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jLabelShowUSERNAME, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jLabelShowROLE, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jLabelShowMOTHER, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jLabelShowPOINTS, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jScrollPaneShowFRIENDS)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)))
@@ -753,7 +765,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(156, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,8 +815,8 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(jScrollPaneShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 590, 568));
@@ -918,5 +930,6 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
     private javax.swing.JLabel jLabelUSERNAME;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPaneShowFRIENDS;
     // End of variables declaration//GEN-END:variables
 }

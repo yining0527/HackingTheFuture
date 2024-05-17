@@ -91,13 +91,13 @@
                                   <Component id="jLabelPOINTS1" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelShowEMAIL" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowUSERNAME" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowROLE" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowMOTHER" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowPOINTS" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowFRIENDS" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabelShowEMAIL" alignment="0" pref="192" max="32767" attributes="0"/>
+                                  <Component id="jLabelShowUSERNAME" alignment="0" pref="192" max="32767" attributes="0"/>
+                                  <Component id="jLabelShowROLE" pref="192" max="32767" attributes="0"/>
+                                  <Component id="jLabelShowMOTHER" alignment="0" pref="192" max="32767" attributes="0"/>
+                                  <Component id="jLabelShowPOINTS" pref="192" max="32767" attributes="0"/>
+                                  <Component id="jScrollPaneShowFRIENDS" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -134,7 +134,7 @@
                                   <Component id="jLabelShowLOCATIONCOORDINATE" min="-2" pref="192" max="-2" attributes="0"/>
                                   <Component id="jLabelShowFATHER" min="-2" pref="192" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="156" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -200,9 +200,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelPOINTS1" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabelShowFRIENDS" min="-2" pref="114" max="-2" attributes="0"/>
+                          <Component id="jScrollPaneShowFRIENDS" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -427,21 +427,6 @@
                 <Property name="text" type="java.lang.String" value="Friend(s)"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelShowFRIENDS">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="66" red="66" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="18" style="1"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                    <EtchetBorder/>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonSendFriendRequest">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -479,6 +464,27 @@
                 </Property>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPaneShowFRIENDS">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabelShowFRIENDS">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel2">
