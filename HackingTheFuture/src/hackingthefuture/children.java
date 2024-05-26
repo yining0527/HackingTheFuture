@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class children extends javax.swing.JFrame {
 
@@ -17,6 +18,7 @@ public class children extends javax.swing.JFrame {
     ResultSet resultSet = null;
     
     private String username1;
+    private String role;
 
     public children() {
         initComponents();
@@ -24,8 +26,9 @@ public class children extends javax.swing.JFrame {
         setResizable(true);
 
     }
-    public void setUsername(String transferUsername){
+    public void setUsername(String transferUsername, String role){
         username1 = transferUsername; 
+        this.role= role;
     }
     
     
@@ -70,11 +73,11 @@ public class children extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jLabel1.setName(""); // NOI18N
         jLabel1.setVerifyInputWhenFocusTarget(false);
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 147, 290, 246));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 290, 246));
 
         jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel8.setText("jLabel8");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 390, 590));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 390, 590));
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(-10, 0, 400, 580);
@@ -229,6 +232,7 @@ public class children extends javax.swing.JFrame {
                 
 
                     String query = "INSERT INTO `children`(`userID`, `Father`, `Mother`) VALUES (?,?,?)";
+                    
 
                     pst = con.prepareStatement(query);
                      pst.setString(1, username1);
@@ -250,6 +254,32 @@ public class children extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
+            }
+            if (role.equalsIgnoreCase("children")){
+                try {
+                    // Establish connection to the database
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+                    // Prepare the SQL query to update the role
+                    String query = "UPDATE `user` SET `fatherName` = ?,`MotherName` = ? WHERE `username` = ? AND `role` = ?";
+
+                    // Create a PreparedStatement object
+                    pst = con.prepareStatement(query);
+
+                    // Set the parameters for the PreparedStatement
+                    pst.setString(1, father.getText()); // newRole is the new value for the role field
+                    pst.setString(2, mother.getText());
+                    pst.setString(3, username1); // Assuming email.getText() retrieves the current email value
+                    pst.setString(4, role); // Assuming username.getText() retrieves the current username value
+
+                    // Execute the update operation
+                    pst.executeUpdate();
+
+                    // Optionally, you can add a success message here if needed
+                } catch (SQLException ex) {
+                    // Handle any SQL errors here
+                    ex.printStackTrace();
+                }
             }
 
     }//GEN-LAST:event_NextActionPerformed

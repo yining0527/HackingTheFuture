@@ -9,6 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.InputVerifier;
+
 public class SignUp extends javax.swing.JFrame {
 
     Connection con = null;
@@ -16,13 +20,15 @@ public class SignUp extends javax.swing.JFrame {
     PreparedStatement psCheckUserExists = null;
     ResultSet resultSet = null;
 
+
+
     public SignUp() {
         initComponents();
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
 
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

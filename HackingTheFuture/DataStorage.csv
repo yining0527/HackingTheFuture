@@ -1,1 +1,4 @@
-email, username, password, role, latitude, longitude,  father, mother
+email, username, password, role, latitude, longitude, childrenName, siblingsOrder
+kek1,k1,k1,parent,444.1, 454.1,k3,1
+kek1,k1,k1,parent,444.1, 454.1,k4,2
+kek1,k1,k1,parent,444.1, 454.1,k5,3

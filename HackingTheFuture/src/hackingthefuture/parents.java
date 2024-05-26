@@ -142,7 +142,7 @@ public class parents extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(153, 153, 255));
         jLabel6.setText("Siblings order:");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hackingthefuture/Image/Quiz.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Quiz.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

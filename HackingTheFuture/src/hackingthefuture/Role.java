@@ -274,7 +274,7 @@ public class Role extends javax.swing.JFrame {
             } else if (role.equalsIgnoreCase("children")) {
                 setPoints();
                 children children = new children();
-                children.setUsername(username);
+                children.setUsername(username,role);
                 children.setVisible(true);
                 children.pack();
                 children.setLocationRelativeTo(null);

@@ -44,89 +44,30 @@ public class ProfileParent extends javax.swing.JFrame {
     
     public void setUsername(String transferUsername) {
         this.username = transferUsername;
-        takeInformation();
-        takeChildren();
-        takeBookings();
+        takeInformation1();
+//        takeChildren();
+//        takeBookings();
 }
-
     
-    private void takeInformation() {
+    private void takeInformation1(){
         System.out.println("take information");
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-            System.out.println("Database connection successful.");
-
-            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
-            pst = con.prepareStatement(querySD);
-            pst.setString(1, username); // Set the username parameter at index 1
-
-            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
-            System.out.println("Username: " + username); // Print username for debugging
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                System.out.println("ResultSet contains data.");
-                this.email = rs.getString("email");
-                this.role = rs.getString("role");
-                this.locationCoordinate = rs.getString("LocationCoordinate");
-            } else {
-                System.out.println("ResultSet is empty.");
-            }
-
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace(); // Print stack trace for debugging
-            System.err.println("Error executing SQL query: " + e.getMessage());
-        }
-
-        System.out.println("Email: " + email);
-        System.out.println(username);
-        System.out.println(role);
-        System.out.println(locationCoordinate);
-
+        User us = new User (username);
+        this.email = us.getEmail();
+        this.role = us.getRole();
+        this.locationCoordinate= us.getLocationCoordinate();
+        this.childrenNames=us.getChildren();
         jLabelShowEMAIL.setText(email);
         jLabelShowUSERNAME.setText(username);
         jLabelShowROLE.setText(role);
         jLabelShowLOCATIONCOORDINATE.setText(locationCoordinate);
-    }
-    
-    private void takeChildren() {
-    System.out.println("take children");
-    try {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
-        System.out.println("Database connection successful.");
-
-        String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";
-        pst = con.prepareStatement(queryChildren);
-        pst.setString(1, username); // Set the username parameter at index 1
-
-        System.out.println("SQL Query for children: " + queryChildren); // Print SQL query for debugging
-        System.out.println("Username: " + username); // Print username for debugging
-
-        ResultSet rs = pst.executeQuery();
-
-        while (rs.next()) {
-            String childName = rs.getString("Children");
-            childrenNames.add(childName); // Add child's username to the ArrayList
+         // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
+        StringBuilder childrenDisplay = new StringBuilder("<html>");
+        for (String child : childrenNames) {
+            childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
         }
-
-        con.close();
-    } catch (SQLException e) {
-        e.printStackTrace(); // Print stack trace for debugging
-        System.err.println("Error executing SQL query for children: " + e.getMessage());
+        childrenDisplay.append("</html>"); // Close the HTML tag
+        jLabelShowCHILDREN.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
     }
-
-    System.out.println("Children Names: " + childrenNames);
-
-    // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
-   StringBuilder childrenDisplay = new StringBuilder("<html>");
-   for (String child : childrenNames) {
-       childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
-   }
-   childrenDisplay.append("</html>"); // Close the HTML tag
-   jLabelShowCHILDREN.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
-}
 
     private void takeBookings()
     {
