@@ -46,7 +46,7 @@ public class ProfileParent extends javax.swing.JFrame {
         this.username = transferUsername;
         takeInformation1();
 //        takeChildren();
-//        takeBookings();
+        takeBookings();
 }
     
     private void takeInformation1(){
