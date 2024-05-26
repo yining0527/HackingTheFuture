@@ -101,7 +101,7 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Asus\OneDrive\Documents\NetBeansProjects\HackingTheFuture\HackingTheFuture\src\hackingthefuture\Image\back2.jpg"/>
+                  <Image iconType="2" name="C:\Users\kekyi\Downloads\HackingTheFuture\HackingTheFuture\src\hackingthefuture\Image\back2.jpg"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="jLabel8"/>
               </Properties>
@@ -286,11 +286,6 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Asus\OneDrive\Documents\NetBeansProjects\HackingTheFuture\HackingTheFuture\src\hackingthefuture\Image\Parent (1).png"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

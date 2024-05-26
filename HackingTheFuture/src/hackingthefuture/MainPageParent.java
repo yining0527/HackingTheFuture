@@ -67,6 +67,7 @@ public class MainPageParent extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(370, 20, 230, 48);
@@ -77,6 +78,7 @@ public class MainPageParent extends javax.swing.JFrame {
         jLabel6.setBounds(0, 70, 900, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ROLE: PARENT");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(750, 40, 110, 20);
@@ -85,6 +87,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         Booking.setBackground(new java.awt.Color(204, 255, 204));
         Booking.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Booking.setForeground(new java.awt.Color(0, 0, 0));
         Booking.setText("Make Booking");
         Booking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +99,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         viewEvent.setBackground(new java.awt.Color(204, 255, 255));
         viewEvent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        viewEvent.setForeground(new java.awt.Color(0, 0, 0));
         viewEvent.setText("View Event");
         viewEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +111,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        discussion.setForeground(new java.awt.Color(0, 0, 0));
         discussion.setText("Discussion");
         discussion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +123,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         jButtonPROFILE.setBackground(new java.awt.Color(255, 153, 153));
         jButtonPROFILE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonPROFILE.setForeground(new java.awt.Color(0, 0, 0));
         jButtonPROFILE.setText("Profile");
         jButtonPROFILE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +135,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         jButtonDATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonDATASTORAGE.setForeground(new java.awt.Color(0, 0, 0));
         jButtonDATASTORAGE.setText("Export Data");
         jButtonDATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +147,7 @@ public class MainPageParent extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +157,7 @@ public class MainPageParent extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(217, 24, 72, 23);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 910, 560);

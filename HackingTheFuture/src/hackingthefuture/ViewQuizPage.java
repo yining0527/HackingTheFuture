@@ -205,11 +205,13 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Theme: ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 9, -1, -1));
 
         scienceButton.setBackground(new java.awt.Color(255, 153, 153));
         scienceButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        scienceButton.setForeground(new java.awt.Color(0, 0, 0));
         scienceButton.setText("Science");
         scienceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +222,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         technologyButton.setBackground(new java.awt.Color(255, 204, 153));
         technologyButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        technologyButton.setForeground(new java.awt.Color(0, 0, 0));
         technologyButton.setText("Technology");
         technologyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +233,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         engineeringButton.setBackground(new java.awt.Color(255, 255, 153));
         engineeringButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        engineeringButton.setForeground(new java.awt.Color(0, 0, 0));
         engineeringButton.setText("Engineering");
         engineeringButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +244,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         mathematicsButton.setBackground(new java.awt.Color(204, 255, 204));
         mathematicsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        mathematicsButton.setForeground(new java.awt.Color(0, 0, 0));
         mathematicsButton.setText("Mathematics");
         mathematicsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,10 +254,12 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(mathematicsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 13, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Science");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 73, 119, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Technology");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 73, 121, -1));
 
@@ -262,6 +269,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 104, 353, 179));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Engineering");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 307, 120, -1));
 
@@ -271,6 +279,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 104, 353, 180));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Mathematics");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 301, 119, -1));
 
@@ -281,6 +290,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         AttemptQuizButton.setBackground(new java.awt.Color(153, 255, 255));
         AttemptQuizButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AttemptQuizButton.setForeground(new java.awt.Color(0, 0, 0));
         AttemptQuizButton.setText("AttemptQuiz");
         AttemptQuizButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +322,8 @@ public class ViewQuizPage extends javax.swing.JFrame {
         });
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel6.setText("jLabel6");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 570));
 

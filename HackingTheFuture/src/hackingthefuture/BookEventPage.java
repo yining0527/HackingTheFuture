@@ -129,12 +129,14 @@ public class BookEventPage extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Booking Event");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(320, 30, 390, 60);
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 153));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Choose the Name of Events You Want To Join:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(240, 150, 485, 25);
@@ -148,6 +150,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
         doneButton.setBackground(new java.awt.Color(255, 153, 153));
         doneButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        doneButton.setForeground(new java.awt.Color(0, 0, 0));
         doneButton.setText("Done");
         doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +162,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
         backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(0, 0, 0));
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,18 +182,17 @@ public class BookEventPage extends javax.swing.JFrame {
         jPanel1.add(eventBox);
         eventBox.setBounds(240, 190, 398, 51);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\sunLiveEvent.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\sunLiveEvent.png")); // NOI18N
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(330, 310, 170, 160);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setPreferredSize(new java.awt.Dimension(900, 600));
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 900, 570);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\sunLiveEvent.png")); // NOI18N
         jLabel5.setText("jLabel5");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(350, 310, 190, 150);

@@ -351,6 +351,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Booking Page");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
@@ -376,6 +377,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 90, 318, 396));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Child username");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 96, 241, 35));
 
@@ -388,6 +390,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(DestinationID, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 149, 136, 45));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Selected booking for                ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 212, 218, 51));
 
@@ -397,6 +400,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 239, 43));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Available time slots             ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 281, 204, 34));
 
@@ -410,10 +414,12 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 22, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Enter the time slot");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 437, 226, 48));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Enter destination ID for booking ");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 155, 241, 35));
 
@@ -438,7 +444,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         });
         jPanel1.add(visitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 438, 239, 48));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 560));
 

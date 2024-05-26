@@ -104,7 +104,7 @@ public class Login extends JFrame {
         Right.add(jLabel8);
         jLabel8.setBounds(47, 317, 0, 0);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel7.setText("jLabel7");
         Right.add(jLabel7);
         jLabel7.setBounds(0, 0, 410, 590);

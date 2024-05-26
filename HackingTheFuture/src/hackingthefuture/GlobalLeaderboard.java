@@ -127,6 +127,7 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         jTableLeaderboard = new javax.swing.JTable();
         jLabelLeaderboard = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +158,7 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
 
         jLabelLeaderboard.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLeaderboard.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabelLeaderboard.setForeground(new java.awt.Color(0, 0, 0));
         jLabelLeaderboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLeaderboard.setText("Leaderboard");
         jLabelLeaderboard.setToolTipText("");
@@ -171,7 +173,11 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(20, 20, 72, 22);
+        backButton.setBounds(20, 20, 72, 23);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 910, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,6 +242,7 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLeaderboard;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
