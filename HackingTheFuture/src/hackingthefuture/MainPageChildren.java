@@ -49,8 +49,8 @@ public class MainPageChildren extends javax.swing.JFrame {
         discussion = new javax.swing.JButton();
         DATASTORAGE = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
-        profile = new javax.swing.JLabel();
         profile1 = new javax.swing.JToggleButton();
+        profile = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,11 +147,6 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(205, 18, 72, 23);
 
-        profile.setForeground(new java.awt.Color(0, 0, 0));
-        profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
-        jPanel1.add(profile);
-        profile.setBounds(0, 0, 900, 570);
-
         profile1.setBackground(new java.awt.Color(255, 153, 153));
         profile1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profile1.setText("Profile");
@@ -161,7 +156,12 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(profile1);
-        profile1.setBounds(24, 18, 68, 23);
+        profile1.setBounds(24, 18, 67, 23);
+
+        profile.setForeground(new java.awt.Color(0, 0, 0));
+        profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jPanel1.add(profile);
+        profile.setBounds(0, 0, 910, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
