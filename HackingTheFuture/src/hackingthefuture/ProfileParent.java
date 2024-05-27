@@ -55,7 +55,8 @@ public class ProfileParent extends javax.swing.JFrame {
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
-        this.childrenNames=us.getChildren();
+        this. childrenNames =us.getChildren();
+        System.out.println(us.getChildren());
         jLabelShowEMAIL.setText(email);
         jLabelShowUSERNAME.setText(username);
         jLabelShowROLE.setText(role);

@@ -37,8 +37,7 @@ public class User {
         this(); // Initialize lists
         this.username = transferUsername;
         fetchUserDetails();
-        fetchParentNames();
-        fetchChildNames();
+        
     }
 
     // Method to initialize database connection
@@ -49,7 +48,7 @@ public class User {
     }
 
     // Method to fetch user details from the database
-    private void fetchUserDetails() {
+    public void fetchUserDetails() {
         try {
             connectToDatabase();
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -75,15 +74,21 @@ public class User {
             e.printStackTrace();
             System.err.println("Error executing SQL query: " + e.getMessage());
         }
+        System.out.println(role);
+        if (role.equalsIgnoreCase("parent")){
+            fetchChildNames();
+        }else if(role.equalsIgnoreCase("children")){
+            fetchParentNames();
+        }
     }
 
     // Method to fetch parent names from the database
-    private void fetchParentNames() {
-        if ("children".equalsIgnoreCase(role)) {
+    public void fetchParentNames() {
+        
             try {
                 connectToDatabase();
-                String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
-                pst = con.prepareStatement(querySD);
+                String querySD1 = "SELECT * FROM `children` WHERE `userID` = ?";
+                pst = con.prepareStatement(querySD1);
                 pst.setString(1, username);
 
                 ResultSet rs = pst.executeQuery();
@@ -101,32 +106,39 @@ public class User {
                 e.printStackTrace();
                 System.err.println("Error executing SQL query: " + e.getMessage());
             }
-        }
+        
     }
 
     // Method to fetch child names from the database
-    private void fetchChildNames() {
-        if ("parents".equalsIgnoreCase(role)) {
+    public void fetchChildNames() {
+        System.out.println("take children");
             try {
-                connectToDatabase();
-                String querySD = "SELECT * FROM `parent` WHERE `userID` = ?";
-                pst = con.prepareStatement(querySD);
-                pst.setString(1, username);
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+                System.out.println("Database connection successful.");
+
+                String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";
+                pst = con.prepareStatement(queryChildren);
+                pst.setString(1, username); // Set the username parameter at index 1
+
+                System.out.println("SQL Query for children: " + queryChildren); // Print SQL query for debugging
+                System.out.println("Username: " + username); // Print username for debugging
 
                 ResultSet rs = pst.executeQuery();
 
                 while (rs.next()) {
-                    String childName = rs.getString("children");
-                    children.add(childName);
+                    String childName = rs.getString("Children");
+                    this.children.add(childName); // Add child's username to the ArrayList
                 }
+                
 
-                rs.close();
-                pst.close();
+                con.close();
             } catch (SQLException e) {
-                e.printStackTrace();
-                System.err.println("Error executing SQL query: " + e.getMessage());
+                e.printStackTrace(); // Print stack trace for debugging
+                System.err.println("Error executing SQL query for children: " + e.getMessage());
             }
-        }
+            System.out.println(children);
+
+        
     }
 
     // Getters and Setters
