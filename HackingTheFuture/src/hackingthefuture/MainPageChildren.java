@@ -39,6 +39,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        profile = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -50,7 +51,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         DATASTORAGE = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         profile1 = new javax.swing.JToggleButton();
-        profile = new javax.swing.JLabel();
+        ViewOthersProfile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +60,6 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(350, 20, 220, 48);
@@ -70,14 +70,12 @@ public class MainPageChildren extends javax.swing.JFrame {
         jLabel6.setBounds(0, 70, 890, 20);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ROLE: STUDENTS");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(760, 40, 120, 30);
 
         viewAndattemptQuiz.setBackground(new java.awt.Color(255, 255, 204));
         viewAndattemptQuiz.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        viewAndattemptQuiz.setForeground(new java.awt.Color(0, 0, 0));
         viewAndattemptQuiz.setText("View & Attempt Quiz");
         viewAndattemptQuiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +87,6 @@ public class MainPageChildren extends javax.swing.JFrame {
 
         viewEvent.setBackground(new java.awt.Color(204, 255, 255));
         viewEvent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        viewEvent.setForeground(new java.awt.Color(0, 0, 0));
         viewEvent.setText("View Event");
         viewEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,11 +94,10 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(viewEvent);
-        viewEvent.setBounds(306, 269, 247, 62);
+        viewEvent.setBounds(310, 230, 247, 62);
 
         leaderboard.setBackground(new java.awt.Color(255, 153, 153));
         leaderboard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        leaderboard.setForeground(new java.awt.Color(0, 0, 0));
         leaderboard.setText("Global Leaderboard");
         leaderboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +109,6 @@ public class MainPageChildren extends javax.swing.JFrame {
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        discussion.setForeground(new java.awt.Color(0, 0, 0));
         discussion.setText("Discussion");
         discussion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,11 +116,10 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(discussion);
-        discussion.setBounds(306, 403, 247, 62);
+        discussion.setBounds(310, 330, 247, 62);
 
         DATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         DATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        DATASTORAGE.setForeground(new java.awt.Color(0, 0, 0));
         DATASTORAGE.setText("Export Data");
         DATASTORAGE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +131,6 @@ public class MainPageChildren extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,10 +151,16 @@ public class MainPageChildren extends javax.swing.JFrame {
         jPanel1.add(profile1);
         profile1.setBounds(24, 18, 67, 23);
 
-        profile.setForeground(new java.awt.Color(0, 0, 0));
-        profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
-        jPanel1.add(profile);
-        profile.setBounds(0, 0, 910, 570);
+        ViewOthersProfile.setBackground(new java.awt.Color(102, 255, 204));
+        ViewOthersProfile.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ViewOthersProfile.setText("View Others' Profile");
+        ViewOthersProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewOthersProfileActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ViewOthersProfile);
+        ViewOthersProfile.setBounds(310, 430, 250, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,6 +244,16 @@ public class MainPageChildren extends javax.swing.JFrame {
         ProfileStudentFrame.pack();
         ProfileStudentFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_profile1ActionPerformed
+
+    private void ViewOthersProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewOthersProfileActionPerformed
+        // TODO add your handling code here:
+        ViewOthersProfile othersProfileFrame = new ViewOthersProfile();
+        othersProfileFrame.setUsername(username);
+        othersProfileFrame.pack(); // Pack the frame before displaying it
+        othersProfileFrame.setVisible(true);
+        othersProfileFrame.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_ViewOthersProfileActionPerformed
  
     
     /**
@@ -292,6 +301,7 @@ public class MainPageChildren extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton DATASTORAGE;
+    private javax.swing.JButton ViewOthersProfile;
     private javax.swing.JButton discussion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
