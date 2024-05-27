@@ -257,6 +257,10 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Username and password cannot be empty!");
             return;
         }
+        if (!email1.contains("@") || !email1.contains(".com")) {
+            JOptionPane.showMessageDialog(this, "The email format is wrong. It must contain '@' and '.com'.");
+            return;
+        }
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
