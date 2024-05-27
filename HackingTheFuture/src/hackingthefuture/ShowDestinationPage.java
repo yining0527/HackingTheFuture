@@ -22,7 +22,6 @@ import javax.swing.JTextPane;
 import java.util.stream.Collectors;
 import javax.swing.JTextArea;
 
-
 /**
  *
  * @author Asus
@@ -53,11 +52,12 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         this.username = username;  // Set the username
         takeInformation(); // Retrieve user information
         displayBookingDestination();// Display booking destinations
+        fillCombo();
     }
 
     public ShowDestinationPage() {
         initComponents();
-        // Ensure TimeSlot JTextPane is properly initialized and configured
+        fillCombo();
 
     }
 
@@ -67,8 +67,8 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         takeInformation(); // Retrieve user information
         displayBookingDestination(); // Display booking destinations
     }
-    
-    public String getUsername(){
+
+    public String getUsername() {
         return username;
     }
 
@@ -79,7 +79,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     }
 
     private void takeInformation() {
-         User us = new User (username);
+        User us = new User (username);
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
@@ -89,6 +89,42 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         System.out.println(username);
         System.out.println(role);
         System.out.println(locationCoordinate);
+//        System.out.println("take information");
+//        try {
+//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+//            System.out.println("Database connection successful.");
+//
+//            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+//            pst = con.prepareStatement(querySD);
+//            pst.setString(1, username); // Set the username parameter at index 1
+//
+//            System.out.println("SQL Query: " + querySD); // Print SQL query for debugging
+//            System.out.println("Username: " + username); // Print username for debugging
+//
+//            ResultSet rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                System.out.println("ResultSet contains data.");
+//                this.email = rs.getString("email");
+//                this.role = rs.getString("role");
+//                this.locationCoordinate = rs.getString("LocationCoordinate");
+//            } else {
+//                System.out.println("ResultSet is empty.");
+//            }
+//
+//            con.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Print stack trace for debugging
+//            System.err.println("Error executing SQL query: " + e.getMessage());
+//        }
+//
+//        // Add a print statement to check the value of locationCoordinate
+//        System.out.println("Location Coordinate: " + locationCoordinate);
+//
+//        System.out.println("Email: " + email);
+//        System.out.println(username);
+//        System.out.println(role);
+//        System.out.println(locationCoordinate);
     }
 
     public void displayBookingDestination() {
@@ -123,7 +159,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     public List<ShowDestinationPage> readBookingDestination() {
         List<ShowDestinationPage> destinations = new ArrayList<>();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("BookingDestination.txt"));
+            Scanner inputStream = new Scanner(new FileInputStream("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
             while (inputStream.hasNextLine()) {
                 String name = inputStream.nextLine().trim();
                 if (!inputStream.hasNextLine()) {
@@ -242,10 +278,23 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         return clashesFound;
     }
 
+//    // Method to handle booking insertion process
+//    public void handleBooking(String parentName, String childName, String destination, String visitDate) {
+//        List<String> childEventDates = getChildEventDates(childName);
+//        displayAvailableTimeSlots(childEventDates);
+//
+//        // Check for repeated destinations or clashes
+//        if (!checkForClashes(destination, visitDate, childEventDates)) {
+//            // If no clashes, insert booking destination
+//            insertBookingDestination(parentName, childName, destination, visitDate);
+//        } else {
+//            // Handle clashes or repeated destinations
+//            System.out.println("Clashes found or destination already registered.");
+//        }
+//    }
     // Method to handle booking insertion process
     public void handleBooking(String parentName, String childName, String destination, String visitDate) {
         List<String> childEventDates = getChildEventDates(childName);
-        displayAvailableTimeSlots(childEventDates);
 
         // Check for repeated destinations or clashes
         if (!checkForClashes(destination, visitDate, childEventDates)) {
@@ -256,11 +305,11 @@ public class ShowDestinationPage extends javax.swing.JFrame {
             System.out.println("Clashes found or destination already registered.");
         }
     }
-    
+
     private boolean bookingExists(String childName, String visitDate) {
         String query = "SELECT COUNT(*) FROM bookingdestination WHERE childName = ? AND visitDate = ?";
 
-        try ( Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", ""); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, childName);
             preparedStatement.setString(2, visitDate);
@@ -287,6 +336,36 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         return true;
     }
 
+    private void fillCombo() {
+        try {
+            // Establish the database connection
+            System.out.println("Attempting database connection...");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+
+            String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";
+            pst = con.prepareStatement(queryChildren);
+            pst.setString(1, username); // Set the childName parameter
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = pst.executeQuery();
+
+            // Clear existing items in the LinkBox before adding new items
+            childComboBox.removeAllItems();
+
+            // Iterate through the result set and add quiz contents to the LinkBox
+            while (resultSet.next()) {
+                String childrenName = resultSet.getString("Children");
+                System.out.println("Adding children name to LinkBox: " + childrenName);
+                childComboBox.addItem(childrenName); // Add quiz content as an item to the LinkBox
+            }
+
+            // Close the resources
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("Error executing SQL query: " + ex.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -316,7 +395,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         chooseTimeSlot = new javax.swing.JTextArea();
         visitDate = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        childComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -325,7 +404,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Booking Page");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
@@ -351,7 +429,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 90, 318, 396));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Child username");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 96, 241, 35));
 
@@ -364,7 +441,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(DestinationID, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 149, 136, 45));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Selected booking for                ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 212, 218, 51));
 
@@ -374,7 +450,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 239, 43));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Available time slots             ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 281, 204, 34));
 
@@ -388,12 +463,10 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 22, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Enter the time slot");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 437, 226, 48));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Enter destination ID for booking ");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 155, 241, 35));
 
@@ -403,7 +476,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
                 childUsernameActionPerformed(evt);
             }
         });
-        jPanel1.add(childUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 86, 136, 45));
+        jPanel1.add(childUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 136, 45));
 
         chooseTimeSlot.setColumns(20);
         chooseTimeSlot.setRows(5);
@@ -418,9 +491,13 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         });
         jPanel1.add(visitDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 438, 239, 48));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
-        jLabel8.setText("jLabel8");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 560));
+        childComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        childComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                childComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(childComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 230, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -458,20 +535,21 @@ public class ShowDestinationPage extends javax.swing.JFrame {
             String trimmedDate = date.substring(date.indexOf(" ") + 1);
 
             if (trimmedDate.equals(enteredDate)) {
-              dateFound = true;
+                dateFound = true;
                 break;
             }
         }
 
         if (!dateFound) {
             JOptionPane.showMessageDialog(this, "Please enter a valid date shown in available time slots.", "Invalid Date", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return;
         }
 
         // If the format is correct and the date is valid, proceed to check for existing booking
-        String childName = childUsername.getText();
+//        String childName = childUsername.getText();
+        String childName = (String) childComboBox.getSelectedItem();
         String destination = DestinationName.getText();
-        String selectedVisitDate = visitDate.getText();
+        String selectedVisitDate = visitDate.getText().trim();
 
         // Check if a booking already exists for the child on the selected visit date
         if (bookingExists(childName, selectedVisitDate)) {
@@ -481,7 +559,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
 
         // If no booking exists and the date is valid, proceed with the booking
         try {
-          
+
             insertBookingDestination(username, childName, destination, selectedVisitDate);
             JOptionPane.showMessageDialog(this, "You have successfully booked the visit", "Booking Successful", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Booking successful.");
@@ -490,9 +568,9 @@ public class ShowDestinationPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Failed to book the visit. Please try again later.", "Booking Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Booking failed: " + ex.getMessage());
         }
-        
+
         this.dispose();
-    
+
     }//GEN-LAST:event_bookButtonActionPerformed
 
     private void DestinationIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinationIDActionPerformed
@@ -529,31 +607,34 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void childUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_childUsernameActionPerformed
-        // Get the child's username from the text field
-        String childName = childUsername.getText();
-
-        // Retrieve all event dates for the child
-        List<String> childEventDates = getChildEventDates(childName);
-
-        // Display the event dates
-        if (!childEventDates.isEmpty()) {
-            StringBuilder childEventDateDisplay = new StringBuilder("Child Event Dates:\n");
-            for (String eventDate : childEventDates) {
-                childEventDateDisplay.append(eventDate).append("\n");
-            }
-            System.out.println(childEventDateDisplay.toString());
-        } else {
-            System.out.println("No event dates found for the child.");
-        }
-
-        // Now you can proceed with displaying available time slots or performing other actions based on the event dates.
-        // For example:
-        displayAvailableTimeSlots(childEventDates);
+//        // Get the child's username from the text field
+//
+//        String childName = (String) childComboBox.getSelectedItem();
+////        String childName = childUsername.getText();
+//
+//        // Retrieve all event dates for the child
+//        List<String> childEventDates = getChildEventDates(childName);
+//
+//        // Display the event dates
+//        if (!childEventDates.isEmpty()) {
+//            StringBuilder childEventDateDisplay = new StringBuilder("Child Event Dates:\n");
+//            for (String eventDate : childEventDates) {
+//                childEventDateDisplay.append(eventDate).append("\n");
+//            }
+//            System.out.println(childEventDateDisplay.toString());
+//        } else {
+//            System.out.println("No event dates found for the child.");
+//        }
+//
+//        // Now you can proceed with displaying available time slots or performing other actions based on the event dates.
+//        // For example:
+//        displayAvailableTimeSlots(childEventDates);
     }//GEN-LAST:event_childUsernameActionPerformed
 
     private void visitDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitDateActionPerformed
         // Get the entered date ID from the text field
-        int dateID = Integer.parseInt(visitDate.getText());
+        String dateText = visitDate.getText().trim(); // Trim leading and trailing whitespace
+        int dateID = Integer.parseInt(dateText);
 
         // Retrieve the dates displayed in the displayDestination area
         String[] dates = chooseTimeSlot.getText().split("\n");
@@ -578,6 +659,32 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         visitDate.setText(selectedDate.trim());
         //storeDestinationInDatabase(destinationName); // Uncomment if needed
     }//GEN-LAST:event_visitDateActionPerformed
+
+    private void childComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_childComboBoxActionPerformed
+        // Check if the action event corresponds to a selection action
+        if (evt.getActionCommand().equals("comboBoxChanged")) {
+            // Get the child's username from the text field
+            String childName = (String) childComboBox.getSelectedItem();
+
+            // Retrieve all event dates for the child
+            List<String> childEventDates = getChildEventDates(childName);
+
+            // Display the event dates
+            if (!childEventDates.isEmpty()) {
+                StringBuilder childEventDateDisplay = new StringBuilder("Child Event Dates:\n");
+                for (String eventDate : childEventDates) {
+                    childEventDateDisplay.append(eventDate).append("\n");
+                }
+                System.out.println(childEventDateDisplay.toString());
+            } else {
+                System.out.println("No event dates found for the child.");
+            }
+
+            // Now you can proceed with displaying available time slots or performing other actions based on the event dates.
+            // For example:
+            displayAvailableTimeSlots(childEventDates);
+        }
+    }//GEN-LAST:event_childComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -608,10 +715,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
 
         /* Create and display the form */
@@ -623,6 +726,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
                 showDestinationPage.pack();
                 showDestinationPage.setLocationRelativeTo(null);
                 showDestinationPage.takeInformation(); // Call takeInformation method to retrieve username
+                showDestinationPage.fillCombo();
 
             }
         });
@@ -634,6 +738,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private javax.swing.JTextPane DestinationName;
     private javax.swing.JButton backButton;
     private javax.swing.JButton bookButton;
+    private javax.swing.JComboBox<String> childComboBox;
     private javax.swing.JTextField childUsername;
     private javax.swing.JTextArea chooseTimeSlot;
     private javax.swing.JTextArea displayDestination;
@@ -644,7 +749,6 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
