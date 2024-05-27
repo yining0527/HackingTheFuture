@@ -190,6 +190,7 @@ public class MainPageParent extends javax.swing.JFrame {
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
         ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
+        ViewEventPageFrame.setUsername(username);
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);
@@ -198,6 +199,7 @@ public class MainPageParent extends javax.swing.JFrame {
     private void discussionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discussionActionPerformed
         // TODO add your handling code here:
         Discussion DiscussionFrame = new Discussion(getUsername());
+        DiscussionFrame.setUsername(username);
          DiscussionFrame.setVisible(true);
          DiscussionFrame.pack();
          DiscussionFrame.setLocationRelativeTo(null);

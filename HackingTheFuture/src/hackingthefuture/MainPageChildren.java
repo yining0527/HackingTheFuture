@@ -183,6 +183,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         ViewQuizPage ViewQuizPageFrame = new ViewQuizPage(getUsername());
+        ViewQuizPageFrame.setUsername(username);
         ViewQuizPageFrame.setVisible(true);
         ViewQuizPageFrame.pack();
         ViewQuizPageFrame.setLocationRelativeTo(null);

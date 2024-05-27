@@ -192,6 +192,7 @@ public class MainPageEducator extends javax.swing.JFrame {
     private void createQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createQuizActionPerformed
         // TODO add your handling code here:
         CreateQuizPage CreateQuizPageFrame = new CreateQuizPage(getUsername());
+        CreateQuizPageFrame.setUsername(username);
         CreateQuizPageFrame.setVisible(true);
         CreateQuizPageFrame.pack();
         CreateQuizPageFrame.setLocationRelativeTo(null);
@@ -200,6 +201,7 @@ public class MainPageEducator extends javax.swing.JFrame {
     private void viewEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEventActionPerformed
         // TODO add your handling code here:
         ViewEventPage ViewEventPageFrame = new ViewEventPage(getUsername());
+        ViewEventPageFrame.setUsername(username);
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);
@@ -208,6 +210,7 @@ public class MainPageEducator extends javax.swing.JFrame {
     private void createEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventActionPerformed
         // TODO add your handling code here:
         CreateEventPage CreateEventPageFrame = new CreateEventPage(getUsername());
+        CreateEventPageFrame.setUsername(username);
         CreateEventPageFrame.setVisible(true);
         CreateEventPageFrame.pack();
         CreateEventPageFrame.setLocationRelativeTo(null);
@@ -217,6 +220,7 @@ public class MainPageEducator extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         Discussion DiscussionFrame = new Discussion(getUsername());
+        DiscussionFrame.setUsername(username);
          DiscussionFrame.setVisible(true);
          DiscussionFrame.pack();
          DiscussionFrame.setLocationRelativeTo(null);
