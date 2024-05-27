@@ -59,6 +59,7 @@ public class Discussion extends javax.swing.JFrame {
         setPreferredSize(new Dimension(900, 600));
         setResizable(true);
         this.username = username;  // Set the username
+        System.out.println(username);
         fetchPost();
         takeInformation(); // Retrieve user information
     }
@@ -74,6 +75,7 @@ public class Discussion extends javax.swing.JFrame {
 
     private void takeInformation() {
         System.out.println("take information");
+        System.out.println(username);
         User us = new User(username);
         this.email = us.getEmail();
         this.role = us.getRole();

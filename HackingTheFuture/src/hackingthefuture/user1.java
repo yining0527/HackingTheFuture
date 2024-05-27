@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class User {
+public class user1 {
     private Connection con = null;
     private PreparedStatement pst = null;
 
@@ -26,14 +26,14 @@ public class User {
     private String childName;
 
     // Default Constructor
-    public User() {
+    public user1() {
         // Initialize lists
         this.parents = new ArrayList<>();
         this.children = new ArrayList<>();
     }
 
     // Constructor to fetch user details from database
-    public User(String transferUsername) {
+    public user1(String transferUsername) {
         this(); // Initialize lists
         this.username = transferUsername;
         fetchUserDetails();

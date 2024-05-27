@@ -181,6 +181,7 @@ public class MainPageParent extends javax.swing.JFrame {
     private void BookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingActionPerformed
         // TODO add your handling code here:
         ShowDestinationPage showDestinationPage = new ShowDestinationPage(getUsername());
+        showDestinationPage.setUsername(username);
         showDestinationPage.setVisible(true);
         showDestinationPage.pack();
         showDestinationPage.setLocationRelativeTo(null);

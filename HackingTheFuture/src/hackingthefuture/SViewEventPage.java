@@ -59,7 +59,7 @@ public class SViewEventPage extends javax.swing.JFrame {
     
     private void takeInformation() {
         System.out.println("take information");
-      User us = new User (username);
+        User us = new User (username);
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
