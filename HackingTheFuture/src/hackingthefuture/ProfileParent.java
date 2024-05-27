@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class ProfileParent extends javax.swing.JFrame {
     Connection con = null;
@@ -65,6 +66,7 @@ public class ProfileParent extends javax.swing.JFrame {
         StringBuilder childrenDisplay = new StringBuilder("<html>");
         for (String child : childrenNames) {
             childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
+            System.out.println(childrenNames);
         }
         childrenDisplay.append("</html>"); // Close the HTML tag
         jLabelShowCHILDREN.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
@@ -106,6 +108,10 @@ public class ProfileParent extends javax.swing.JFrame {
             // Display the data
                 System.out.println(username + "\t" + childName + "\t" + destination + "\t" + visitDate);
             }
+            
+            // Adjust the column width for the "Destination" column
+            TableColumn column = jTableShowBOOKINGS.getColumnModel().getColumn(2); // Index 2 represents the "Destination" column
+            column.setPreferredWidth(230); // Adjust the width as needed
 
         con.close();
         } catch (SQLException e) {
@@ -168,7 +174,6 @@ public class ProfileParent extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("User");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 201, -1, -1));
 
@@ -227,6 +232,7 @@ public class ProfileParent extends javax.swing.JFrame {
         jLabelPASTBOOKINGSMADE.setForeground(new java.awt.Color(255, 153, 153));
         jLabelPASTBOOKINGSMADE.setText("Past Bookings");
 
+        jTableShowBOOKINGS.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTableShowBOOKINGS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -258,7 +264,7 @@ public class ProfileParent extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabelLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,9 +291,9 @@ public class ProfileParent extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelPASTBOOKINGSMADE, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelPASTBOOKINGSMADE1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,10 +333,9 @@ public class ProfileParent extends javax.swing.JFrame {
                 .addGap(85, 85, 85))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 615, 568));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 650, 568));
 
         jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Account");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 271, 176, -1));
 
@@ -343,7 +348,6 @@ public class ProfileParent extends javax.swing.JFrame {
         });
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
         jLabel9.setText("jLabel9");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 570));
 

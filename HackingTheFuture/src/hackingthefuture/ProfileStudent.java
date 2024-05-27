@@ -36,6 +36,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private ArrayList<String> friends;
     private ArrayList<String> friendsLeaderboard = new ArrayList<>();;
     private JDialog requestDialog;
+    private String userRole;
     
     private int points;
 
@@ -54,6 +55,8 @@ public class ProfileStudent extends javax.swing.JFrame {
         takeInformation();
         takeParents();
         takeFriends();
+//        fetchUserRole();
+//        checkFriendshipAndDisplayButton();
     }
     
     public void setLeaderboardUsername(String profileUsername)
@@ -62,6 +65,7 @@ public class ProfileStudent extends javax.swing.JFrame {
         takeInformationLeaderboard();
         takeParentsLeaderboard();
         takeFriendsLeaderboard();
+        fetchUserRole();
         checkFriendshipAndDisplayButton();
     }
     
@@ -121,9 +125,9 @@ public class ProfileStudent extends javax.swing.JFrame {
         jLabelShowMOTHER.setText(mother);
     }
     
-    private void takeFriends()
-    {
+    private void takeFriends() {
         friends = new ArrayList<>();
+        StringBuilder friendNames = new StringBuilder();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
@@ -135,33 +139,35 @@ public class ProfileStudent extends javax.swing.JFrame {
 
             while (rs.next()) {
                 String friendName = "";
-                if(currentUsername.equals(rs.getString("sender_username")))
-                {
+                if (currentUsername.equals(rs.getString("sender_username"))) {
                     friendName = rs.getString("receiver_username");
-                }
-                else if(currentUsername.equals(rs.getString("receiver_username")))
-                {
+                } else if (currentUsername.equals(rs.getString("receiver_username"))) {
                     friendName = rs.getString("sender_username");
                 }
-                
-                friends.add(friendName); // Add child's username to the ArrayList
+
+                if (!friendName.isEmpty()) {
+                    friends.add(friendName); // Add friend's username to the ArrayList
+                    friendNames.append(friendName).append("\n"); // Append friend's username to the StringBuilder
+                }
             }
 
             con.close();
         } catch (SQLException e) {
             e.printStackTrace(); // Print stack trace for debugging
-            System.err.println("Error executing SQL query for children: " + e.getMessage());
+            System.err.println("Error executing SQL query for friends: " + e.getMessage());
         }
 
         System.out.println("Friends Names: " + friends);
 
-        // Display childrenNames using jLabelShowCHILDREN with HTML formatting for new lines
-       StringBuilder childrenDisplay = new StringBuilder("<html>");
-       for (String child : friends) {
-           childrenDisplay.append(child).append("<br>"); // Append each child's username followed by a line break in HTML
-       }
-       childrenDisplay.append("</html>"); // Close the HTML tag
-       jLabelShowFRIENDS.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
+        // Set the text content of jLabelShowFRIENDS to the names with HTML formatting (optional)
+        StringBuilder friendDisplay = new StringBuilder("<html>");
+        for (String friend : friends) {
+            friendDisplay.append(friend).append("<br>"); // Append each friend's username followed by a line break in HTML
+        }
+        friendDisplay.append("</html>"); // Close the HTML tag
+        jLabelShowFRIENDS.setText(friendDisplay.toString()); // Set the text in jLabelShowFRIENDS with HTML formatting
+
+        System.out.println("Friends HTML: " + friendDisplay.toString());
     }
     
     private void takeFriendsLeaderboard()
@@ -286,9 +292,36 @@ public class ProfileStudent extends javax.swing.JFrame {
         jLabelShowFATHER.setText(father);
         jLabelShowMOTHER.setText(mother);
     }
+    private void fetchUserRole() {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            System.out.println("Database connection successful.");
+
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, currentUsername);
+            System.out.println("hello");
+            System.out.println("Fetching user details for username: " + currentUsername);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                this.userRole = rs.getString("role");
+                System.out.println("Role: " + userRole);
+            }
+
+            pst.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query for friends: " + e.getMessage());
+        }
+        
+    }
     
     private void checkFriendshipAndDisplayButton() {
-        if (areAlreadyFriendsOrRequested(currentUsername, profileUsername) || currentUsername.equals(profileUsername)) {
+        System.out.println("HHHHH user role: " + userRole);
+        if (areAlreadyFriendsOrRequested(currentUsername, profileUsername) || currentUsername.equals(profileUsername) || !userRole.equals("children")) {
             jButtonSendFriendRequest.setVisible(false);  // Hide the button if they are already friends or the same user
         } else {
             jButtonSendFriendRequest.setVisible(true);   // Show the button otherwise
@@ -351,7 +384,18 @@ public class ProfileStudent extends javax.swing.JFrame {
     public void setUsernameAndButtonVisibility(String username, boolean showButton) {
         this.currentUsername = username;
         jButtonSendFriendRequest.setVisible(showButton);
+        
     }
+    
+    public void setSendFriendRequestNotVisible() {
+        if (jButtonSendFriendRequest != null) {
+            System.out.println("Setting Send Friend Request Button visibility to false.");
+            jButtonSendFriendRequest.setVisible(false);
+        } else {
+            System.out.println("Send Friend Request Button is null.");
+        }
+    }
+
     
     public void setInboxVisibility(String username, boolean showButton) {
         this.currentUsername = username;
