@@ -74,6 +74,7 @@ public class ProfileStudent extends javax.swing.JFrame {
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
+        this.points = us.getCurrentPoints();
 
         System.out.println("Email: " + email);
         System.out.println(currentUsername);
