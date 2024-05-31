@@ -48,6 +48,28 @@ public class ProfileEducator extends javax.swing.JFrame {
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
+        
+        try
+        {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            String querySD = "SELECT * FROM `user` WHERE `username` = ?";
+            pst = con.prepareStatement(querySD);
+            pst.setString(1, username); // Set the username parameter at index 1
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                this.numberOfQuizzes = rs.getInt("numberOfQuizzes");
+                this.numberOfEvents = rs.getInt("numberOfEvents");
+            }
+            
+            con.close();
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace(); // Print stack trace for debugging
+            System.err.println("Error executing SQL query: " + e.getMessage());
+        }
 
         System.out.println("Email: " + email);
         System.out.println(username);
