@@ -109,11 +109,10 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel1.setText("Attempt");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(50, 210, 230, 60);
+        jLabel1.setBounds(50, 200, 230, 60);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(650, 550));
@@ -148,7 +147,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\attemptQuiz.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\attemptQuizz.png")); // NOI18N
         jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -194,14 +193,13 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(311, 0, 630, 566);
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel2.setText("Quiz");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(80, 260, 150, 70);
+        jLabel2.setBounds(80, 250, 150, 70);
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
         jLabel4.setText("jLabel4");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(0, 0, 310, 570);
