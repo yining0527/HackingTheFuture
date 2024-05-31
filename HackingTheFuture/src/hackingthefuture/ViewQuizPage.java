@@ -77,6 +77,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
             ScienceList.setEditable(true); // Set editable to true
             ScienceList.setText(scienceQuizzes.toString());
+            ScienceList.setCaretPosition(0); // Set the caret position to the top
             ScienceList.setEditable(false); // Set editable back to false
 
         } catch (SQLException ex) {
@@ -104,6 +105,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
             techList.setEditable(true); // Set editable to true
             techList.setText(scienceQuizzes.toString());
+            techList.setCaretPosition(0); // Set the caret position to the top
             techList.setEditable(false); // Set editable back to false
 
         } catch (SQLException ex) {
@@ -131,6 +133,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
             engList.setEditable(true); // Set editable to true
             engList.setText(scienceQuizzes.toString());
+            engList.setCaretPosition(0); // Set the caret position to the top
             engList.setEditable(false); // Set editable back to false
 
         } catch (SQLException ex) {
@@ -158,6 +161,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
             mathList.setEditable(true); // Set editable to true
             mathList.setText(scienceQuizzes.toString());
+            mathList.setCaretPosition(0); // Set the caret position to the top
             mathList.setEditable(false); // Set editable back to false
 
         } catch (SQLException ex) {
@@ -194,7 +198,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         AttemptQuizButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         engList = new javax.swing.JTextPane();
-        returnButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
@@ -205,13 +208,11 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Theme: ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 9, -1, -1));
 
         scienceButton.setBackground(new java.awt.Color(255, 153, 153));
         scienceButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        scienceButton.setForeground(new java.awt.Color(0, 0, 0));
         scienceButton.setText("Science");
         scienceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +223,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         technologyButton.setBackground(new java.awt.Color(255, 204, 153));
         technologyButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        technologyButton.setForeground(new java.awt.Color(0, 0, 0));
         technologyButton.setText("Technology");
         technologyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +233,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         engineeringButton.setBackground(new java.awt.Color(255, 255, 153));
         engineeringButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        engineeringButton.setForeground(new java.awt.Color(0, 0, 0));
         engineeringButton.setText("Engineering");
         engineeringButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +243,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         mathematicsButton.setBackground(new java.awt.Color(204, 255, 204));
         mathematicsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        mathematicsButton.setForeground(new java.awt.Color(0, 0, 0));
         mathematicsButton.setText("Mathematics");
         mathematicsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,12 +252,10 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(mathematicsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 13, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Science");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 73, 119, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Technology");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 73, 121, -1));
 
@@ -269,7 +265,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 104, 353, 179));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Engineering");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 307, 120, -1));
 
@@ -279,7 +274,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 104, 353, 180));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Mathematics");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 301, 119, -1));
 
@@ -288,31 +282,22 @@ public class ViewQuizPage extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 338, 353, 180));
 
-        AttemptQuizButton.setBackground(new java.awt.Color(153, 255, 255));
+        AttemptQuizButton.setBackground(new java.awt.Color(255, 153, 153));
         AttemptQuizButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AttemptQuizButton.setForeground(new java.awt.Color(0, 0, 0));
         AttemptQuizButton.setText("AttemptQuiz");
         AttemptQuizButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AttemptQuizButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(AttemptQuizButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(726, 524, 127, -1));
+        jPanel1.add(AttemptQuizButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 520, 127, -1));
 
         engList.setBackground(new java.awt.Color(255, 255, 153));
         jScrollPane5.setViewportView(engList);
 
         jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 338, 353, 180));
 
-        returnButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        returnButton.setText("Return");
-        returnButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                returnButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 537, -1, -1));
-
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -320,10 +305,9 @@ public class ViewQuizPage extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, -1, -1));
+        jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel6.setText("jLabel6");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 570));
 
@@ -414,11 +398,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
         //        displayScienceQuizzes();
     }//GEN-LAST:event_scienceButtonActionPerformed
 
-    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-    }//GEN-LAST:event_returnButtonActionPerformed
-
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -485,7 +464,6 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane mathList;
     private javax.swing.JButton mathematicsButton;
-    private javax.swing.JButton returnButton;
     private javax.swing.JButton scienceButton;
     private javax.swing.JTextPane techList;
     private javax.swing.JButton technologyButton;

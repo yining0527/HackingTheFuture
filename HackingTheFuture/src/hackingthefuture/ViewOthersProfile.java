@@ -117,8 +117,8 @@ public class ViewOthersProfile extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Could not retrieve the role for the selected user.");
             }
         } else {
-            // Inform the user to select a row
-            JOptionPane.showMessageDialog(this, "Please select a user from the others' profile board to view their profile.");
+//            // Inform the user to select a row
+//            JOptionPane.showMessageDialog(this, "Please select a user from the others' profile board to view their profile.");
         }
     }
 
@@ -166,13 +166,14 @@ public class ViewOthersProfile extends javax.swing.JFrame {
         jScrollPane1.setBounds(50, 110, 780, 380);
 
         jLabelLeaderboard.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelLeaderboard.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabelLeaderboard.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabelLeaderboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLeaderboard.setText("Others' Profile");
         jLabelLeaderboard.setToolTipText("");
         jPanel1.add(jLabelLeaderboard);
-        jLabelLeaderboard.setBounds(150, 30, 590, 50);
+        jLabelLeaderboard.setBounds(140, 50, 600, 60);
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -181,8 +182,9 @@ public class ViewOthersProfile extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(20, 20, 72, 23);
+        backButton.setBounds(20, 20, 72, 22);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 900, 590);

@@ -74,7 +74,7 @@ public class ProfileStudent extends javax.swing.JFrame {
         this.email = us.getEmail();
         this.role = us.getRole();
         this.locationCoordinate= us.getLocationCoordinate();
-        this.points = us.getCurrentPoints();
+        this.points=us.getCurrentPoints();
 
         System.out.println("Email: " + email);
         System.out.println(currentUsername);
@@ -167,7 +167,8 @@ public class ProfileStudent extends javax.swing.JFrame {
         }
         friendDisplay.append("</html>"); // Close the HTML tag
         jLabelShowFRIENDS.setText(friendDisplay.toString()); // Set the text in jLabelShowFRIENDS with HTML formatting
-
+        jLabelShowFRIENDS.setVerticalAlignment(SwingConstants.TOP); // Set vertical alignment to top
+        jLabelShowFRIENDS.setHorizontalAlignment(SwingConstants.LEFT); // Optional: Set horizontal alignment to left
         System.out.println("Friends HTML: " + friendDisplay.toString());
     }
     
@@ -211,6 +212,9 @@ public class ProfileStudent extends javax.swing.JFrame {
        }
        childrenDisplay.append("</html>"); // Close the HTML tag
        jLabelShowFRIENDS.setText(childrenDisplay.toString()); // Set the text in jLabelShowCHILDREN with HTML formatting
+       jLabelShowFRIENDS.setVerticalAlignment(SwingConstants.TOP); // Set vertical alignment to top
+        jLabelShowFRIENDS.setHorizontalAlignment(SwingConstants.LEFT); // Optional: Set horizontal alignment to left
+
     }
     
     private void takeInformationLeaderboard() {
@@ -630,7 +634,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelShowFRIENDS = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -638,10 +642,9 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setText("User");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 199, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(650, 550));
@@ -714,6 +717,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelPOINTS1.setForeground(new java.awt.Color(255, 153, 153));
         jLabelPOINTS1.setText("Friend(s)");
 
+        jButtonSendFriendRequest.setBackground(new java.awt.Color(255, 153, 153));
         jButtonSendFriendRequest.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonSendFriendRequest.setText("Send Friend Request");
         jButtonSendFriendRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -722,6 +726,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
             }
         });
 
+        jButtonInbox.setBackground(new java.awt.Color(255, 153, 153));
         jButtonInbox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonInbox.setText("Inbox");
         jButtonInbox.addActionListener(new java.awt.event.ActionListener() {
@@ -735,7 +740,6 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         jLabelShowFriendshipStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jScrollPaneShowFRIENDS.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPaneShowFRIENDS.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabelShowFRIENDS.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jScrollPaneShowFRIENDS.setViewportView(jLabelShowFRIENDS);
@@ -763,7 +767,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,7 +791,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(156, Short.MAX_VALUE))))
+                        .addContainerGap(176, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -838,16 +842,16 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelPOINTS1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPaneShowFRIENDS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 590, 568));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 610, 610));
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel2.setText("Account");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 263, 176, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 176, -1));
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -857,20 +861,20 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
         });
         jPanel1.add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
-        jLabel9.setText("jLabel9");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
+        jLabel4.setText("jLabel4");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 300, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -938,7 +942,7 @@ public void updateFriendshipStatusLabel(String currentUser, String profileUser) 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelEMAIL;
     private javax.swing.JLabel jLabelFATHER;
     private javax.swing.JLabel jLabelLOCATIONCOORDINATE;

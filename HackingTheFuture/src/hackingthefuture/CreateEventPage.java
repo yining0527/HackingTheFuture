@@ -109,11 +109,10 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel1.setText("Create ");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 180, 190, 60);
+        jLabel1.setBounds(40, 190, 190, 60);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 153, 153));
@@ -199,7 +198,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(createEventButton)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +214,7 @@ public class CreateEventPage extends javax.swing.JFrame {
                         .addComponent(eventStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
                         .addComponent(eventEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,13 +248,12 @@ public class CreateEventPage extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(235, 0, 659, 571);
+        jPanel2.setBounds(250, 0, 659, 571);
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel2.setText("Event");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(50, 240, 163, 63);
+        jLabel2.setBounds(50, 240, 163, 61);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -266,18 +264,18 @@ public class CreateEventPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(17, 6, 72, 27);
+        jButton1.setBounds(17, 6, 72, 26);
         jPanel1.add(jLabel10);
         jLabel10.setBounds(32, 329, 163, 0);
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\createEvent_1.png")); // NOI18N
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(30, 340, 190, 180);
+        jLabel11.setBounds(30, 350, 190, 180);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
         jLabel9.setText("jLabel9");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(0, 0, 240, 580);
+        jLabel9.setBounds(0, 0, 250, 580);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

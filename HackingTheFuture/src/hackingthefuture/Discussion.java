@@ -110,7 +110,7 @@ public class Discussion extends javax.swing.JFrame {
         writePost = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,18 +118,17 @@ public class Discussion extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("Discussion");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(320, 80, 300, 58);
+        jLabel1.setBounds(330, 80, 300, 58);
 
         postField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         postField.setPreferredSize(new java.awt.Dimension(353, 185));
         jScrollPane1.setViewportView(postField);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(83, 166, 723, 310);
+        jScrollPane1.setBounds(80, 150, 723, 310);
 
         seeAllPosts.setBackground(new java.awt.Color(255, 153, 153));
         seeAllPosts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -151,7 +150,7 @@ public class Discussion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(22, 12, 72, 27);
+        backButton.setBounds(22, 12, 72, 26);
 
         writePost.setBackground(new java.awt.Color(255, 153, 153));
         writePost.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -163,17 +162,19 @@ public class Discussion extends javax.swing.JFrame {
         });
         jPanel1.add(writePost);
         writePost.setBounds(32, 503, 119, 39);
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(590, 10, 164, 148);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\Discussion_1.png")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(610, 0, 170, 148);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 900, 570);
 
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(700, 40, 38, 16);
+        jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(660, 40, 38, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,6 +281,7 @@ public class Discussion extends javax.swing.JFrame {
 
         // Set the text of the text pane after retrieving all posts
         postField.setText(liveEventsBuilder.toString());
+        postField.setCaretPosition(0);  // Set the caret position to the beginning of the text
         postField.setEditable(false);
     }
 
@@ -343,7 +345,7 @@ public class Discussion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane postField;

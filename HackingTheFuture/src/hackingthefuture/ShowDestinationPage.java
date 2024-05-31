@@ -159,7 +159,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     public List<ShowDestinationPage> readBookingDestination() {
         List<ShowDestinationPage> destinations = new ArrayList<>();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("C:\\Users\\Asus\\OneDrive\\Documents\\NetBeansProjects\\HackingTheFuture\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
+            Scanner inputStream = new Scanner(new FileInputStream("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\BookingDestination.txt"));
             while (inputStream.hasNextLine()) {
                 String name = inputStream.nextLine().trim();
                 if (!inputStream.hasNextLine()) {
@@ -396,6 +396,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         chooseTimeSlot = new javax.swing.JTextArea();
         visitDate = new javax.swing.JTextField();
         childComboBox = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -412,6 +413,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jLabel6.setText("========================================================================================================");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, -1, -1));
 
+        bookButton.setBackground(new java.awt.Color(255, 153, 153));
         bookButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bookButton.setText("Book");
         bookButton.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +455,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         jLabel4.setText("Available time slots             ");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(361, 281, 204, 34));
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -498,6 +501,11 @@ public class ShowDestinationPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(childComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 230, 40));
+
+        jLabel8.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 560));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -749,6 +757,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

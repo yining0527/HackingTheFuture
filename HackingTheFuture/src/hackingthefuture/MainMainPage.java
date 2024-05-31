@@ -46,16 +46,14 @@ public class MainMainPage extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Main Page");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(320, 30, 330, 110);
+        jLabel1.setBounds(320, 20, 330, 110);
         jPanel1.add(jLabel9);
         jLabel9.setBounds(830, 14, 0, 0);
 
         login.setBackground(new java.awt.Color(204, 255, 204));
         login.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        login.setForeground(new java.awt.Color(0, 0, 0));
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +65,6 @@ public class MainMainPage extends javax.swing.JFrame {
 
         createEvent1.setBackground(new java.awt.Color(204, 255, 255));
         createEvent1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        createEvent1.setForeground(new java.awt.Color(0, 0, 0));
         createEvent1.setText("View Event");
         createEvent1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +76,6 @@ public class MainMainPage extends javax.swing.JFrame {
 
         signUp.setBackground(new java.awt.Color(255, 255, 204));
         signUp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        signUp.setForeground(new java.awt.Color(0, 0, 0));
         signUp.setText("Sign Up");
         signUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,8 +85,7 @@ public class MainMainPage extends javax.swing.JFrame {
         jPanel1.add(signUp);
         signUp.setBounds(315, 136, 247, 62);
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 910, 570);
 

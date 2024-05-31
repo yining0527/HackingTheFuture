@@ -29,6 +29,12 @@ public class MainPageChildren extends javax.swing.JFrame {
     public String getUsername(){
         return username;
     }
+    public MainPageChildren(String username) {
+        initComponents();
+        setPreferredSize(new Dimension(900, 600));
+        setResizable(true);
+        this.username = username;  // Set the username
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +58,7 @@ public class MainPageChildren extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         profile1 = new javax.swing.JToggleButton();
         ViewOthersProfile = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,7 +112,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(leaderboard);
-        leaderboard.setBounds(30, 50, 180, 23);
+        leaderboard.setBounds(30, 50, 180, 22);
 
         discussion.setBackground(new java.awt.Color(255, 204, 204));
         discussion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -127,7 +134,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(DATASTORAGE);
-        DATASTORAGE.setBounds(97, 18, 100, 23);
+        DATASTORAGE.setBounds(97, 18, 100, 22);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -138,7 +145,7 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(205, 18, 72, 23);
+        jButton1.setBounds(205, 18, 72, 22);
 
         profile1.setBackground(new java.awt.Color(255, 153, 153));
         profile1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -149,9 +156,9 @@ public class MainPageChildren extends javax.swing.JFrame {
             }
         });
         jPanel1.add(profile1);
-        profile1.setBounds(24, 18, 67, 23);
+        profile1.setBounds(24, 18, 67, 22);
 
-        ViewOthersProfile.setBackground(new java.awt.Color(102, 255, 204));
+        ViewOthersProfile.setBackground(new java.awt.Color(204, 204, 255));
         ViewOthersProfile.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ViewOthersProfile.setText("View Others' Profile");
         ViewOthersProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +168,10 @@ public class MainPageChildren extends javax.swing.JFrame {
         });
         jPanel1.add(ViewOthersProfile);
         ViewOthersProfile.setBounds(310, 430, 250, 60);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 920, 560);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -305,6 +316,7 @@ public class MainPageChildren extends javax.swing.JFrame {
     private javax.swing.JButton discussion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

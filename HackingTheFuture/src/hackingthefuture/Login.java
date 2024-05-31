@@ -82,7 +82,6 @@ public class Login extends JFrame {
         Right.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setLabelFor(Left);
         jLabel5.setText("<html>Hacking the future</html>");
@@ -90,7 +89,7 @@ public class Login extends JFrame {
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Right.add(jLabel5);
-        jLabel5.setBounds(47, 164, 335, 135);
+        jLabel5.setBounds(50, 200, 335, 135);
 
         jLabel6.setFont(new java.awt.Font("Ink Free", 0, 48)); // NOI18N
         jLabel6.setText("Hacking the future");
@@ -104,7 +103,7 @@ public class Login extends JFrame {
         Right.add(jLabel8);
         jLabel8.setBounds(47, 317, 0, 0);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
         jLabel7.setText("jLabel7");
         Right.add(jLabel7);
         jLabel7.setBounds(0, 0, 410, 590);
@@ -152,7 +151,6 @@ public class Login extends JFrame {
 
         login.setBackground(new java.awt.Color(255, 153, 153));
         login.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        login.setForeground(new java.awt.Color(255, 255, 255));
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

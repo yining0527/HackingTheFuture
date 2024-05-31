@@ -95,7 +95,7 @@ public class BookEventPage extends javax.swing.JFrame {
         eventBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,14 +104,12 @@ public class BookEventPage extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Booking Event");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(320, 30, 390, 60);
 
         jLabel4.setBackground(new java.awt.Color(255, 153, 153));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Choose the Name of Events You Want To Join:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(240, 150, 485, 25);
@@ -125,7 +123,6 @@ public class BookEventPage extends javax.swing.JFrame {
 
         doneButton.setBackground(new java.awt.Color(255, 153, 153));
         doneButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        doneButton.setForeground(new java.awt.Color(0, 0, 0));
         doneButton.setText("Done");
         doneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,11 +130,10 @@ public class BookEventPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(doneButton);
-        doneButton.setBounds(720, 500, 90, 32);
+        doneButton.setBounds(720, 500, 90, 31);
 
         backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        backButton.setForeground(new java.awt.Color(0, 0, 0));
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +141,7 @@ public class BookEventPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(100, 490, 72, 32);
+        backButton.setBounds(100, 490, 72, 31);
 
         eventBox.setBackground(new java.awt.Color(255, 153, 153));
         eventBox.setForeground(new java.awt.Color(204, 204, 255));
@@ -157,20 +153,20 @@ public class BookEventPage extends javax.swing.JFrame {
         jPanel1.add(eventBox);
         eventBox.setBounds(240, 190, 398, 51);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\sunLiveEvent.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\sunLiveEvent.png")); // NOI18N
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(330, 310, 170, 160);
+        jLabel3.setBounds(690, 120, 170, 160);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setPreferredSize(new java.awt.Dimension(900, 600));
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 900, 570);
+        jLabel2.setBounds(0, 0, 900, 600);
 
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(350, 310, 190, 150);
+        jLabel7.setText("jLabel7");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(480, 310, 38, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -570,8 +566,8 @@ public class BookEventPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

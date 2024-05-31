@@ -281,10 +281,9 @@ public class SViewEventPage extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setText("View");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 181, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(650, 550));
@@ -297,8 +296,8 @@ public class SViewEventPage extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setText("Closest 3 Upcoming Events:");
 
+        makeBooking.setBackground(new java.awt.Color(255, 153, 153));
         makeBooking.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        makeBooking.setForeground(new java.awt.Color(255, 153, 153));
         makeBooking.setText("MakeBooking");
         makeBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +313,7 @@ public class SViewEventPage extends javax.swing.JFrame {
         upcomingEventsTextArea.setRows(5);
         jScrollPane3.setViewportView(upcomingEventsTextArea);
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -368,12 +368,11 @@ public class SViewEventPage extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, 561));
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel2.setText("Event");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 245, 149, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 149, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 560));
 

@@ -101,6 +101,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
         quizTitle = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,8 +110,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 550));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel1.setText("Create ");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(60, 190, 180, 60);
@@ -219,11 +219,10 @@ public class CreateQuizPage extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(270, 0, 669, 564);
 
-        jLabel2.setFont(new java.awt.Font("Ink Free", 1, 52)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 52)); // NOI18N
         jLabel2.setText("Quiz");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(80, 260, 149, 63);
+        jLabel2.setBounds(80, 250, 149, 63);
 
         backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -234,9 +233,14 @@ public class CreateQuizPage extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backButton);
-        backButton.setBounds(15, 6, 72, 27);
+        backButton.setBounds(15, 6, 72, 26);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\kekyi\\Downloads\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back2.jpg")); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\createQuizz.png")); // NOI18N
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(40, 340, 200, 190);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back3.jpg")); // NOI18N
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(0, 0, 270, 570);
@@ -461,6 +465,7 @@ public class CreateQuizPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField quizContent;

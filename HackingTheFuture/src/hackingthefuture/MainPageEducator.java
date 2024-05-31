@@ -58,8 +58,8 @@ public class MainPageEducator extends javax.swing.JFrame {
         jButtonPROFILE = new javax.swing.JButton();
         jButtonDATASTORAGE = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         ViewOthersProfile = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +137,7 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonPROFILE);
-        jButtonPROFILE.setBounds(19, 16, 72, 23);
+        jButtonPROFILE.setBounds(19, 16, 72, 22);
 
         jButtonDATASTORAGE.setBackground(new java.awt.Color(255, 153, 153));
         jButtonDATASTORAGE.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -148,7 +148,7 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButtonDATASTORAGE);
-        jButtonDATASTORAGE.setBounds(109, 16, 100, 23);
+        jButtonDATASTORAGE.setBounds(109, 16, 100, 22);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -159,13 +159,9 @@ public class MainPageEducator extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(223, 16, 72, 23);
+        jButton1.setBounds(223, 16, 72, 22);
 
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, -10, 910, 570);
-
-        ViewOthersProfile.setBackground(new java.awt.Color(102, 255, 204));
+        ViewOthersProfile.setBackground(new java.awt.Color(204, 204, 255));
         ViewOthersProfile.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ViewOthersProfile.setText("View Others' Profile");
         ViewOthersProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +171,11 @@ public class MainPageEducator extends javax.swing.JFrame {
         });
         jPanel1.add(ViewOthersProfile);
         ViewOthersProfile.setBounds(330, 470, 250, 60);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, -10, 910, 570);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

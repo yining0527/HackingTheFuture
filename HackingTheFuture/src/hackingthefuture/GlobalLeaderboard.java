@@ -104,6 +104,8 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
             profileStudent.setFriendshipStatusVisibility(username, isCurrentUser);
             profileStudent.updateFriendshipStatusLabel(username, username1);
             profileStudent.setVisible(true);
+            profileStudent.pack();
+            profileStudent.setLocationRelativeTo(null);
         } else {
             // Inform the user to select a row
             JOptionPane.showMessageDialog(this, "Please select a player from the leaderboard to view their profile.");
@@ -127,6 +129,8 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         jTableLeaderboard = new javax.swing.JTable();
         jLabelLeaderboard = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,16 +157,17 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableLeaderboard);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 110, 700, 380);
+        jScrollPane1.setBounds(70, 110, 700, 380);
 
         jLabelLeaderboard.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelLeaderboard.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabelLeaderboard.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabelLeaderboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLeaderboard.setText("Leaderboard");
         jLabelLeaderboard.setToolTipText("");
         jPanel1.add(jLabelLeaderboard);
-        jLabelLeaderboard.setBounds(90, 50, 590, 50);
+        jLabelLeaderboard.setBounds(140, 40, 590, 70);
 
+        backButton.setBackground(new java.awt.Color(255, 153, 153));
         backButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -173,11 +178,20 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         jPanel1.add(backButton);
         backButton.setBounds(20, 20, 72, 22);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 910, 570);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 850, 550);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,13 +243,19 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GlobalLeaderboard().setVisible(true);
+                GlobalLeaderboard GlobalLeaderboardFrame = new GlobalLeaderboard();
+                GlobalLeaderboardFrame.setVisible(true);
+                GlobalLeaderboardFrame.pack();
+                GlobalLeaderboardFrame.setLocationRelativeTo(null);
+                GlobalLeaderboardFrame.takeInformation();
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelLeaderboard;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
