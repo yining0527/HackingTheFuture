@@ -228,7 +228,7 @@ public class parents extends javax.swing.JFrame {
 
 
             try {
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
                 String query = "INSERT INTO `parent`(`userID`, `Children`,`siblingsOrder`) VALUES (?,?,?)";
 

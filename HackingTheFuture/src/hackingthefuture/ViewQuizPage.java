@@ -60,7 +60,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private void displayScienceQuizzes() {
         // Fetch and display Science-themed quizzes from your dataset
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             String scienceQuizQuery = "SELECT * FROM `quiz` WHERE `quiz theme` = 'Science'";
             pst = con.prepareStatement(scienceQuizQuery);
@@ -88,7 +88,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private void displayTechnologyQuizzes() {
         // Fetch and display Science-themed quizzes from your dataset
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             String scienceQuizQuery = "SELECT * FROM `quiz` WHERE `quiz theme` = 'Technology'";
             pst = con.prepareStatement(scienceQuizQuery);
@@ -116,7 +116,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private void displayEngineeringQuizzes() {
         // Fetch and display Science-themed quizzes from your dataset
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             String scienceQuizQuery = "SELECT * FROM `quiz` WHERE `quiz theme` = 'Engineering'";
             pst = con.prepareStatement(scienceQuizQuery);
@@ -144,7 +144,7 @@ public class ViewQuizPage extends javax.swing.JFrame {
     private void displayMathematicsQuizzes() {
         // Fetch and display Science-themed quizzes from your dataset
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             String scienceQuizQuery = "SELECT * FROM `quiz` WHERE `quiz theme` = 'Mathematics'";
             pst = con.prepareStatement(scienceQuizQuery);

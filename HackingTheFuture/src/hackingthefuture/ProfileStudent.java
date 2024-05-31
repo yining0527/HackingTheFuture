@@ -93,7 +93,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     {
         System.out.println("take father");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
@@ -130,7 +130,7 @@ public class ProfileStudent extends javax.swing.JFrame {
         friends = new ArrayList<>();
         StringBuilder friendNames = new StringBuilder();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";
@@ -175,7 +175,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private void takeFriendsLeaderboard()
     {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";
@@ -223,7 +223,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private void takeInformationLeaderboard() {
         System.out.println("take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -268,7 +268,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     {
         System.out.println("take father");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
@@ -302,7 +302,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     }
     private void fetchUserRole() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -343,7 +343,7 @@ public class ProfileStudent extends javax.swing.JFrame {
                  "UNION " +
                  "SELECT 1 FROM friend_requests WHERE ((sender_username = ? AND receiver_username = ?) OR (sender_username = ? AND receiver_username = ?)) AND status = 'accepted'";
     
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
          PreparedStatement pst = con.prepareStatement(sql)) {
         
         pst.setString(1, currentUser);
@@ -369,7 +369,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     
     public void sendFriendRequest() {
     String query = "INSERT INTO friend_requests (sender_username, receiver_username, request_date, status) VALUES (?, ?, CURRENT_TIMESTAMP, 'pending')";
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
          PreparedStatement pst = con.prepareStatement(query)) {
         pst.setString(1, currentUsername);
         pst.setString(2, profileUsername);
@@ -446,7 +446,7 @@ public class ProfileStudent extends javax.swing.JFrame {
     private void loadFriendRequests(DefaultListModel<String> model) {
         System.out.println("load friend request");
     String query = "SELECT * FROM friend_requests WHERE receiver_username = ? AND status = 'pending'";
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
          PreparedStatement pst = con.prepareStatement(query)) {
         pst.setString(1, currentUsername);
         ResultSet rs = pst.executeQuery();
@@ -471,7 +471,7 @@ public class ProfileStudent extends javax.swing.JFrame {
             String queryUpdateRequest = "UPDATE friend_requests SET status = 'accepted' WHERE request_id = ?";
             String queryInsertFriend = "INSERT INTO friends (user1_username, user2_username, friendship_date) SELECT sender_username, receiver_username, CURRENT_TIMESTAMP FROM friend_requests WHERE request_id = ?";
 
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
                  PreparedStatement pstUpdate = con.prepareStatement(queryUpdateRequest);
                  PreparedStatement pstInsert = con.prepareStatement(queryInsertFriend)) {
                 
@@ -520,7 +520,7 @@ private void rejectFriendRequest(String requestDetail, JDialog dialog) {
 
             String query = "UPDATE friend_requests SET status = 'rejected' WHERE request_id = ?";
 
-            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
                  PreparedStatement pst = con.prepareStatement(query)) {
                 pst.setInt(1, Integer.parseInt(requestId));
                 int result = pst.executeUpdate();
@@ -550,7 +550,7 @@ private void rejectFriendRequest(String requestDetail, JDialog dialog) {
 
 public void updateFriendshipStatusLabel(String currentUser, String profileUser) {
     String query = "SELECT sender_username, receiver_username, status FROM friend_requests WHERE (sender_username = ? AND receiver_username = ?) OR (sender_username = ? AND receiver_username = ?)";
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
          PreparedStatement pst = con.prepareStatement(query)) {
         pst.setString(1, currentUser);
         pst.setString(2, profileUser);

@@ -63,6 +63,6 @@ public class BookingPage {
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
     }
 }

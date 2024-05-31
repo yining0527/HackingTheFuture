@@ -77,7 +77,7 @@ public class ProfileParent extends javax.swing.JFrame {
         System.out.println("take bookings");
         
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryBooking = "SELECT * FROM `bookingdestination` WHERE `parentName` = ?";

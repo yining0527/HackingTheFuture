@@ -47,7 +47,7 @@ public class GlobalLeaderboard extends javax.swing.JFrame {
         List<GlobalLeaderboard> leaderboard = new ArrayList<>();
         
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
             
             String querySD = "SELECT * FROM `user` WHERE `role` = 'children' ORDER BY points DESC, pointLastUpdated ASC";

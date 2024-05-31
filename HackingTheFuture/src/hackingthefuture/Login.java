@@ -252,7 +252,7 @@ public class Login extends JFrame {
             String query = "SELECT * FROM `user` WHERE (`username` = ? OR `email` = ? )AND `password` = ?";
 
             // Establishing a connection to the database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             // Creating a prepared statement for the login query
             pst = con.prepareStatement(query);

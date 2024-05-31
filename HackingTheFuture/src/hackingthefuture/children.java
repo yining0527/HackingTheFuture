@@ -226,7 +226,7 @@ public class children extends javax.swing.JFrame {
             }
 
             try {
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
                 
 
@@ -257,7 +257,7 @@ public class children extends javax.swing.JFrame {
             if (role.equalsIgnoreCase("children")){
                 try {
                     // Establish connection to the database
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
                     // Prepare the SQL query to update the role
                     String query = "UPDATE `user` SET `fatherName` = ?,`MotherName` = ? WHERE `username` = ? AND `role` = ?";

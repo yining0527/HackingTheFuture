@@ -80,7 +80,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
     {
         System.out.println("take father");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
@@ -117,7 +117,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
         friends = new ArrayList<>();
         StringBuilder friendNames = new StringBuilder();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";

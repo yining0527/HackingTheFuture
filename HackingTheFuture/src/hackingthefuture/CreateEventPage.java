@@ -340,7 +340,7 @@ public class CreateEventPage extends javax.swing.JFrame {
         }
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
 
             // Check if the event already exists based on title, description, venue, date, and time
             String query = "SELECT * FROM `event` WHERE `event title` = ? AND `event description` = ? AND `event venue` = ? AND `event date` = ? AND `event start time` = ? AND `event end time` = ?";
@@ -387,7 +387,7 @@ public class CreateEventPage extends javax.swing.JFrame {
 
         System.out.println("take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
