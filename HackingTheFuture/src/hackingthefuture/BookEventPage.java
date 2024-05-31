@@ -172,7 +172,7 @@ public class BookEventPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +206,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
         System.out.println("take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -250,7 +250,7 @@ public class BookEventPage extends javax.swing.JFrame {
         boolean eventValid = false;
         try {
             // Establish connection to the database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // SQL query to retrieve events from the database
             String query = "SELECT * FROM `event` WHERE `event title` = ?"; // Adjust query according to your database schema
@@ -300,7 +300,7 @@ public class BookEventPage extends javax.swing.JFrame {
         String eventDate = null; // Initialize eventDate variable
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryChildren = "SELECT * FROM `event` WHERE `event title` = ?";
@@ -340,7 +340,7 @@ public class BookEventPage extends javax.swing.JFrame {
         boolean clashedOrRepeated = false;
         
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             String queryChildren = "SELECT * FROM `bookingevent` WHERE `username` = ?";
             pst = con.prepareStatement(queryChildren);
@@ -378,7 +378,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
     private void insertBookingEvent(String eventName, String eventDate) {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             String query = "INSERT INTO `bookingevent`(`username`, `eventName`, `eventDate`) VALUES (?,?,?)";
 
@@ -417,7 +417,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
     private void fetchLiveEvents() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch live events
             String liveEventsQuery = "SELECT `event title` FROM `event` WHERE `event date` = CURDATE()";
@@ -448,7 +448,7 @@ public class BookEventPage extends javax.swing.JFrame {
 
     private void fetchUpcomingEvents() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch closest upcoming events (limit to 3)
             String upcomingEventsQuery = "SELECT `event title` FROM `event` WHERE `event date` > CURDATE() ORDER BY `event date` LIMIT 3";

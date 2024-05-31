@@ -83,7 +83,7 @@ public class ViewEventPage extends javax.swing.JFrame {
 // Method to fetch live events from the database
     private void fetchLiveEvents() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch live events
             String liveEventsQuery = "SELECT * FROM `event` WHERE `event date` = CURDATE()";
@@ -104,7 +104,7 @@ public class ViewEventPage extends javax.swing.JFrame {
 // Method to fetch upcoming events from the database
     private void fetchUpcomingEvents() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch closest upcoming events (limit to 3)
             String upcomingEventsQuery = "SELECT * FROM `event` WHERE `event date` > CURDATE() ORDER BY `event date` LIMIT 3";

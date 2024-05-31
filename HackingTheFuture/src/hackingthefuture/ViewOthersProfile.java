@@ -43,7 +43,7 @@ public class ViewOthersProfile extends javax.swing.JFrame {
         System.out.println("Retrieving user information...");
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT email, username, role FROM user";

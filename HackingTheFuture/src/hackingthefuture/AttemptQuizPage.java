@@ -223,7 +223,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
     private boolean isQuizValid(String userInput) {
         boolean quizValid = false;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             String query = "SELECT * FROM `quiz` WHERE `quiz title` = ?";
             pst = con.prepareStatement(query);
@@ -276,7 +276,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
 
         System.out.println("take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -338,7 +338,7 @@ public class AttemptQuizPage extends javax.swing.JFrame {
         try {
             // Establish the database connection
             System.out.println("Attempting database connection...");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Prepare the SQL query to fetch all quiz contents
             String allQuizzesQuery = "SELECT `quiz title` FROM `quiz`";

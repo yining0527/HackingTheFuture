@@ -39,7 +39,7 @@ public class Discussion extends javax.swing.JFrame {
     private void fetchPost() {
         try {
             // Connect to the database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch the four most recent posts
             String postDetails = "SELECT * FROM `discussion` ORDER BY `time` DESC LIMIT 4";
@@ -246,7 +246,7 @@ public class Discussion extends javax.swing.JFrame {
 
     private void fetchAllPosts() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             // Query to fetch all posts sorted by time in descending order
             String postDetails = "SELECT * FROM `discussion` ORDER BY `time` DESC";

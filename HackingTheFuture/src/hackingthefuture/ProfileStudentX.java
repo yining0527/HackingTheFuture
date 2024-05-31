@@ -80,7 +80,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
     {
         System.out.println("take father");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `children` WHERE `userID` = ?";
@@ -117,7 +117,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
         friends = new ArrayList<>();
         StringBuilder friendNames = new StringBuilder();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryFriends = "SELECT * FROM `friend_requests` WHERE status = 'accepted'";
@@ -305,7 +305,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -323,7 +323,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelShowLOCATIONCOORDINATE, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelShowFATHER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +367,7 @@ public class ProfileStudentX extends javax.swing.JFrame {
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 600, 600));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 610, 600));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel2.setText("Account");

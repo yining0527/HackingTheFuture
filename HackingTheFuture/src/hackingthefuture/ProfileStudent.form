@@ -82,61 +82,52 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="603" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonSendFriendRequest" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButtonInbox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabelShowFriendshipStatus" pref="246" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelEMAIL" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="jLabelUSERNAME" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="jLabelROLE" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="jLabelLOCATIONCOORDINATE" min="-2" pref="192" max="-2" attributes="0"/>
+                                  <Component id="jLabelFATHER" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelMOTHER" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
                                   <Component id="jLabelPOINTS" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
                                   <Component id="jLabelPOINTS1" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabelShowEMAIL" alignment="0" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jLabelShowUSERNAME" alignment="0" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jLabelShowROLE" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jLabelShowMOTHER" alignment="0" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jLabelShowPOINTS" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jScrollPaneShowFRIENDS" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="177" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelROLE" min="-2" pref="107" max="-2" attributes="0"/>
-                                  <Component id="jLabelEMAIL" min="-2" pref="107" max="-2" attributes="0"/>
-                                  <Component id="jLabelUSERNAME" min="-2" pref="107" max="-2" attributes="0"/>
-                                  <Component id="jButtonSendFriendRequest" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButtonInbox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabelShowFriendshipStatus" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelFATHER" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelLOCATIONCOORDINATE" min="-2" pref="192" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelShowLOCATIONCOORDINATE" min="-2" pref="192" max="-2" attributes="0"/>
-                                  <Component id="jLabelShowFATHER" min="-2" pref="192" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="176" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelShowEMAIL" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowUSERNAME" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowROLE" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowLOCATIONCOORDINATE" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowFATHER" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowMOTHER" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jLabelShowPOINTS" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="jScrollPaneShowFRIENDS" min="-2" pref="192" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -153,7 +144,7 @@
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
                               <Component id="jLabelShowFriendshipStatus" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -167,8 +158,9 @@
                               <Component id="jLabelEMAIL" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="jLabelShowUSERNAME" min="-2" pref="35" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabelShowEMAIL" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>

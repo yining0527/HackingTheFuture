@@ -193,7 +193,7 @@ public class WritingPost extends javax.swing.JFrame {
         }
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 //
 //            PreparedStatement psCheckUsername = con.prepareStatement("SELECT * FROM `discussion` WHERE `username` = ?");
 //            psCheckUsername.setString(1, username);

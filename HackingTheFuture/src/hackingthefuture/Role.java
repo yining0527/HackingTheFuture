@@ -251,7 +251,7 @@ public class Role extends javax.swing.JFrame {
 
             try {
                 // Establish connection to the database
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
                 // Prepare the SQL query to update the role
                 String query = "UPDATE `user` SET `role` = ?,`LocationCoordinate` = ? WHERE `email` = ? AND `username` = ? AND `password` = ?";
@@ -317,7 +317,7 @@ public class Role extends javax.swing.JFrame {
     public void setNumberOfQuizzesAndEvents() {
         System.out.println("Take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";
@@ -370,7 +370,7 @@ public class Role extends javax.swing.JFrame {
     public void setPoints() {
         System.out.println("Take information");
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String querySD = "SELECT * FROM `user` WHERE `username` = ?";

@@ -43,7 +43,7 @@ public class User {
     // Method to initialize database connection
     private void connectToDatabase() throws SQLException {
         if (con == null || con.isClosed()) {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
         }
     }
 
@@ -113,7 +113,7 @@ public class User {
     public void fetchChildNames() {
         System.out.println("take children");
             try {
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
                 System.out.println("Database connection successful.");
 
                 String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";

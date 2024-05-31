@@ -183,7 +183,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         List<String> eventDates = new ArrayList<>();
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
             System.out.println("Database connection successful.");
 
             String queryChildren = "SELECT * FROM `bookingevent` WHERE `username` = ?";
@@ -239,7 +239,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     // Method to insert booking destination if no clashes
     private void insertBookingDestination(String parentName, String childName, String destination, String visitDate) {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             String query = "INSERT INTO `bookingdestination`(`parentName`, `childName`, `destination`,`visitDate`) VALUES (?,?,?,?)";
 
@@ -309,7 +309,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
     private boolean bookingExists(String childName, String visitDate) {
         String query = "SELECT COUNT(*) FROM bookingdestination WHERE childName = ? AND visitDate = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", ""); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", ""); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, childName);
             preparedStatement.setString(2, visitDate);
@@ -340,7 +340,7 @@ public class ShowDestinationPage extends javax.swing.JFrame {
         try {
             // Establish the database connection
             System.out.println("Attempting database connection...");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hackingthefuture", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3307/hackingthefuture", "root", "");
 
             String queryChildren = "SELECT * FROM `parent` WHERE `userID` = ?";
             pst = con.prepareStatement(queryChildren);
