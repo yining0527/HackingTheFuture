@@ -87,15 +87,13 @@ public class MainMainPage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\FOP\\Netbeans Project\\HackingTheFuture1\\HackingTheFuture\\HackingTheFuture\\src\\hackingthefuture\\Image\\back1.jpg")); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 0, 910, 570);
+        jLabel2.setBounds(0, 0, 920, 560);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +113,7 @@ public class MainMainPage extends javax.swing.JFrame {
 
     private void createEvent1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEvent1ActionPerformed
         // TODO add your handling code here:
-        ViewEventPage ViewEventPageFrame = new ViewEventPage();
+        AllViewEventPage ViewEventPageFrame = new AllViewEventPage();
         ViewEventPageFrame.setVisible(true);
         ViewEventPageFrame.pack();
         ViewEventPageFrame.setLocationRelativeTo(null);
